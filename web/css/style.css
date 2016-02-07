@@ -1,0 +1,137 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 2, 2016, 6:51:22 PM
+    Author     : hieu
+*/
+html {
+    box-sizing: border-box;
+    
+}
+
+body {
+    font-family: sans-serif;
+}
+
+html, p, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+ul {
+    margin-top: 0px;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.alert {
+    color: red;
+}
+
+.button,
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+    background-color: #fff;
+    border: 1px solid;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 700;
+    height: 30px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.button:hover,
+.button:focus,
+button:hover,
+button:focus,
+input[type='button']:hover,
+input[type='button']:focus,
+input[type='reset']:hover,
+input[type='reset']:focus,
+input[type='submit']:hover,
+input[type='submit']:focus {
+    background-color: #eee;
+    
+}
+
+a {
+    text-decoration: none;
+}
+
+a.button {
+    color: #000;
+    border-color: #000;
+}
+
+a:visited.button{
+    color: #000;
+    border-color: #000;;
+}
+
+a:hover.button {
+    background-color: #eee;
+}
+
+.navigation {
+    background: #f4f5f6;
+    height: 40px;
+}
+
+.navigation-list {
+    list-style: none;
+    margin-bottom: 0;
+}
+
+.navigation-title {
+    color: black;
+    font-weight: 700;
+    line-height:40px;
+}
+
+.navigation-item {
+    display: list-item;
+    float: left;
+    margin-bottom: 0;
+    margin-left: 5px;
+    line-height: 40px;
+}
+
+.float-right {
+    float: right;
+}
+
+.page {
+    display: none;
+}
+
+.chat-division {
+    box-sizing: border-box;
+    border: 1px solid #c0c0c0;
+    background-color: #eeeeee;
+    width: 420px;
+    height: 200px;
+    margin-bottom: 10px;
+    padding: 15px;
+    overflow-y: scroll;
+}
+
+.message-input {
+    box-sizing: border-box;
+    width: 420px;
+    height: 25px;
+}
