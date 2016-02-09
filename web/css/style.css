@@ -145,14 +145,10 @@ a:hover.button {
   position: relative;
   clear: both;
  
-
-  background: #ffffff;
-
-  border: solid 1px rgba(0,0,0,0.5);
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
- 
+
   -webkit-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
   -moz-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
   box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
@@ -164,10 +160,12 @@ a:hover.button {
   word-wrap: break-word;
 }
 
+.right {
+	float: right;
+}
 
-
-.bubble-alt {
-  float: right;
+.sender {
+	width: 100%;
 }
 
 .bubble p {
