@@ -32,10 +32,10 @@ public class SessionData {
     }
     
     public void addSession(Session session) {
-        sessions.put(session.getIdentifier(), session);
+        sessions.put(session.getId(), session);
     }
 
-    public Session getSession(String identifier) {
-        return sessions.get(identifier);
+    public Session getSession(String sessionId) {
+        return sessions.get(sessionId);
     }
 }

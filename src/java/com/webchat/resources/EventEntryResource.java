@@ -5,9 +5,11 @@
  */
 package com.webchat.resources;
 
+import com.webchat.data.ChatRoomData;
 import com.webchat.data.EventEntryData;
 import com.webchat.data.SessionData;
 import com.webchat.models.ChatEntry;
+import com.webchat.models.ChatRoom;
 import com.webchat.models.EventEntry;
 import com.webchat.models.LoginEntry;
 import com.webchat.models.Session;
@@ -31,55 +33,48 @@ public class EventEntryResource {
 
     private SessionData sessionData;
     private EventEntryData eventEntryData;
-    
+    private ChatRoomData chatRoomData;
+
     public EventEntryResource() {
         this.eventEntryData = EventEntryData.getInstance();
         this.sessionData = SessionData.getInstance();
+        this.chatRoomData = ChatRoomData.getInstance();
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_XML)
     public Collection<EventEntry> getEventEntries() {
         return eventEntryData.getEventEntries();
     }
-    
-    @Path("chat-entries")
+
+    @Path("chat")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public Collection<ChatEntry> getChatEntries() {
+        return eventEntryData.getChatEntries();
+    }
+
+    @Path("chat")
     @POST
     @Consumes(MediaType.APPLICATION_XML)
     public void createChatEntry(@HeaderParam("sessionId") String sessionId, ChatEntry entry) {
         eventEntryData.addEventEntry(entry);
         Session session = sessionData.getSession(sessionId);
-        User user = session.getUser();
-        user.addEventEntry(entry);
+        if (session != null) {
+            String username = session.getUsername();
+            entry.setUsername(username);
+            int roomId = entry.getRoomId();
+            ChatRoom chatRoom = chatRoomData.getChatRoom(roomId);
+            if (chatRoom != null) {
+                chatRoom.addChatEntry(entry);
+            }
+        }
     }
-    
-    @Path("chat-entries/{timeStamp}")
+
+    @Path("{timeStamp}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public ChatEntry getChatEntry(@PathParam("timeStamp") long timeStamp) {
-        EventEntry entry = eventEntryData.getEventEntry(timeStamp);
-        if (entry == null) {
-            System.out.println("1");
-            return new ChatEntry("temp", "temp");
-        }
-        if (entry.getClass() == ChatEntry.class) {
-            return (ChatEntry)entry;
-        } else {
-            System.out.println("2");
-            return new ChatEntry("temp", "temp");
-        }
-        
-    }
-    
-    @Path("login-entries/{timeStamp}")
-    @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public LoginEntry getLoginEntry(@PathParam("timeStamp") long timeStamp) {
-         EventEntry entry = eventEntryData.getEventEntry(timeStamp);
-        if (entry.getClass() == LoginEntry.class) {
-            return (LoginEntry)entry;
-        } else {
-            return null;
-        }
+    public EventEntry getEventEntry(@PathParam("timeStamp") long timeStamp) {
+        return eventEntryData.getEventEntry(timeStamp);
     }
 }

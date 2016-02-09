@@ -5,12 +5,13 @@
  */
 package com.webchat.resources;
 
+import com.webchat.data.ChatRoomData;
 import com.webchat.data.SessionData;
 import com.webchat.data.UserData;
+import com.webchat.models.ChatRoom;
 import com.webchat.models.Session;
 import com.webchat.models.User;
 import java.util.Collection;
-import java.util.Set;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -28,10 +29,12 @@ public class UserResource {
 
     private SessionData sessionData;
     private UserData userData;
+    private ChatRoomData chatRoomData;
 
     public UserResource() {
         this.userData = UserData.getInstance();
         this.sessionData = SessionData.getInstance();
+        this.chatRoomData = ChatRoomData.getInstance();
     }
 
     @GET
@@ -52,11 +55,13 @@ public class UserResource {
             result.append("<message>").append("This username is not available").append("</message>");
         } else {
             userData.addUser(user);
-            Session session = new Session(user);
+            Session session = new Session(user);           
             sessionData.addSession(session);
+            ChatRoom chatHall = chatRoomData.getChatRoom(0);
+            chatHall.addUser(user);
             result.append("<result>").append("success").append("</result>");
             result.append("<username>").append(user.getUsername()).append("</username>");
-            result.append("<sessionId>").append(session.getIdentifier()).append("</sessionId>");
+            result.append("<sessionId>").append(session.getId()).append("</sessionId>");
         }
         result.append("</response>");
         return result.toString();

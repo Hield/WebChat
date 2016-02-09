@@ -5,10 +5,8 @@
  */
 package com.webchat.models;
 
-import com.webchat.data.UserData;
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.Map;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -20,12 +18,12 @@ public class Session {
 
     private User user;
     private long timeStamp;
-    private String identifier;
+    private String id;
 
     public Session(User user) {
         this.user = user;
         this.timeStamp = System.currentTimeMillis();
-        this.identifier = new BigInteger(130, new SecureRandom()).toString(32);
+        this.id = new BigInteger(130, new SecureRandom()).toString(32);
     }
 
     public User getUser() {
@@ -40,7 +38,7 @@ public class Session {
         return timeStamp;
     }
 
-    public String getIdentifier() {
-        return identifier;
+    public String getId() {
+        return id;
     }
 }

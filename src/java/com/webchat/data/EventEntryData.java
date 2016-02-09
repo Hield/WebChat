@@ -5,10 +5,13 @@
  */
 package com.webchat.data;
 
+import com.webchat.models.ChatEntry;
 import com.webchat.models.EventEntry;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
 /**
  *
@@ -17,10 +20,10 @@ import java.util.List;
 public class EventEntryData {
 
     private static EventEntryData instance = new EventEntryData();
-    private List<EventEntry> entries;
+    private LinkedHashMap<Long, EventEntry> entries;
 
     private EventEntryData() {
-        this.entries = new ArrayList<>();
+        this.entries = new LinkedHashMap<>();
         addEventEntry(new EventEntry());
     }
 
@@ -29,14 +32,32 @@ public class EventEntryData {
     }
 
     public Collection<EventEntry> getEventEntries() {
-        return entries;
+        return entries.values();
     }
 
     public EventEntry getEventEntry(long timeStamp) {
-        return null;
+        return entries.get(timeStamp);
     }
 
     public void addEventEntry(EventEntry entry) {
-        entries.add(entry);
+        entries.put(entry.getTimeStamp(), entry);
+    }
+
+    public Collection<ChatEntry> getChatEntries() {
+        Set<ChatEntry> chatEntries = new HashSet<>();
+        for (EventEntry entry : entries.values()) {
+            if (entry.getClass() == ChatEntry.class) {
+                chatEntries.add((ChatEntry) entry);
+            }
+        }
+        return chatEntries;
+    }
+
+    public ChatEntry getChatEntry(long timeStamp) {
+        if (entries.get(timeStamp).getClass() != ChatEntry.class) {
+            return null;
+        } else {
+            return (ChatEntry) entries.get(timeStamp);
+        }
     }
 }
