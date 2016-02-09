@@ -144,7 +144,7 @@ a:hover.button {
   position: relative;
   clear: both;
  
-  background: #e5e5e5;
+  background: #ffffff;
   /*background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.15, #bee2ff), color-stop(1, #95c2fd));
   background-image: -webkit-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
   background-image: -moz-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
@@ -176,34 +176,10 @@ a:hover.button {
   position: absolute;
 }
 
-.bubble:before {
-  border: 10px solid transparent;
-  border-bottom-color: rgba(0,0,0,0.5);
-  bottom: 0px;
-  left: -7px;
-  z-index: -2;
-}
-
-.bubble:after {
-  border: 8px solid transparent;
-  border-bottom-color: #e5e5e5; /* arrow color */
-  bottom: 1px;
-  left: -5px;
-}
-
 .bubble-alt {
   float: right;
 }
 
-.bubble-alt:before {
-  left: auto;
-  right: -7px;
-}
-.bubble-alt:after {
-  left: auto;
-  right: -5px;
-}
- 
 .bubble p {
   font-size: 0.8em;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
