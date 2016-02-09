@@ -17,8 +17,9 @@ body {
 }
 
 html, p, body {
-    margin: 0px;
+    margin: auto;
     padding: 0px;
+	width: 95%;
 }
 
 ul {
@@ -123,8 +124,8 @@ a:hover.button {
     box-sizing: border-box;
     border: 1px solid #c0c0c0;
     background-color: #eeeeee;
-    width: 420px;
-    height: 200px;
+ 
+    height: 400px;
     margin-bottom: 10px;
     padding: 15px;
     overflow-y: scroll;
@@ -145,14 +146,6 @@ a:hover.button {
   clear: both;
  
   background: #e5e5e5;
-  /*background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.15, #bee2ff), color-stop(1, #95c2fd));
-  background-image: -webkit-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
-  background-image: -moz-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
-  background-image: -ms-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
-  background-image: -o-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
-  background-image: linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#95c2fd', endColorstr='#bee2ff');
- */
   border: solid 1px rgba(0,0,0,0.5);
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -186,7 +179,6 @@ a:hover.button {
 
 .bubble:after {
   border: 8px solid transparent;
-  border-bottom-color: #e5e5e5; /* arrow color */
   bottom: 1px;
   left: -5px;
 }
@@ -208,3 +200,4 @@ a:hover.button {
   font-size: 0.8em;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+

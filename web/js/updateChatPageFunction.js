@@ -11,7 +11,6 @@ function updateChatDivision(object, message) {
 	if (object == "receiver") {
 		var $chatDivision = $(".chat-division");
 		var color= colors["p1"];
-		console.log(color);
 		$chatDivision.append('<div class="bubble"><p>'+message+'</p></div>');
 	}
 	else if (object == "sender") {
