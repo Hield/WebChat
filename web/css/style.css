@@ -164,7 +164,7 @@ a:hover.button {
 	float: right;
 }
 
-.sender {
+.sender, .receiver {
 	width: 100%;
 }
 

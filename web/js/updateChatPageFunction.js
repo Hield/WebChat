@@ -9,7 +9,7 @@ $(document).ready(function () {
 function updateChatDivision(messageType, message, timeStamp) {
 	if (messageType == "received") {
 		var $chatDivision = $(".chat-division");
-		$chatDivision.append('<div class="bubble"><p>' + message + '</p><span>' + timeStamp + '<span></div>');
+		$chatDivision.append('<div class="bubble"><p class="receiver">' + message + '</p><span>' + timeStamp + '<span></div>');
 	}
 	else if (messageType == "sent") {
 		var $chatDivision = $(".chat-division");
