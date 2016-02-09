@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	$("#test-btn").click( function() {
 		updateChatDivision("received", "Hello World");
-		updateChatDivision("sent", "Hisd");
+		updateChatDivision("sent", "Hi Worlddd");
 	});
 });
 
@@ -14,7 +14,7 @@ function updateChatDivision(messageType, message, timeStamp) {
 		var $chatDivision = $(".chat-division");
 		var timeStamp = hour + ":" + minute;
 		console.log(timeStamp);
-		$chatDivision.append('<div class="bubble"><p class="receiver">' + message + '</p><span>' + timeStamp + '<span></div>');
+		$chatDivision.append('<div class="bubble"><p class="receiver">' + message + '</p><span class="timeStamp">' + timeStamp + '<span></div>');
 	}
 	else if (messageType == "sent") {
 		var date = new Date();
@@ -23,7 +23,7 @@ function updateChatDivision(messageType, message, timeStamp) {
 		var $chatDivision = $(".chat-division");
 		var timeStamp = hour + ":" + minute;
 		var $chatDivision = $(".chat-division");
-		$chatDivision.append('<div class="bubble bubble-right"><p class="sender">' + message + '</p><span>' + timeStamp + '</span</div>');
+		$chatDivision.append('<div class="bubble bubble-right"><p class="sender">' + message + '</p><span class="timeStamp">' + timeStamp + '</span</div>');
 		var $chatBubble = $(".bubble-right");
 		$chatBubble.css("background", "#99ffff");
 		$chatBubble.css("border-bottom-color", "#99ffff");

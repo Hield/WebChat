@@ -168,6 +168,11 @@ a:hover.button {
 	width: 100%;
 }
 
+.timeStamp {
+	font-size: 0.6em;
+	float: right;
+}
+
 .bubble p {
   font-size: 0.8em;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
