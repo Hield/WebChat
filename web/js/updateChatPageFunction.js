@@ -17,6 +17,7 @@ function updateChatDivision(messageType, message, timeStamp) {
 		$chatDivision.append('<div class="bubble"><p class="receiver">' + message + '</p><span>' + timeStamp + '<span></div>');
 	}
 	else if (messageType == "sent") {
+		var date = new Date();
 		var hour = date.getHours();
 		var minute = date.getMinutes();
 		var $chatDivision = $(".chat-division");
