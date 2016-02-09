@@ -5,16 +5,16 @@ $(document).ready(function () {
 	});
 });
 
-//
 function updateChatDivision(object, message) {
-	var colors = {"p1": "#95c2fd", "p2": "#7acd47", "p3": "#f4e371"};
 	if (object == "receiver") {
 		var $chatDivision = $(".chat-division");
-		var color= colors["p1"];
 		$chatDivision.append('<div class="bubble"><p>'+message+'</p></div>');
 	}
 	else if (object == "sender") {
 		var $chatDivision = $(".chat-division");
-		$chatDivision.append('<div class="bubble bubble-alt"><p>'+message+'</p></div>');
+		$chatDivision.append('<div class="bubble bubble-alt"><p class="sender">' + message + '</p></div>');
+		var $chatBubble = $(".bubble-alt");
+		$chatBubble.css("background", "#99ffff");
+		$chatBubble.css("border-bottom-color", "#99ffff");
 	}
 }
