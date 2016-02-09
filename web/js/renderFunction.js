@@ -13,6 +13,7 @@ $(document).ready(function () {
 
 function render(url) {
     var action = url.split("/")[0];
+ 
     if (action !== window.location.hash) {
         window.location.hash = action;
     } else {

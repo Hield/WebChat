@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Webchat</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <nav class="navigation">            
+            <div class="container">
+                <a class="navigation-title" href="#">HOME</a>
+                <ul class="navigation-list float-right">
+                    <li class="navigation-item login-state-control">
+                        <a class="logout-button button">
+                            Logout
+                        </a>
+                    </li>
+                    <li class="navigation-item login-state-control">
+                        <a href="#login" class="show-login-form-button button">
+                            Login
+                        </a>
+                    </li>
+                    <li class="navigation-item login-state-control">
+                        <a href="#register" class="show-register-form-button button">
+                            Register
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="container">
+            
+            <div class="register-page page">
+                <form class="register-form">
+                    <h1>Register form</h1>
+                    Username : <input type="text" name="username"><br/>
+                    Password : <input type="password" name="password"><br/>
+                    <span class="alert register-form-error-span"></span>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+            
+            <div class="login-page page">
+                <form class="login-form">
+                    <h1>Login form</h1>
+                    Username : <input type="text" name="username"><br/>
+                    Password : <input type="password" name="password"><br/>
+                    <span class="alert login-form-error-span"></span>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+            
+            <div class="chat-page page">
+                <h1>Welcome to chat</h1>
+                <div class="chat-division"></div>
+                <form class="chat-form">
+                    <input type="text" name="message" class="message-input" autocomplete="off"><br/>
+                    <button type="submit">Send</button>
+                    <button type="button" id="test-btn">Test</button>
+                </form>
+            </div>
+            
+            <div class="error-page page">
+                <h3>Sorry, something went wrong</h3>
+            </div>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="js/function1.js"></script>
+        <script src="js/renderFunction.js"></script>
+        <script src="js/updateChatPageFunction.js"></script>
+    </body>
+</html>
