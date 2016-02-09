@@ -5,7 +5,9 @@
  */
 package com.webchat.models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -18,14 +20,16 @@ public class User {
 
     private String username;
     private String password;
-    private Set<EventEntry> eventEntries;
+    private List<EventEntry> eventEntries;
     private Set<User> contacts;
+    private int currentEventIndex;
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        eventEntries = new HashSet<>();
+        eventEntries = new ArrayList<>();
         contacts = new HashSet<>();
+        currentEventIndex = -1;
     }
 
     public User() {
@@ -48,7 +52,7 @@ public class User {
         this.password = password;
     }
 
-    public Set<EventEntry> getEventEntries() {
+    public List<EventEntry> getEventEntries() {
         return eventEntries;
     }
 
@@ -62,5 +66,14 @@ public class User {
 
     public void addContact(User user) {
         contacts.add(user);
+    }
+
+    public int getCurrentEventIndex() {
+        return currentEventIndex;
+    }
+    
+    public int getNewestEventIndex() {
+        currentEventIndex = eventEntries.size() - 1;
+        return eventEntries.size() - 1;
     }
 }

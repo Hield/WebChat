@@ -11,6 +11,8 @@ import com.webchat.models.Session;
 import com.webchat.models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,9 +34,9 @@ public class PollingController extends HttpServlet {
         Session session = SessionData.getInstance().getSession(sessionId);
         if (session != null) {
             User user = session.getUser();
-
+            int entriesNumber = user.getEventEntries().size();
             int i = 0;
-            while (i * 50 < 30000 && user.getEventEntries().size() == 0) {
+            while (i * 50 < 30050 && user.getEventEntries().size() == entriesNumber) {
                 try {
                     Thread.sleep(50);
                     i++;
@@ -42,15 +44,16 @@ public class PollingController extends HttpServlet {
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
-            }           
+            }
             StringBuilder result = new StringBuilder();
             result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             result.append("<response>");
             result.append("<result>").append("success").append("</result>");
-            for (EventEntry entry : user.getEventEntries()) {
-                result.append("<timeStamp>").append(entry.getTimeStamp()).append("</timeStamp>");
+            List<EventEntry> entries = user.getEventEntries();
+            for (int index = entriesNumber; index < entries.size(); index++) {
+                result.append("<type>").append(entries.get(index).getType()).append("</type>");
+                result.append("<timeStamp>").append(entries.get(index).getTimeStamp()).append("</timeStamp>");
             }
-            user.getEventEntries().clear();
             result.append("</response>");
             out.write(result.toString());
         } else {

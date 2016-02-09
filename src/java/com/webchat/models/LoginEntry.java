@@ -18,6 +18,7 @@ public class LoginEntry extends EventEntry {
     
     public LoginEntry(){
         super();
+        setType("login");
         this.username = "temp";
     }
     
