@@ -5,9 +5,8 @@ $(document).ready(function () {
 	});
 });
 
-//
 function updateChatDivision(messageType, message, timeStamp) {
-	if (messageType == "received") {
+	if (messageType == "received)
 		var $chatDivision = $(".chat-division");
 		$chatDivision.append('<div class="bubble"><p>' + message + '</p><span>' + timeStamp + '<span></div>');
 	}
