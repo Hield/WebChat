@@ -39,7 +39,8 @@ public class EventEntry {
     public void setType(String type) {
         this.type = type;
     }
-
+	
+	@XmlElement
     public String getTime() {
         SimpleDateFormat format = new SimpleDateFormat("hh:mm");
         return format.format(date);

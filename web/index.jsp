@@ -76,7 +76,8 @@
         </div>
         
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script src="js/function.js"></script>
+        <script src="js/updateChatPageFunction.js"></script>
+		<script src="js/function1.js"></script>
         <script src="js/renderFunction.js"></script>
     </body>
 </html>

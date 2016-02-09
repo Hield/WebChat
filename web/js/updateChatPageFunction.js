@@ -6,23 +6,15 @@ $(document).ready(function () {
 });
 
 
-function updateChatDivision(messageType, message, timeStamp) {
-	if (messageType == "received") {
-		var date = new Date();
-		var hour = (date.getHours() < 10 ? "0" : "") + date.getHours();
-		var minute = (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
-		timeStamp = hour + ":" + minute;
+function updateChatDivision(messageType, message, time) {
+	if (messageType === "received") {
 		var $chatDivision = $(".chat-division");
-		console.log(timeStamp);
-		$chatDivision.append('<div class="bubble"><p class="receiver">' + message + '</p><span class="timeStamp">' + timeStamp + '<span></div>');
+		console.log(time);
+		$chatDivision.append('<div class="bubble"><p class="receiver">' + message + '</p><span class="time">' + time + '<span></div>');
 	}
-	else if (messageType == "sent") {
-		var date = new Date();
-		var hour = (date.getHours() < 10 ? "0" : "") + date.getHours();
-		var minute = (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
-		timeStamp = hour + ":" + minute;
+	else if (messageType === "sent") {
 		var $chatDivision = $(".chat-division");
-		$chatDivision.append('<div class="bubble bubble-right"><p class="sender">' + message + '</p><span class="timeStamp">' + timeStamp + '</span</div>');
+		$chatDivision.append('<div class="bubble bubble-right"><p class="sender">' + message + '</p><span class="time">' + time + '</span</div>');
 		var $chatBubble = $(".bubble-right");
 		$chatBubble.css("background", "#99ffff");
 		$chatBubble.css("border-bottom-color", "#99ffff");
