@@ -249,8 +249,9 @@ function processResponse(data) {
                             var roomId = $(data).find("roomId").html();
                             var username = $(data).find("username").html();
                             var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
-                            console.log(message);
-                            console.log(chatDivision);
+                            //console.log(message);
+                            //console.log(chatDivision);
+                            console.log("sending message: " + message);
                             chatDivision.html(chatDivision.html() + "<p>" + username + ": " + message + "</p>");
                         }
                     },
