@@ -66,16 +66,16 @@ function login(form) {
     var username = $(form).find("[name='username']").val();
     var password = $(form).find("[name='password']").val();
     $.ajax({
-        type       : "POST",
-        url        : "api/sessions",
+        type: "POST",
+        url: "api/sessions",
         contentType: "application/xml",
-        dataType   : "xml",
-        data       : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
-                     "<user>" + 
-                         "<username>" + username + "</username>" + 
-                         "<password>" + password + "</password>" + 
-                     "</user>",
-        complete    : function(data) {
+        dataType: "xml",
+        data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<user>" +
+                "<username>" + username + "</username>" +
+                "<password>" + password + "</password>" +
+                "</user>",
+        complete: function (data) {
             var xml = data.responseXML;
             var result = $(xml).find("result").html();
             if (result === "failure") {
@@ -85,10 +85,10 @@ function login(form) {
                 var sessionId = $(xml).find("sessionId").html();
                 localStorage.setItem("sessionId", sessionId);
                 render("#chat");
-				$(".chat-division").attr("id", username);
+                $(".chat-division").attr("id", username);
             }
         },
-        cache       : false
+        cache: false
     });
     $(form).find("[name='username']").val("");
     $(form).find("[name='password']").val("");
@@ -109,19 +109,19 @@ function register(form) {
         $(".register-form-error-span").html(errorMessage + "<br/>");
     } else {
         $.ajax({
-            type       : "POST",
-            url        : "api/users",
+            type: "POST",
+            url: "api/users",
             contentType: "application/xml",
-            dataType   : "xml",
-            data       : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
-                         "<user>" + 
-                             "<username>" + username + "</username>" + 
-                             "<password>" + password + "</password>" + 
-                         "</user>",
-            success    : function() {
+            dataType: "xml",
+            data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                    "<user>" +
+                    "<username>" + username + "</username>" +
+                    "<password>" + password + "</password>" +
+                    "</user>",
+            success: function () {
                 console.log("Success");
             },
-            complete   : function(data) {
+            complete: function (data) {
                 var xml = data.responseXML;
                 var result = $(xml).find("result").html();
                 if (result === "failure") {
@@ -131,10 +131,10 @@ function register(form) {
                     var sessionId = $(xml).find("sessionId").html();
                     localStorage.setItem("sessionId", sessionId);
                     render("#chat");
-					$(".chat-division").attr("id", username);
+                    $(".chat-division").attr("id", username);
                 }
             },
-            cache      : false
+            cache: false
         });
     }
 }
@@ -146,59 +146,59 @@ function logout() {
 }
 
 /*
-//----- Long polling function -----//
-function poll() {
-    if (localStorage.getItem("sessionId")){
-        $.ajax({
-            type    : "GET",
-            url     : "polling",
-            headers : {
-                "sessionId": localStorage.getItem("sessionId")
-            },
-            dataType: "xml",
-            success : function(data) {
-                console.log(data);
-                processResponse(data);
-            },
-            error   : function(data) {
-                console.log(data);
-                if (data.statusText === "timeout") {
-                    poll();
-                } else {
-                    setTimeout(function() {
-                        poll();
-                    }, 5000);
-                }
-            },
-            timeout : 30000,
-            cache   : false
-        });
-    }
-}
-*/
+ //----- Long polling function -----//
+ function poll() {
+ if (localStorage.getItem("sessionId")){
+ $.ajax({
+ type    : "GET",
+ url     : "polling",
+ headers : {
+ "sessionId": localStorage.getItem("sessionId")
+ },
+ dataType: "xml",
+ success : function(data) {
+ console.log(data);
+ processResponse(data);
+ },
+ error   : function(data) {
+ console.log(data);
+ if (data.statusText === "timeout") {
+ poll();
+ } else {
+ setTimeout(function() {
+ poll();
+ }, 5000);
+ }
+ },
+ timeout : 30000,
+ cache   : false
+ });
+ }
+ }
+ */
 
 //----- Polling function -----//
 function poll() {
-    pollId = setInterval(function() {
+    pollId = setInterval(function () {
         if (localStorage.getItem("sessionId")) {
             var sessionId = localStorage.getItem("sessionId");
             $.ajax({
-                type    : "GET",
-                url     : "api/sessions/" + sessionId + "/update",
-                headers : {
+                type: "GET",
+                url: "api/sessions/" + sessionId + "/update",
+                headers: {
                     "sessionId": sessionId
                 },
                 dataType: "xml",
-                success : function(data) {
+                success: function (data) {
                     processResponse(data);
                 },
-                error   : function(data) {
+                error: function (data) {
                     console.log(data);
                 },
-                cache   : false
+                cache: false
             });
         }
-    }, 500);    
+    }, 500);
 }
 
 function stopPolling() {
@@ -210,29 +210,29 @@ function processResponse(data) {
     var result = $(data).find("result").html();
     if (result === "success") {
         /*
-        var type = $(data).find("type").html();
-        var timeStamp = $(data).find("timeStamp").html();                    
-        if (type === "chat") {
-            console.log("FROM chat");
-            $.ajax({
-                type    :  "GET",
-                url     : "api/event-entries/chat/" + timeStamp,
-                headers : {
-                    "sessionId": localStorage.getItem("sessionId")
-                },
-                dataType: "xml",
-                success : function(data) {
-                    var message = $(data).find("message").html();
-                    var roomId = $(data).find("roomId").html();
-                    var username = $(data).find("username").html();
-                    var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
-                    chatDivision.html(chatDivision.html() + "<p>" + username + ": " + message + "</p>");
-                },
-                cache   : false
-            });
-        }
-        poll();
-        */
+         var type = $(data).find("type").html();
+         var timeStamp = $(data).find("timeStamp").html();                    
+         if (type === "chat") {
+         console.log("FROM chat");
+         $.ajax({
+         type    :  "GET",
+         url     : "api/event-entries/chat/" + timeStamp,
+         headers : {
+         "sessionId": localStorage.getItem("sessionId")
+         },
+         dataType: "xml",
+         success : function(data) {
+         var message = $(data).find("message").html();
+         var roomId = $(data).find("roomId").html();
+         var username = $(data).find("username").html();
+         var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
+         chatDivision.html(chatDivision.html() + "<p>" + username + ": " + message + "</p>");
+         },
+         cache   : false
+         });
+         }
+         poll();
+         */
         var currentIndex = parseInt($(data).find("current").html());
         var newestIndex = parseInt($(data).find("newest").html());
         if (currentIndex < newestIndex) {
@@ -244,28 +244,29 @@ function processResponse(data) {
                         "sessionId": localStorage.getItem("sessionId")
                     },
                     dataType: "xml",
-                    success: function(data) {
+                    success: function (data) {
+
                         var type = $(data).find("type").html();
                         if (type === "chat") {
                             var message = $(data).find("message").html();
                             var roomId = $(data).find("roomId").html();
                             var username = $(data).find("username").html();
                             var time = $(data).find("time").html();
-							var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
-							var currentUser = $(".chat-division").attr("id");
-							if (currentUser !== username) {
-								updateChatDivision("received", username + ": " + message, time);
-							}
-							else {
-								updateChatDivision("sent", username + ": " + message, time);
-							}
-							console.log(data);
-							console.log(message);
-							console.log(chatDivision);
+                            var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
+                            
+                            var currentUser = $(".chat-division").attr("id");
+              console.log(currentUser);
+                            if (currentUser !== username) {
+                                updateChatDivision("received", username + ": " + message, time);
+                            } else {
+                                updateChatDivision("sent", username + ": " + message, time);
+                            }
+               
+                            console.log(chatDivision);
                             //chatDivision.html(chatDivision.html() + "<p>" + username + ": " + message + "</p>");
                         }
                     },
-                    error: function(data) {
+                    error: function (data) {
                         console.log(data);
                     },
                     cache: false
@@ -284,20 +285,20 @@ function processResponse(data) {
 function sendMessage(form) {
     var message = $(form).find("[name='message']").val();
     var roomId = $(form).parent().attr("id").split("-room-")[1];
-    
+
     $(".message-input").val("");
     $.ajax({
-        type       : "POST",
-        url        : "api/event-entries/chat",
-        headers    : {
+        type: "POST",
+        url: "api/event-entries/chat",
+        headers: {
             "sessionId": localStorage.getItem("sessionId")
         },
         contentType: "application/xml",
-        data       : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
-                     "<chatEntry>" +
-                         "<roomId>" + roomId + "</roomId>" +
-                         "<message>" + message + "</message>" +
-                     "</chatEntry>",
-        cache      : false
+        data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<chatEntry>" +
+                "<roomId>" + roomId + "</roomId>" +
+                "<message>" + message + "</message>" +
+                "</chatEntry>",
+        cache: false
     });
 }

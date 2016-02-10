@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Webchat</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -64,8 +65,10 @@
                 <div id="chat-room-0" class="chat-room">
                     <div class="chat-division"></div>
                     <form class="chat-form">
-                        <input type="text" name="message" class="message-input" autocomplete="off"><br/>
-                        <button type="submit">Send</button>
+                        <input type="text" name="message" class="message-input" 
+                               autofocus autocomplete="off"
+                               placeholder="Type your message" id="sendingInput">
+                        <button type="submit" id="sendingButton"><i class="fa fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
