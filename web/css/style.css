@@ -57,6 +57,16 @@ input[type='submit'] {
     white-space: nowrap;
 }
 
+input[type='text'], input[type='password'] {
+    font-size: 0.8em;
+    margin: 5px auto;
+} 
+
+button[type='submit'] {
+    width: 245px;
+
+}
+
 .button:hover,
 .button:focus,
 button:hover,
@@ -123,13 +133,14 @@ a:hover.button {
 
 .page {
     display: none;
+    text-align: center;
 }
 
 .chat-division {
     box-sizing: border-box;
     border: 1px solid #c0c0c0;
     background-color: #eeeeee;
-
+    display: block;
     height: 400px;
     margin-bottom: 10px;
     padding: 15px;
@@ -145,6 +156,7 @@ a:hover.button {
 .bubble {
     box-sizing: border-box;
     float: left;
+    text-align: left;
     width: auto;
     max-width: 80%;
     position: relative;
@@ -202,8 +214,9 @@ a:hover.button {
         clear: both; 
         margin: 0 auto; 
         width: 90%;
-        font-size: 90%;
+        font-size: 70%;
     }
+    
     #sendingInput {
         width: 88%;
     }
@@ -212,5 +225,13 @@ a:hover.button {
         float: right;
     }
 
+    .chat-division {
+
+    }
+    
+    .bubble {
+        font-size: 1em;
+        max-width: 50%;
+    }
 
 }

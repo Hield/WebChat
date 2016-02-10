@@ -84,6 +84,7 @@ function login(form) {
             } else if (result === "success") {
                 var sessionId = $(xml).find("sessionId").html();
                 localStorage.setItem("sessionId", sessionId);
+                localStorage.setItem("username", username);
                 render("#chat");
                 $(".chat-division").attr("id", username);
             }
@@ -253,16 +254,17 @@ function processResponse(data) {
                             var username = $(data).find("username").html();
                             var time = $(data).find("time").html();
                             var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
+
+                            //var currentUser = $(".chat-division").attr("id");
                             
-                            var currentUser = $(".chat-division").attr("id");
-              console.log(currentUser);
-                            if (currentUser !== username) {
+                            if (localStorage.getItem("username") !== username) {
                                 updateChatDivision("received", username + ": " + message, time);
                             } else {
                                 updateChatDivision("sent", username + ": " + message, time);
                             }
-               
-                            console.log(chatDivision);
+                            
+                            //----- Scroll to bottom for new message -----//
+                            $('.chat-division').animate({scrollTop: $('.chat-division')[0].scrollHeight}, 1);
                             //chatDivision.html(chatDivision.html() + "<p>" + username + ": " + message + "</p>");
                         }
                     },

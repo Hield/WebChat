@@ -40,11 +40,11 @@
         
         <div class="container">
             
-            <div class="register-page page">
+            <div class="register-page page" >
                 <form class="register-form">
                     <h1>Register form</h1>
-                    Username : <input type="text" name="username"><br/>
-                    Password : <input type="password" name="password"><br/>
+                    <input type="text" name="username" placeholder="Username"><br/>
+                    <input type="password" name="password" placeholder="Password"><br/>
                     <span class="alert register-form-error-span"></span>
                     <button type="submit">Register</button>
                 </form>
@@ -53,15 +53,15 @@
             <div class="login-page page">
                 <form class="login-form">
                     <h1>Login form</h1>
-                    Username : <input type="text" name="username"><br/>
-                    Password : <input type="password" name="password"><br/>
+                    <input type="text" name="username" placeholder="Username"><br/>
+                    <input type="password" name="password" placeholder="Password"><br/>
                     <span class="alert login-form-error-span"></span>
-                    <button type="submit">Login</button>
+                    <button type="submit" id="logInButton">Log In</button>
                 </form>
             </div>
             
             <div class="chat-page page">
-                <h1>Welcome to chat</h1>
+                <h1>Welcome</h1>
                 <div id="chat-room-0" class="chat-room">
                     <div class="chat-division"></div>
                     <form class="chat-form">
