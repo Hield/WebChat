@@ -268,6 +268,7 @@ function processResponse(data) {
                 localStorage.removeItem("sessionId");
             }
         }
+	}
 }
 
 //----- Send message function -----//
