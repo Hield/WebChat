@@ -197,10 +197,13 @@ a:hover.button {
 
 #sendingInput {
     width: 93%;
+    float: left;
+    margin: 0;
+    height: 30px;
 }
 
 #sendingButton {  
-    width: 6%;
+    width: 60px;
     float: right;
 }
 
@@ -218,15 +221,15 @@ a:hover.button {
     }
     
     #sendingInput {
-        width: 88%;
+        width: 85%;
     }
     #sendingButton {  
-        width: 10%;
+        width: 13%;
         float: right;
     }
 
     .chat-division {
-
+        height: 300px;
     }
     
     .bubble {
