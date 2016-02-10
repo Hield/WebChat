@@ -86,7 +86,8 @@ function login(form) {
                 localStorage.setItem("sessionId", sessionId);
                 localStorage.setItem("username", username);
                 render("#chat");
-                $(".chat-division").attr("id", username);
+              //  $('#welcomeHeading').html("Welcome " + username);
+                //$(".chat-division").attr("id", username);
             }
         },
         cache: false
@@ -131,8 +132,10 @@ function register(form) {
                 } else if (result === "success") {
                     var sessionId = $(xml).find("sessionId").html();
                     localStorage.setItem("sessionId", sessionId);
+                    localStorage.setItem("username", username);
                     render("#chat");
-                    $(".chat-division").attr("id", username);
+                   // $('#welcomeHeading').html("Welcome " + username);
+                    //$(".chat-division").attr("id", username);
                 }
             },
             cache: false

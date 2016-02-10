@@ -77,8 +77,10 @@ function renderRegisterPage() {
 
 function renderChatPage() {
     var sessionId = localStorage.getItem("sessionId");
+    var username = localStorage.getItem("username");
     if (sessionId){
         $(".chat-page").show();
+        $('#welcomeHeading').html("Welcome " + username);
         poll();
     } else {
         renderHomePage();
