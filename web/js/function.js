@@ -261,12 +261,12 @@ function processResponse(data) {
                 });
             }
         }
-    } else if (result === "failure") {
-        var message = $(data).find("message").html();
-        if (message === "sessionTimeout") {
-            localStorage.removeItem("sessionId");
+        else if (result === "failure") {
+            var message = $(data).find("message").html();
+            if (message === "sessionTimeout") {
+                localStorage.removeItem("sessionId");
+            }
         }
-    }
 }
 
 //----- Send message function -----//
