@@ -61,12 +61,16 @@
             
             <div class="chat-page page">
                 <h1>Welcome to chat</h1>
-                <div id="chat-room-0" class="chat-room">
-                    <div class="chat-division"></div>
-                    <form class="chat-form">
-                        <input type="text" name="message" class="message-input" autocomplete="off"><br/>
-                        <button type="submit">Send</button>
-                    </form>
+                <div class="chat-rooms">
+                    <!--
+                    <div id="chat-room-0" class="chat-room">
+                        <div class="chat-division"></div>
+                        <form class="chat-form">
+                            <input type="text" name="message" class="message-input" autocomplete="off"><br/>
+                            <button type="submit">Send</button>
+                        </form>
+                    </div>
+                    -->
                 </div>
             </div>
             

@@ -12,7 +12,9 @@ import com.webchat.models.ChatRoom;
 import com.webchat.models.EventEntry;
 import com.webchat.models.Session;
 import com.webchat.models.User;
+import java.util.Collection;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -65,8 +67,6 @@ public class SessionResource {
             user = userData.getUser(user.getUsername());
             Session session = new Session(user);
             sessionData.addSession(session);
-            ChatRoom chatHall = chatRoomData.getChatRoom(0);
-            chatHall.addUser(user);
             result.append("<result>").append("success").append("</result>");
             result.append("<username>").append(user.getUsername()).append("</username>");
             result.append("<sessionId>").append(session.getId()).append("</sessionId>");
@@ -77,7 +77,71 @@ public class SessionResource {
         result.append("</response>");
         return result.toString();
     }
-
+    
+    @Path("{sessionId}")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public String getSession(@PathParam("sessionId") String sessionId) {
+        StringBuilder result = new StringBuilder();
+        result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        result.append("<response>");
+        Session session = sessionData.getSession(sessionId);
+        if (session != null) {
+            result.append("<result>success</result>");
+        } else {
+            result.append("<result>failure</result>");
+        }
+        result.append("</response>");
+        return result.toString();
+    }
+    
+    @Path("{sessionId}")
+    @DELETE
+    public void logout(@PathParam("sessionId") String sessionId) {
+        sessionData.deleteSession(sessionId);
+    }
+    
+    @Path("{sessionId}/rooms")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public Collection<ChatRoom> getRooms(@PathParam("sessionId") String sessionId) {
+        Session session = sessionData.getSession(sessionId);
+        return session.getChatRooms();
+    }
+    
+    @Path("{sessionId}/rooms")
+    @POST
+    @Consumes(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_XML)
+    public String joinRoom(@PathParam("sessionId") String sessionId, ChatRoom chatRoom) {
+        StringBuilder result = new StringBuilder();
+        result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        result.append("<response>");
+        Session session = sessionData.getSession(sessionId);
+        if (session != null) {
+            if (session.joinRoom(chatRoom.getId())) {
+                result.append("<result>success</result>");
+            } else {
+                result.append("<result>failure</result>");
+                result.append("<message>roomNotExist</message>");
+            }
+        } else {
+            result.append("<result>failure</result>");
+            result.append("<message>sessionTimeout</message>");
+        }
+        result.append("</response>");
+        return result.toString();
+    }
+    
+    @Path("{sesseionId}/rooms")
+    @DELETE
+    public void outRoomsTemporary(@PathParam("sessionId") String sessionId) {
+        Session session = sessionData.getSession(sessionId);
+        if (session != null) {
+            session.outRoomsTemporary();
+        }
+    }
+    
     @Path("{sessionId}/{index}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
