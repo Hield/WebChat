@@ -1,8 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 var pollId;
 var username;
 
@@ -25,14 +20,6 @@ $(document).ready(function () {
         logout();
         render("");
     });
-
-    /* Old action
-    //----- Send message action -----//
-    $(".chat-form").submit(function (event) {
-        event.preventDefault();
-        sendMessage(this);
-    });
-    */
 
     //----- Close tab action -----//
     $(window).on("beforeunload", function(){
@@ -179,38 +166,6 @@ function logout() {
     outRoomsCompletely();
     stopPolling();
 }
-
-/*
-//----- Long polling function -----//
-function poll() {
-    if (localStorage.getItem("sessionId")){
-        $.ajax({
-            type    : "GET",
-            url     : "polling",
-            headers : {
-                "sessionId": localStorage.getItem("sessionId")
-            },
-            dataType: "xml",
-            success : function(data) {
-                console.log(data);
-                processResponse(data);
-            },
-            error   : function(data) {
-                console.log(data);
-                if (data.statusText === "timeout") {
-                    poll();
-                } else {
-                    setTimeout(function() {
-                        poll();
-                    }, 5000);
-                }
-            },
-            timeout : 30000,
-            cache   : false
-        });
-    }
-}
-*/
 
 //----- Polling function -----//
 function poll() {
