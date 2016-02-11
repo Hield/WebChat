@@ -42,6 +42,10 @@ public class ChatRoom {
             user.addEventEntry(entry);
         }
     }
+    
+    public void removeUser(User user) {
+        users.remove(user);
+    }
 
     public void addChatEntry(ChatEntry entry) {
         chatEntries.add(entry);

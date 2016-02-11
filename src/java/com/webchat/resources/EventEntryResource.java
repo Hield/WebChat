@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author hieu
  */
-@Path("event-entries")
+@Path("events")
 public class EventEntryResource {
 
     private SessionData sessionData;

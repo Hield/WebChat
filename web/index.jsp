@@ -61,15 +61,20 @@
             </div>
             
             <div class="chat-page page">
-                <h1 id="welcomeHeading"></h1>
-                <div id="chat-room-0" class="chat-room">
-                    <div class="chat-division"></div>
-                    <form class="chat-form">
-                        <input type="text" name="message" class="message-input" 
-                               autofocus autocomplete="off"
-                               placeholder="Type your message" id="sendingInput">
-                        <button type="submit" id="sendingButton"><i class="fa fa-paper-plane"></i></button>
-                    </form>
+                <h1>Welcome to chat</h1>
+                <div class="chat-rooms">
+                    <!--
+                        ***Example chatroom***                       
+                        <div id="chat-room-0" class="chat-room">
+                            <div class="chat-division"></div>
+                            <form class="chat-form">
+                                <input type="text" name="message" class="message-input" 
+                                       autofocus autocomplete="off"
+                                       placeholder="Type your message" id="sendingInput">
+                                <button type="submit" id="sendingButton"><i class="fa fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                    -->
                 </div>
             </div>
             
@@ -80,7 +85,7 @@
         
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="js/updateChatPageFunction.js"></script>
-		<script src="js/function1.js"></script>
+        <script src="js/function.js"></script>
         <script src="js/renderFunction.js"></script>
     </body>
 </html>

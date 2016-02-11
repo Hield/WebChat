@@ -57,8 +57,6 @@ public class UserResource {
             userData.addUser(user);
             Session session = new Session(user);           
             sessionData.addSession(session);
-            ChatRoom chatHall = chatRoomData.getChatRoom(0);
-            chatHall.addUser(user);
             result.append("<result>").append("success").append("</result>");
             result.append("<username>").append(user.getUsername()).append("</username>");
             result.append("<sessionId>").append(session.getId()).append("</sessionId>");

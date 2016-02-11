@@ -38,4 +38,8 @@ public class SessionData {
     public Session getSession(String sessionId) {
         return sessions.get(sessionId);
     }
+    
+    public void deleteSession(String sessionId) {
+        sessions.remove(sessionId);
+    }
 }

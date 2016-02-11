@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author hieu
  */
-@Path("chat-rooms")
+@Path("rooms")
 public class ChatRoomResource {
 
     private final ChatRoomData chatRoomData;

@@ -149,38 +149,6 @@ function logout() {
     render("");
 }
 
-/*
- //----- Long polling function -----//
- function poll() {
- if (localStorage.getItem("sessionId")){
- $.ajax({
- type    : "GET",
- url     : "polling",
- headers : {
- "sessionId": localStorage.getItem("sessionId")
- },
- dataType: "xml",
- success : function(data) {
- console.log(data);
- processResponse(data);
- },
- error   : function(data) {
- console.log(data);
- if (data.statusText === "timeout") {
- poll();
- } else {
- setTimeout(function() {
- poll();
- }, 5000);
- }
- },
- timeout : 30000,
- cache   : false
- });
- }
- }
- */
-
 //----- Polling function -----//
 function poll() {
     pollId = setInterval(function () {
@@ -307,3 +275,80 @@ function sendMessage(form) {
         cache: false
     });
 }
+//<<<<<<< HEAD
+//=======
+//}
+//
+////----- Poll All Function -----//
+//function pollAll() {
+//    var sessionId = localStorage.getItem("sessionId");
+//    var isComplete = false;
+//            $.ajax({
+//                type: "GET",
+//                url: "api/sessions/" + sessionId + "/update",
+//                headers: {
+//                    "sessionId": sessionId
+//                },
+//                dataType: "xml",
+//                success: function (data) {
+//                    var result = $(data).find("result").html();
+//					if (result === "success") {
+//			        console.log(data);
+//					var newestIndex = parseInt($(data).find("newest").html());
+//					for (var i = 0; i <= newestIndex; i++) {
+//						$.ajax({
+//							type: "GET",
+//							url: "api/sessions/" + localStorage.getItem("sessionId") + "/" + i,
+//							headers: {
+//								"sessionId": localStorage.getItem("sessionId")
+//							},
+//							dataType: "xml",
+//							success: function (data) {
+//								var type = $(data).find("type").html();
+//								if (type === "chat") {
+//									var message = $(data).find("message").html();
+//									var roomId = $(data).find("roomId").html();
+//									var username = $(data).find("username").html();
+//									var time = $(data).find("time").html();
+//									var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
+//
+//									//var currentUser = $(".chat-division").attr("id");
+//                            
+//									if (localStorage.getItem("username") !== username) {
+//										updateChatDivision("received", username + ": " + message, time);
+//									} else {
+//										updateChatDivision("sent", username + ": " + message, time);
+//									}
+//                            
+//									//----- Scroll to bottom for new message -----//
+//									$('.chat-division').animate({scrollTop: $('.chat-division')[0].scrollHeight}, 1);
+//									isComplete = true;
+//								}
+//							},
+//							error: function (data) {
+//								console.log(data);
+//							},
+//							cache: false
+//							});
+//					}
+//        
+//					} else if (result === "failure") {
+//						var message = $(data).find("message").html();
+//						if (message === "sessionTimeout") {
+//							localStorage.removeItem("sessionId");
+//							localStorage.removeItem("username");
+//					}
+//					}
+//                },
+//                error: function (data) {
+//                    console.log(data);
+//                },
+//				complete: function () {
+//					return isComplete;
+//				},
+//                cache: false
+//            });
+//	
+//	
+//>>>>>>> 6068cb8e867f4ad0e4969a70f43baeb75104e932
+//}

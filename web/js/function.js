@@ -1,9 +1,5 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 var pollId;
+var username;
 
 $(document).ready(function () {
 
@@ -22,12 +18,12 @@ $(document).ready(function () {
     //----- Logout action -----//
     $(".logout-button").click(function () {
         logout();
+        render("");
     });
 
-    //----- Send message action -----//
-    $(".chat-form").submit(function (event) {
-        event.preventDefault();
-        sendMessage(this);
+    //----- Close tab action -----//
+    $(window).on("beforeunload", function(){
+        outRoomsTemporary();
     });
 
     //----- Call to initialize -----//
@@ -36,7 +32,28 @@ $(document).ready(function () {
 
 //----- Initialize -----//
 function init() {
-    render("");
+    if (localStorage.getItem("sessionId")) {
+        $.ajax({
+            type    : "GET",
+            url     : "api/sessions/" + localStorage.getItem("sessionId"),
+            dataType: "xml",
+            success : function(data) {
+                var result = $(data).find("result").html();
+                if (result === "success") {
+                    
+                    rejoinRooms();
+                    render("#chat");
+                } else if (result === "failure") {
+                    render("#login");
+                }
+            },
+            error   : function() {
+                render("#login");
+            }
+        });
+    } else {
+        render("#login");
+    }
 }
 
 //----- Check the validity of username -----//
@@ -81,9 +98,10 @@ function login(form) {
             if (result === "failure") {
                 var message = $(xml).find("message").html();
                 $(".login-form-error-span").html(message + "<br/>");
-            } else if (result === "success") {
+            } else if (result === "success") {               
                 var sessionId = $(xml).find("sessionId").html();
                 localStorage.setItem("sessionId", sessionId);
+                joinRoom(0);
                 render("#chat");
             }
         },
@@ -126,9 +144,10 @@ function register(form) {
                 if (result === "failure") {
                     var message = $(xml).find("message").html();
                     $(".register-form-error-span").html(message + "<br/>");
-                } else if (result === "success") {
+                } else if (result === "success") {                   
                     var sessionId = $(xml).find("sessionId").html();
                     localStorage.setItem("sessionId", sessionId);
+                    joinRoom(0);
                     render("#chat");
                 }
             },
@@ -139,41 +158,15 @@ function register(form) {
 
 //----- Logout function -----//
 function logout() {
+    $.ajax({
+        type : "DELETE",
+        url  : "api/sessions/" + localStorage.getItem("sessionId"),
+        cache: false
+    });
     localStorage.removeItem("sessionId");
-    render("");
+    outRoomsCompletely();
+    stopPolling();
 }
-
-/*
-//----- Long polling function -----//
-function poll() {
-    if (localStorage.getItem("sessionId")){
-        $.ajax({
-            type    : "GET",
-            url     : "polling",
-            headers : {
-                "sessionId": localStorage.getItem("sessionId")
-            },
-            dataType: "xml",
-            success : function(data) {
-                console.log(data);
-                processResponse(data);
-            },
-            error   : function(data) {
-                console.log(data);
-                if (data.statusText === "timeout") {
-                    poll();
-                } else {
-                    setTimeout(function() {
-                        poll();
-                    }, 5000);
-                }
-            },
-            timeout : 30000,
-            cache   : false
-        });
-    }
-}
-*/
 
 //----- Polling function -----//
 function poll() {
@@ -207,30 +200,6 @@ function stopPolling() {
 function processResponse(data) {
     var result = $(data).find("result").html();
     if (result === "success") {
-        /*
-        var type = $(data).find("type").html();
-        var timeStamp = $(data).find("timeStamp").html();                    
-        if (type === "chat") {
-            console.log("FROM chat");
-            $.ajax({
-                type    :  "GET",
-                url     : "api/event-entries/chat/" + timeStamp,
-                headers : {
-                    "sessionId": localStorage.getItem("sessionId")
-                },
-                dataType: "xml",
-                success : function(data) {
-                    var message = $(data).find("message").html();
-                    var roomId = $(data).find("roomId").html();
-                    var username = $(data).find("username").html();
-                    var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
-                    chatDivision.html(chatDivision.html() + "<p>" + username + ": " + message + "</p>");
-                },
-                cache   : false
-            });
-        }
-        poll();
-        */
         var currentIndex = parseInt($(data).find("current").html());
         var newestIndex = parseInt($(data).find("newest").html());
         if (currentIndex < newestIndex) {
@@ -249,9 +218,6 @@ function processResponse(data) {
                             var roomId = $(data).find("roomId").html();
                             var username = $(data).find("username").html();
                             var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
-                            //console.log(message);
-                            //console.log(chatDivision);
-                            console.log("sending message: " + message);
                             chatDivision.html(chatDivision.html() + "<p>" + username + ": " + message + "</p>");
                         }
                     },
@@ -262,24 +228,26 @@ function processResponse(data) {
                 });
             }
         }
-        else if (result === "failure") {
-            var message = $(data).find("message").html();
-            if (message === "sessionTimeout") {
-                localStorage.removeItem("sessionId");
-            }
-        }
+    } else if (result === "failure") {
+        var message = $(data).find("message").html();
+        if (message === "sessionTimeout") {
+            localStorage.removeItem("sessionId");
+            render("login");
+            stopPolling();
 	}
+    }
 }
 
 //----- Send message function -----//
-function sendMessage(form) {
+function sendMessage(event, form) {
+    event.preventDefault();
     var message = $(form).find("[name='message']").val();
     var roomId = $(form).parent().attr("id").split("-room-")[1];
     
     $(".message-input").val("");
     $.ajax({
         type       : "POST",
-        url        : "api/event-entries/chat",
+        url        : "api/events/chat",
         headers    : {
             "sessionId": localStorage.getItem("sessionId")
         },
@@ -293,3 +261,70 @@ function sendMessage(form) {
     });
 }
 
+
+//----- Out all rooms temporary function -----//
+function outRoomsTemporary() {
+    $.ajax({
+        type    : "DELETE",
+        url     : "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
+        cache   : false,
+        success : function () {
+            console.log("success");
+        }
+    });
+}
+
+//----- Out room function -----//
+function outRoom(roomId) {
+    
+}
+
+//----- Out all rooms completely function -----//
+function outRoomsCompletely() {
+    $(".chat-rooms").html("");
+}
+
+//----- Rejoin rooms function -----//
+function rejoinRooms() {
+    $.ajax({
+        type    : "GET",
+        url     : "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
+        dataType: "xml",
+        success : function(data) {
+            console.log(data);
+            $(data).find("chatRoom").each(function(index, element) {
+                joinRoom($(element).find("id").html());
+            });
+        },
+        error   : function(data) {
+            console.log(data);
+        },
+        cache   : false
+    });
+}
+
+//----- Join room function -----//
+function joinRoom(roomId) {
+    $(".chat-rooms").html($(".chat-rooms").html() + 
+        "<div id=\"chat-room-" + roomId + "\" class=\"chat-room\">" + 
+            "<div class=\"chat-division\"></div>" +
+            "<form class=\"chat-form\" onsubmit=\"sendMessage(event, this);\">" +
+                "<input type=\"text\" name=\"message\" class=\"message-input\" autocomplete=\"off\"><br/>" + 
+                "<button type=\"submit\">Send</button>" + 
+            "</form>" + 
+        "</div>");
+    $.ajax({
+        type       : "POST",
+        url        : "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
+        contentType: "application/xml",
+        dataType   : "xml",
+        data       : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
+                     "<chatRoom>" +
+                         "<id>" + roomId + "</id>" +
+                     "</chatRoom>",
+        success    : function(data) {
+            console.log(data);
+        },
+        cache      : false
+    });
+}
