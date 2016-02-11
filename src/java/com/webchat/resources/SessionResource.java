@@ -88,6 +88,7 @@ public class SessionResource {
         Session session = sessionData.getSession(sessionId);
         if (session != null) {
             result.append("<result>success</result>");
+            result.append("<username>").append(session.getUsername()).append("</username>");
         } else {
             result.append("<result>failure</result>");
         }
