@@ -291,4 +291,5 @@ function sendMessage(form) {
                      "</chatEntry>",
         cache      : false
     });
-}}
+}
+

@@ -36,13 +36,7 @@ $(document).ready(function () {
 
 //----- Initialize -----//
 function init() {
-    var sessionId = localStorage.getItem("sessionId");
-    if (!sessionId) {
-        render("");
-    }
-	else {
-		render("#chat");
-	}
+    render("");
 }
 
 //----- Check the validity of username -----//
@@ -92,6 +86,8 @@ function login(form) {
                 localStorage.setItem("sessionId", sessionId);
                 localStorage.setItem("username", username);
                 render("#chat");
+              //  $('#welcomeHeading').html("Welcome " + username);
+                //$(".chat-division").attr("id", username);
             }
         },
         cache: false
@@ -136,8 +132,10 @@ function register(form) {
                 } else if (result === "success") {
                     var sessionId = $(xml).find("sessionId").html();
                     localStorage.setItem("sessionId", sessionId);
-					localStorage.setItem("username", username);
+                    localStorage.setItem("username", username);
                     render("#chat");
+                   // $('#welcomeHeading').html("Welcome " + username);
+                    //$(".chat-division").attr("id", username);
                 }
             },
             cache: false
@@ -148,7 +146,6 @@ function register(form) {
 //----- Logout function -----//
 function logout() {
     localStorage.removeItem("sessionId");
-	localStorage.removeItem("username");
     render("");
 }
 
@@ -240,9 +237,7 @@ function processResponse(data) {
          }
          poll();
          */
-        console.log(data);
-		var currentIndex = parseInt($(data).find("current").html());
-		
+        var currentIndex = parseInt($(data).find("current").html());
         var newestIndex = parseInt($(data).find("newest").html());
         if (currentIndex < newestIndex) {
             for (var i = currentIndex + 1; i <= newestIndex; i++) {
@@ -287,7 +282,6 @@ function processResponse(data) {
         var message = $(data).find("message").html();
         if (message === "sessionTimeout") {
             localStorage.removeItem("sessionId");
-			localStorage.removeItem("username");
         }
     }
 }
@@ -312,77 +306,4 @@ function sendMessage(form) {
                 "</chatEntry>",
         cache: false
     });
-}
-
-//----- Poll All Function -----//
-function pollAll() {
-	var sessionId = localStorage.getItem("sessionId");
-	var isComplete = false;
-            $.ajax({
-                type: "GET",
-                url: "api/sessions/" + sessionId + "/update",
-                headers: {
-                    "sessionId": sessionId
-                },
-                dataType: "xml",
-                success: function (data) {
-                    var result = $(data).find("result").html();
-					if (result === "success") {
-			        console.log(data);
-					var newestIndex = parseInt($(data).find("newest").html());
-					for (var i = 0; i <= newestIndex; i++) {
-						$.ajax({
-							type: "GET",
-							url: "api/sessions/" + localStorage.getItem("sessionId") + "/" + i,
-							headers: {
-								"sessionId": localStorage.getItem("sessionId")
-							},
-							dataType: "xml",
-							success: function (data) {
-								var type = $(data).find("type").html();
-								if (type === "chat") {
-									var message = $(data).find("message").html();
-									var roomId = $(data).find("roomId").html();
-									var username = $(data).find("username").html();
-									var time = $(data).find("time").html();
-									var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
-
-									//var currentUser = $(".chat-division").attr("id");
-                            
-									if (localStorage.getItem("username") !== username) {
-										updateChatDivision("received", username + ": " + message, time);
-									} else {
-										updateChatDivision("sent", username + ": " + message, time);
-									}
-                            
-									//----- Scroll to bottom for new message -----//
-									$('.chat-division').animate({scrollTop: $('.chat-division')[0].scrollHeight}, 1);
-									isComplete = true;
-								}
-							},
-							error: function (data) {
-								console.log(data);
-							},
-							cache: false
-							});
-					}
-        
-					} else if (result === "failure") {
-						var message = $(data).find("message").html();
-						if (message === "sessionTimeout") {
-							localStorage.removeItem("sessionId");
-							localStorage.removeItem("username");
-					}
-					}
-                },
-                error: function (data) {
-                    console.log(data);
-                },
-				complete: function () {
-					return isComplete;
-				},
-                cache: false
-            });
-	
-	
 }
