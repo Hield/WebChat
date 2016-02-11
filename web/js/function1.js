@@ -152,38 +152,6 @@ function logout() {
     render("");
 }
 
-/*
- //----- Long polling function -----//
- function poll() {
- if (localStorage.getItem("sessionId")){
- $.ajax({
- type    : "GET",
- url     : "polling",
- headers : {
- "sessionId": localStorage.getItem("sessionId")
- },
- dataType: "xml",
- success : function(data) {
- console.log(data);
- processResponse(data);
- },
- error   : function(data) {
- console.log(data);
- if (data.statusText === "timeout") {
- poll();
- } else {
- setTimeout(function() {
- poll();
- }, 5000);
- }
- },
- timeout : 30000,
- cache   : false
- });
- }
- }
- */
-
 //----- Polling function -----//
 function poll() {
     pollId = setInterval(function () {
@@ -316,8 +284,8 @@ function sendMessage(form) {
 
 //----- Poll All Function -----//
 function pollAll() {
-	var sessionId = localStorage.getItem("sessionId");
-	var isComplete = false;
+    var sessionId = localStorage.getItem("sessionId");
+    var isComplete = false;
             $.ajax({
                 type: "GET",
                 url: "api/sessions/" + sessionId + "/update",

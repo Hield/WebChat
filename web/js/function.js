@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 var pollId;
+var username;
 
 $(document).ready(function () {
 
