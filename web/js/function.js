@@ -40,6 +40,7 @@ function init() {
             success : function(data) {
                 var result = $(data).find("result").html();
                 if (result === "success") {
+                    
                     rejoinRooms();
                     currentUser = $(data).find("username").html();
                     render("#chat");
@@ -276,6 +277,7 @@ function sendMessage(event, form) {
     });
 }
 
+
 //----- Out all rooms temporary function -----//
 function outRoomsTemporary() {
     $.ajax({
@@ -305,6 +307,7 @@ function rejoinRooms() {
         url     : "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
         dataType: "xml",
         success : function(data) {
+            console.log(data);
             $(data).find("chatRoom").each(function(index, element) {
                 joinRoom($(element).find("id").html());
             });
