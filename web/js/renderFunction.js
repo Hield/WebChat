@@ -8,13 +8,11 @@ $(document).ready(function () {
     $(window).on("hashchange", function () {
         render(decodeURI(window.location.hash));
     });
-
 });
 
 function render(url) {
-    var action = url.split("/")[0];
- 
-    if (action !== window.location.hash) {
+	var action = url.split("/")[0];
+	if (action !== window.location.hash) {
         window.location.hash = action;
     } else {
         $(".login-state-control").hide();
@@ -77,9 +75,13 @@ function renderRegisterPage() {
 
 function renderChatPage() {
     var sessionId = localStorage.getItem("sessionId");
+    var username = localStorage.getItem("username");
     if (sessionId){
         $(".chat-page").show();
-        poll();
+		$(".bubble").remove();
+        $("#welcomHeading").html("Welcome" + username);
+		poll();
+		
     } else {
         renderHomePage();
     }

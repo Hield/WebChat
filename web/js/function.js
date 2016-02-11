@@ -277,7 +277,7 @@ function processResponse(data) {
             localStorage.removeItem("sessionId");
             render("login");
             stopPolling();
-        }
+	}
     }
 }
 
