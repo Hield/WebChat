@@ -70,7 +70,6 @@
 
                     <div class="form-input">
                         <input type="text" name="username" autofocus><br>
-
                         <input type="password" name="password"><br>
                         <span class="alert login-form-error-span"></span>
                         <button type="submit" id="logInButton">sign in</button>
@@ -83,7 +82,18 @@
             </div>
 
             <div class="chat-page page">
-                <h1>Welcome to chat</h1>
+                <nav class="navigation">            
+                    <div class="container">
+						<span class="navigation-title">Welcome to chat</span>
+                        <ul class="navigation-list float-right">
+                            <li class="navigation-item login-state-control">
+                                <a class="logout-button button">
+                                    Logout
+                                </a>
+                            </li>
+						</ul>
+					</div>
+				</nav>
                 <div class="chat-rooms">
                     <!--
                         ***Example chatroom***                       
