@@ -50,12 +50,18 @@ public class UserResource {
         StringBuilder result = new StringBuilder();
         result.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
         result.append("<response>");
-        if (!userData.isAvailable(user.getUsername())) {
+        if (user.getUsername().length() < 5 || user.getUsername().length() > 12) {
+            result.append("<result>failure</result>");
+            result.append("<message>Invalid username format</message>");
+        } else if (user.getPassword().length() < 6 || user.getPassword().length() > 128) {
+            result.append("<result>failure</result>");
+            result.append("<message>Invalid password format</message>");
+        } else if (!userData.isAvailable(user.getUsername())) {
             result.append("<result>").append("failure").append("</result>");
             result.append("<message>").append("This username is not available").append("</message>");
         } else {
             userData.addUser(user);
-            Session session = new Session(user);           
+            Session session = new Session(user);
             sessionData.addSession(session);
             result.append("<result>").append("success").append("</result>");
             result.append("<username>").append(user.getUsername()).append("</username>");

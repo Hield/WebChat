@@ -27,9 +27,9 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        eventEntries = new ArrayList<>();
-        contacts = new HashSet<>();
-        currentEventIndex = -1;
+        this.eventEntries = new ArrayList<>();
+        this.contacts = new HashSet<>();
+        this.currentEventIndex = -1;
     }
 
     public User() {

@@ -35,7 +35,11 @@ public class ChatRoom {
     public void setId(int id) {
         this.id = id;
     }
-
+    
+    public Set<User> getUsers() {
+        return users;
+    }
+    
     public void addUser(User user) {
         users.add(user);
         for (EventEntry entry : chatEntries) {
@@ -47,6 +51,10 @@ public class ChatRoom {
         users.remove(user);
     }
 
+    public List<ChatEntry> getChatEntries() {
+        return chatEntries;
+    }
+    
     public void addChatEntry(ChatEntry entry) {
         chatEntries.add(entry);
         for (User user : users) {
