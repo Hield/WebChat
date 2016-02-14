@@ -1,5 +1,5 @@
 var pollId;
-var username;
+var currentUser;
 
 $(document).ready(function () {
 
@@ -40,7 +40,9 @@ function init() {
             success : function(data) {
                 var result = $(data).find("result").html();
                 if (result === "success") {
+                    
                     rejoinRooms();
+                    currentUser = $(data).find("username").html();
                     render("#chat");
                 } else if (result === "failure") {
                     render("#login");
@@ -99,6 +101,7 @@ function login(form) {
                 $(".login-form-error-span").html(message + "<br/>");
             } else if (result === "success") {               
                 var sessionId = $(xml).find("sessionId").html();
+                currentUser = $(xml).find("username").html();
                 localStorage.setItem("sessionId", sessionId);
                 joinRoom(0);
                 render("#chat");
@@ -139,12 +142,14 @@ function register(form) {
             },
             complete   : function(data) {
                 var xml = data.responseXML;
+            console.log(xml);
                 var result = $(xml).find("result").html();
                 if (result === "failure") {
                     var message = $(xml).find("message").html();
                     $(".register-form-error-span").html(message + "<br/>");
                 } else if (result === "success") {                   
                     var sessionId = $(xml).find("sessionId").html();
+                    currentUser = $(xml).find("username").html();
                     localStorage.setItem("sessionId", sessionId);
                     joinRoom(0);
                     render("#chat");
@@ -163,6 +168,7 @@ function logout() {
         cache: false
     });
     localStorage.removeItem("sessionId");
+    currentUser = "";
     outRoomsCompletely();
     stopPolling();
 }
@@ -216,8 +222,19 @@ function processResponse(data) {
                             var message = $(data).find("message").html();
                             var roomId = $(data).find("roomId").html();
                             var username = $(data).find("username").html();
-                            var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
-                            chatDivision.html(chatDivision.html() + "<p>" + username + ": " + message + "</p>");
+                            var time = $(data).find("time").html();
+                            
+                            if (username !== currentUser) {
+                                updateChatDivision("received", username + ": " + message, time);
+                            } else {
+                                updateChatDivision("sent", username + ": " + message, time);
+                            }
+                            
+                             //----- Scroll to bottom for new message -----//
+                            $('.chat-division').animate({scrollTop: $('.chat-division')[0].scrollHeight}, 1);
+                            
+                            //var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
+                            //chatDivision.html(chatDivision.html() + "<p>" + username + ": " + message + "</p>");
                         }
                     },
                     error: function(data) {
@@ -260,6 +277,7 @@ function sendMessage(event, form) {
     });
 }
 
+
 //----- Out all rooms temporary function -----//
 function outRoomsTemporary() {
     $.ajax({
@@ -289,6 +307,7 @@ function rejoinRooms() {
         url     : "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
         dataType: "xml",
         success : function(data) {
+            console.log(data);
             $(data).find("chatRoom").each(function(index, element) {
                 joinRoom($(element).find("id").html());
             });

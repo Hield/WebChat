@@ -40,9 +40,9 @@ public class EventEntry {
         this.type = type;
     }
 	
-	@XmlElement
+    @XmlElement
     public String getTime() {
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("kk:mm");
         return format.format(date);
     }
 

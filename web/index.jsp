@@ -11,35 +11,37 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Webchat</title>
+        <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <nav class="navigation">            
-            <div class="container">
-                <a class="navigation-title" href="#">HOME</a>
-                <ul class="navigation-list float-right">
-                    <li class="navigation-item login-state-control">
-                        <a class="logout-button button">
-                            Logout
-                        </a>
-                    </li>
-                    <li class="navigation-item login-state-control">
-                        <a href="#login" class="show-login-form-button button">
-                            Login
-                        </a>
-                    </li>
-                    <li class="navigation-item login-state-control">
-                        <a href="#register" class="show-register-form-button button">
-                            Register
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        
+        <!--        <nav class="navigation">            
+                    <div class="container">
+                        <a class="navigation-title" href="#">HOME</a>
+                        <ul class="navigation-list float-right">
+                            <li class="navigation-item login-state-control">
+                                <a class="logout-button button">
+                                    Logout
+                                </a>
+                            </li>
+                            <li class="navigation-item login-state-control">
+                                <a href="#login" class="show-login-form-button button">
+                                    Login
+                                </a>
+                            </li>
+                            <li class="navigation-item login-state-control">
+                                <a href="#register" class="show-register-form-button button">
+                                    Register
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>-->
+
         <div class="container">
-            
+
             <div class="register-page page" >
                 <form class="register-form">
                     <h1>Register form</h1>
@@ -49,19 +51,49 @@
                     <button type="submit">Register</button>
                 </form>
             </div>
-            
+
             <div class="login-page page">
+                <div class="banner-welcome">
+                    <h2 class="banner-h2">welcome to</h2>
+                    <h1 class="banner-h1">LOONF</h1>
+                </div>
+
+                <div class="banner-login">
+                    <span>login</span>
+                </div>
                 <form class="login-form">
-                    <h1>Login form</h1>
-                    <input type="text" name="username" placeholder="Username" autofocus><br/>
-                    <input type="password" name="password" placeholder="Password"><br/>
-                    <span class="alert login-form-error-span"></span>
-                    <button type="submit" id="logInButton">Log In</button>
+
+                    <div class="form-label">
+                        <label for="username">username</label>
+                        <label for="password">password</label>
+                    </div>
+
+                    <div class="form-input">
+                        <input type="text" name="username" autofocus><br>
+                        <input type="password" name="password"><br>
+                        <span class="alert login-form-error-span"></span>
+                        <button type="submit" id="logInButton">sign in</button>
+                        <a href="#register" class="show-register-form-button button">
+                            register
+                        </a>
+                    </div>
+
                 </form>
             </div>
-            
+
             <div class="chat-page page">
-                <h1>Welcome to chat</h1>
+                <nav class="navigation">            
+                    <div class="container">
+						<span class="navigation-title">Welcome to chat</span>
+                        <ul class="navigation-list float-right">
+                            <li class="navigation-item login-state-control">
+                                <a class="logout-button button">
+                                    Logout
+                                </a>
+                            </li>
+						</ul>
+					</div>
+				</nav>
                 <div class="chat-rooms">
                     <!--
                         ***Example chatroom***                       
@@ -77,12 +109,12 @@
                     -->
                 </div>
             </div>
-            
+
             <div class="error-page page">
                 <h3>Sorry, something went wrong</h3>
             </div>
         </div>
-        
+
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="js/updateChatPageFunction.js"></script>
         <script src="js/function.js"></script>
