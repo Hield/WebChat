@@ -28,9 +28,7 @@ ul {
 }
 
 .container {
-    /*    margin: 0 auto;*/
-
-    max-width: 1000px;
+    margin: 0 auto;
     width: 100%;
 }
 
@@ -46,77 +44,114 @@ input[type='submit'] {
     background-color: #F0F0FA;
     border: 1px solid;
     cursor: pointer;
-    float: right;
-    padding: 0 45.85px;
+    /*    float: right;*/
+    padding: 0 43px;
     text-align: center;
     text-decoration: none;
     white-space: nowrap;
 }
 
-/*---- Log In Page -----*/
-
-.banner-welcome {
-    margin: 5% 60% 5% 0;
-    width: 40%;
-    text-align: center;
+a:visited {
+    color: #2A333C;
 }
 
-.banner-login {
-    width: 40%;
-    height: 30px;
-    margin-right: 100px;
-    padding-right: 20px;
-    background-color: #2A333C;
-    color: white;
-    font-size: 1.2em;
-    text-align: right;
-    line-height: 30px;
-    float: left;
-    position: relative;
+.login-page, .register-page {
+    font-size: 2em;
+}
+
+/*---- LogIn and Register Page -----*/
+
+
+.banner-welcome {
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
 }
 
 .banner-h2 {
     color: #336666;
 }
 
+.banner-h1, .banner-h2 {
+    margin: 0;
+}
 
-form {
+.banner-login, .banner-register {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 60px;
+    background-color: #2A333C;
+    color: white;
+    font-size: 1.2em;
+    text-align: center;
+    line-height: 50px;
+}
+
+.login-form, .register-form {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+label {
+    display: inline-block;
     width: 250px;
-    float: left;
-    margin: 0 10%;
+    text-align: center;
 }
 
-.form-label {
-    width: 100px;
-    float: left;
-}
-
-.form-input {
-    width: 150px;
-    float: right;
+label, input {
+    margin: 3px 0;
 }
 
 input[type='text'], input[type='password'] {
     border: white;
-    width: 150px;
-    height: 17px;
+    font-size: 1em;
+    width: 200px;
+    height: 33px;
 } 
 
-button[type='submit'] {
+#logInButton {
     color: white;
     background: #2A333C;
     border: #2A333C 1px solid;
-    width: 150px;
-    height: 22px;
-    margin: 10px 0;
-    float: right;
-}
-
-label, input {
+    width: 200px;
+    height: 40px;
     display: inline-block;
-    margin: 3px 0;
+    text-align: center;
+    margin-left: 260px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1em;
+    /*    margin: 10px 0;
+        float: right;*/
 }
 
+.show-register-form-button {
+    margin-left: 260px;
+}
+
+#registerButton {
+    color: white;
+    background: #2A333C;
+    border: #2A333C 1px solid;
+    width: 200px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1em;
+}
+
+.show-login-page {
+    width: 100%;
+    height: 100px;
+}
+
+.show-login-form-button {
+    float:right;
+    margin-top: 25px;
+
+}
 /*---- Chat Page -----*/
 
 .navigation {
@@ -134,7 +169,7 @@ label, input {
 
 .navigation-title {
     color: black;
-	font-size: 40px;
+    font-size: 40px;
     font-weight: 700;
     line-height:40px;
     padding-left: 20px;
@@ -233,28 +268,70 @@ label, input {
 
 @media only screen and (min-width : 150px) and (max-width : 780px)
 {
-    .body {
-        clear: both; 
-        margin: 0 auto; 
-        width: 90%;
-        font-size: 70%;
-    }
 
-    #sendingInput {
-        width: 85%;
-    }
-    #sendingButton {  
-        width: 13%;
-        float: right;
-    }
-
-    .chat-division {
-        height: 300px;
-    }
-
-    .bubble {
+    .login-page, .register-page {
         font-size: 1em;
-        max-width: 50%;
     }
+
+    .show-login-page {
+        height: 50px;
+    }
+
+    label {
+        width: 100px;
+
+    }
+    input[type='text'], input[type='password'] {
+        width: 150px;
+        height: 25px;
+    }
+
+    #logInButton { 
+        width: 150px;
+        height: 25px;
+        margin-left: 100px;
+    }
+
+    #registerButton {
+        width: 150px;
+        height: 25px;
+    }
+
+    label, input {
+        margin: 5px 0;
+    }
+
+    .show-register-form-button {
+        margin-left: 100px;
+        padding: 2px 43px;
+    } 
+
+    .show-login-form-button {
+        margin-top: 10px;
+        padding: 2px 43px;
+    }
+    /*    .body {
+            clear: both; 
+            margin: 0 auto; 
+            width: 90%;
+            font-size: 70%;
+        }
+    
+        #sendingInput {
+            width: 85%;
+        }
+        #sendingButton {  
+            width: 13%;
+            float: right;
+        }
+    
+        .chat-division {
+            height: 300px;
+        }
+    
+        .bubble {
+            font-size: 1em;
+            max-width: 50%;
+        }*/
 
 }
