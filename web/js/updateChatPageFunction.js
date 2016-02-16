@@ -16,7 +16,9 @@ function updateChatDivision(messageType, message, time) {
 		var $chatDivision = $(".chat-division");
 		$chatDivision.append('<div class="bubble bubble-right"><p class="sender">' + message + '</p><span class="time">' + time + '</span</div>');
 		var $chatBubble = $(".bubble-right");
-		$chatBubble.css("background", "#445878");
+		$chatBubble.css("background", "#1c1d21");
 		$chatBubble.css("border-bottom-color", "#1c1d21");
+                //#1c1d21
+                //#445878
 	}
 }
