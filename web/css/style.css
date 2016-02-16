@@ -191,21 +191,35 @@ label, input {
     display: none;
 }
 
+.chat-room {
+    width: 90%;
+    margin: 2% 5%;
+}
+
 .chat-division {
     box-sizing: border-box;
     border: 1px solid #c0c0c0;
     background-color: #eeeeee;
     display: block;
     height: 400px;
-    margin-bottom: 10px;
-    padding: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 1%;
     overflow-y: scroll;
 }
 
 .message-input {
     box-sizing: border-box;
-    width: 420px;
-    height: 25px;
+    height: 30px;
+    width: 90%;
+}
+
+#sendingButton {
+    height: 30px;
+    width: 10%;
+    padding: 0;
+    /* float: right; */
+    text-align: center;
 }
 
 .bubble {
@@ -250,17 +264,14 @@ label, input {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-#sendingInput {
+/*#sendingInput {
     width: 93%;
     float: left;
     margin: 0;
     height: 30px;
-}
+}*/
 
-#sendingButton {  
-    width: 60px;
-    float: right;
-}
+
 
 /* ===========================
    ====== Media Queries ====== 
