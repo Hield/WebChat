@@ -36,7 +36,7 @@ $(document).ready(function () {
 
 //----- Initialize -----//
 function init() {
-    render("");
+    $(".chat-page").show();
 }
 
 //----- Check the validity of username -----//
