@@ -46,6 +46,7 @@ public class EventEntry {
         return format.format(date);
     }
 
+    @XmlElement
     public String getDate() {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         return format.format(date);
