@@ -249,6 +249,7 @@ label, input {
 .bubble-right {
     float: right;
     color: white;
+    background-color: #31353d;
 }
 
 .sender, .receiver {
