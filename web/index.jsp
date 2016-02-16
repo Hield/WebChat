@@ -43,12 +43,22 @@
         <div class="container">
 
             <div class="register-page page" >
+                <div class="show-login-page">
+                    <a href="#login" class="show-login-form-button button">
+                        login
+                    </a>   
+                </div>
+
+                <div class="banner-register">
+                    <span>create an account</span>
+                </div>
                 <form class="register-form">
-                    <h1>Register form</h1>
-                    <input type="text" name="username" placeholder="Username" autofocus><br/>
-                    <input type="password" name="password" placeholder="Password"><br/>
+                    <label for="username">username</label>
+                    <input type="text" name="username" autofocus class="input-username"><br>
+                    <label for="password">password</label>
+                    <input type="password" name="password" class="input-password"><br>
                     <span class="alert register-form-error-span"></span>
-                    <button type="submit">Register</button>
+                    <button type="submit" id="registerButton">submit</button>
                 </form>
             </div>
 
@@ -62,38 +72,31 @@
                     <span>login</span>
                 </div>
                 <form class="login-form">
-
-                    <div class="form-label">
-                        <label for="username">username</label>
-                        <label for="password">password</label>
-                    </div>
-
-                    <div class="form-input">
-                        <input type="text" name="username" autofocus><br>
-                        <input type="password" name="password"><br>
-                        <span class="alert login-form-error-span"></span>
-                        <button type="submit" id="logInButton">sign in</button>
-                        <a href="#register" class="show-register-form-button button">
-                            register
-                        </a>
-                    </div>
-
+                    <label for="username">username</label>
+                    <input type="text" name="username" autofocus class="input-username"><br>
+                    <label for="password">password</label>
+                    <input type="password" name="password" class="input-password"><br>
+                    <span class="alert login-form-error-span"></span>
+                    <button type="submit" id="logInButton">sign in</button><br>
+                    <a href="#register" class="show-register-form-button button">
+                        register
+                    </a>
                 </form>
             </div>
 
             <div class="chat-page page">
                 <nav class="navigation">            
                     <div class="container">
-						<span class="navigation-title">Welcome to chat</span>
+                        <span class="navigation-title">Welcome to chat</span>
                         <ul class="navigation-list float-right">
                             <li class="navigation-item login-state-control">
                                 <a class="logout-button button">
                                     Logout
                                 </a>
                             </li>
-						</ul>
-					</div>
-				</nav>
+                        </ul>
+                    </div>
+                </nav>
                 <div class="chat-rooms">
                     <!--
                         ***Example chatroom***                       

@@ -28,9 +28,7 @@ ul {
 }
 
 .container {
-    /*    margin: 0 auto;*/
-
-    max-width: 1000px;
+    margin: 0 auto;
     width: 100%;
 }
 
@@ -46,77 +44,114 @@ input[type='submit'] {
     background-color: #F0F0FA;
     border: 1px solid;
     cursor: pointer;
-    float: right;
-    padding: 0 45.85px;
+    /*    float: right;*/
+    padding: 0 43px;
     text-align: center;
     text-decoration: none;
     white-space: nowrap;
 }
 
-/*---- Log In Page -----*/
-
-.banner-welcome {
-    margin: 5% 60% 5% 0;
-    width: 40%;
-    text-align: center;
+a:visited {
+    color: #2A333C;
 }
 
-.banner-login {
-    width: 40%;
-    height: 30px;
-    margin-right: 100px;
-    padding-right: 20px;
-    background-color: #2A333C;
-    color: white;
-    font-size: 1.2em;
-    text-align: right;
-    line-height: 30px;
-    float: left;
-    position: relative;
+.login-page, .register-page {
+    font-size: 2em;
+}
+
+/*---- LogIn and Register Page -----*/
+
+
+.banner-welcome {
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
 }
 
 .banner-h2 {
     color: #336666;
 }
 
-
-form {
-    width: 250px;
-    float: left;
-    margin: 0 10%;
+.banner-h1, .banner-h2 {
+    margin: 0;
 }
 
-.form-label {
-    width: 100px;
-    float: left;
-}
-
-.form-input {
-    width: 150px;
-    float: right;
-}
-
-input[type='text'], input[type='password'] {
-    border: white;
-    width: 150px;
-    height: 17px;
-} 
-
-button[type='submit'] {
+.banner-login, .banner-register {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 60px;
+    background-color: #2A333C;
     color: white;
-    background: #2A333C;
-    border: #2A333C 1px solid;
-    width: 150px;
-    height: 22px;
-    margin: 10px 0;
-    float: right;
+    font-size: 1.2em;
+    text-align: center;
+    line-height: 50px;
+}
+
+.login-form, .register-form {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+label {
+    display: inline-block;
+    width: 250px;
+    text-align: center;
 }
 
 label, input {
-    display: inline-block;
     margin: 3px 0;
 }
 
+.input-username, .input-password {
+    border: white;
+    font-size: 1em;
+    width: 200px;
+    height: 33px;
+} 
+
+#logInButton {
+    color: white;
+    background: #2A333C;
+    border: #2A333C 1px solid;
+    width: 200px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    margin-left: 260px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1em;
+    /*    margin: 10px 0;
+        float: right;*/
+}
+
+.show-register-form-button {
+    margin-left: 260px;
+}
+
+#registerButton {
+    color: white;
+    background: #2A333C;
+    border: #2A333C 1px solid;
+    width: 200px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1em;
+}
+
+.show-login-page {
+    width: 100%;
+    height: 100px;
+}
+
+.show-login-form-button {
+    float:right;
+    margin-top: 25px;
+
+}
 /*---- Chat Page -----*/
 
 .navigation {
@@ -134,7 +169,7 @@ label, input {
 
 .navigation-title {
     color: black;
-	font-size: 40px;
+    font-size: 40px;
     font-weight: 700;
     line-height:40px;
     padding-left: 20px;
@@ -156,49 +191,65 @@ label, input {
     display: none;
 }
 
+.chat-room {
+    width: 90%;
+    margin: 2% 5%;
+}
+
 .chat-division {
     box-sizing: border-box;
     border: 1px solid #c0c0c0;
     background-color: #eeeeee;
     display: block;
     height: 400px;
-    margin-bottom: 10px;
-    padding: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 1%;
     overflow-y: scroll;
 }
 
 .message-input {
     box-sizing: border-box;
-    width: 420px;
-    height: 25px;
+    height: 30px;
+    width: 90%;
+}
+
+#sendingButton {
+    height: 30px;
+    width: 10%;
+    padding: 0;
+    /* float: right; */
+    text-align: center;
 }
 
 .bubble {
     box-sizing: border-box;
+    font-size: 1.5em;
     float: left;
     text-align: left;
     width: auto;
     max-width: 80%;
     position: relative;
     clear: both;
-
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
-
-    -webkit-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
-    -moz-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
-    box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
+/*    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;*/
+    border-radius: 5px;
+/*    -webkit-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);*/
+/*    box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2);*/
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 6px 20px;
-    color: #000;
-    text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+    color: white;
+    background-color: #445878;
+/*    text-shadow: 0 1px 1px rgba(255,255,255,0.8);*/
     word-wrap: break-word;
 }
 
 .bubble-right {
     float: right;
+    color: white;
+    background-color: #31353d;
 }
 
 .chat-message {
@@ -215,17 +266,14 @@ label, input {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-#sendingInput {
+/*#sendingInput {
     width: 93%;
     float: left;
     margin: 0;
     height: 30px;
-}
+}*/
 
-#sendingButton {  
-    width: 60px;
-    float: right;
-}
+
 
 /* ===========================
    ====== Media Queries ====== 
@@ -233,28 +281,70 @@ label, input {
 
 @media only screen and (min-width : 150px) and (max-width : 780px)
 {
-    .body {
-        clear: both; 
-        margin: 0 auto; 
-        width: 90%;
-        font-size: 70%;
-    }
 
-    #sendingInput {
-        width: 85%;
-    }
-    #sendingButton {  
-        width: 13%;
-        float: right;
-    }
-
-    .chat-division {
-        height: 300px;
-    }
-
-    .bubble {
+    .login-page, .register-page {
         font-size: 1em;
-        max-width: 50%;
     }
+
+    .show-login-page {
+        height: 50px;
+    }
+
+    label {
+        width: 100px;
+
+    }
+    .input-username, .input-password {
+        width: 150px;
+        height: 25px;
+    }
+
+    #logInButton { 
+        width: 150px;
+        height: 25px;
+        margin-left: 100px;
+    }
+
+    #registerButton {
+        width: 150px;
+        height: 25px;
+    }
+
+    label, input {
+        margin: 5px 0;
+    }
+
+    .show-register-form-button {
+        margin-left: 100px;
+        padding: 2px 43px;
+    } 
+
+    .show-login-form-button {
+        margin-top: 10px;
+        padding: 2px 43px;
+    }
+    /*    .body {
+            clear: both; 
+            margin: 0 auto; 
+            width: 90%;
+            font-size: 70%;
+        }
+    
+        #sendingInput {
+            width: 85%;
+        }
+        #sendingButton {  
+            width: 13%;
+            float: right;
+        }
+    
+        .chat-division {
+            height: 300px;
+        }
+    
+        .bubble {
+            font-size: 1em;
+            max-width: 50%;
+        }*/
 
 }
