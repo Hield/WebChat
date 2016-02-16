@@ -10,11 +10,11 @@ $(document).ready(function () {
     });
 });
 
-function render(url) {
-	var action = url.split("/")[0];
-	if (action !== window.location.hash) {
-        window.location.hash = action;
+function render(url) {  
+    if (url !== decodeURI(window.location.hash)) {
+        window.location.hash = url;
     } else {
+        var action = url.split("/")[0];
         $(".login-state-control").hide();
         $(".page").hide();
         var map = {
@@ -29,6 +29,10 @@ function render(url) {
             },
             "#chat": function () {
                 renderChatPage();
+            },
+            "#users": function () {
+                var username = url.split("/")[1];
+                renderUsersPage(username);
             }
         };
 
@@ -76,15 +80,20 @@ function renderRegisterPage() {
 function renderChatPage() {
     var sessionId = localStorage.getItem("sessionId");
     var username = localStorage.getItem("username");
-    if (sessionId){
+    if (sessionId) {
         $(".chat-page").show();
-		$(".bubble").remove();
+        $(".bubble").remove();
         $("#welcomHeading").html("Welcome" + username);
-		poll();
-		
+        poll();
+
     } else {
         renderHomePage();
     }
+}
+
+function renderUsersPage(username) {
+    $(".user-page-username").html(username);
+    $(".user-page").show();
 }
 
 function renderErrorPage() {

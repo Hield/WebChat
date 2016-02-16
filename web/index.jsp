@@ -84,16 +84,16 @@
             <div class="chat-page page">
                 <nav class="navigation">            
                     <div class="container">
-						<span class="navigation-title">Welcome to chat</span>
+                        <span class="navigation-title">Welcome to chat</span>
                         <ul class="navigation-list float-right">
                             <li class="navigation-item login-state-control">
                                 <a class="logout-button button">
                                     Logout
                                 </a>
                             </li>
-						</ul>
-					</div>
-				</nav>
+                        </ul>
+                    </div>
+                </nav>
                 <div class="chat-rooms">
                     <!--
                         ***Example chatroom***                       
@@ -108,6 +108,11 @@
                         </div>
                     -->
                 </div>
+            </div>
+
+            <div class="user-page page">
+                <h2 class="user-page-username"></h2>
+                
             </div>
 
             <div class="error-page page">

@@ -25,6 +25,7 @@ public class ApplicationConfig extends Application{
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.webchat.resources.ChatRoomResource.class);
         resources.add(com.webchat.resources.EventEntryResource.class);
+        resources.add(com.webchat.resources.PatientResource.class);
         resources.add(com.webchat.resources.SessionResource.class);
         resources.add(com.webchat.resources.UserResource.class);
     }

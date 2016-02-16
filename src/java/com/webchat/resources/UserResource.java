@@ -8,7 +8,6 @@ package com.webchat.resources;
 import com.webchat.data.ChatRoomData;
 import com.webchat.data.SessionData;
 import com.webchat.data.UserData;
-import com.webchat.models.ChatRoom;
 import com.webchat.models.Session;
 import com.webchat.models.User;
 import java.util.Collection;

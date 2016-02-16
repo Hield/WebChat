@@ -43,6 +43,8 @@ public class SessionResourceTest {
         String result = sessionResource.login(user);
         assertTrue("The result should be failure because the user has not been registered.",
                 result.contains(expResult));
+        assertNull("There should not be any session for user \"test01\"", 
+                sessionData.getSessionByUsername("test01"));
     }
 
     @Test
@@ -53,6 +55,8 @@ public class SessionResourceTest {
         String result = sessionResource.login(user);
         assertTrue("The result should be success because the user has been added in the user data.",
                 result.contains(expResult));
+        assertNotNull("There should be a session for user \"test02\"", 
+                sessionData.getSessionByUsername("test02"));
     }
 
     /**
@@ -66,10 +70,15 @@ public class SessionResourceTest {
         String expResult = "<result>failure</result>";
         String expMessage = "<message>sessionTimeout</message>";
         String result = sessionResource.joinRoom(randomSessionId, chatRoom);
+        assertNull("The session should not appear in the database.", 
+                sessionData.getSession(randomSessionId));
         assertTrue("The operation should fail because of session id invalidity.",
                 result.contains(expResult));
         assertTrue("The chatroom is added to the ChatRoomData so it should only fail because of session id invalidity.",
                 result.contains(expMessage));
+        assertEquals("The chat room should not add any user.", 
+                0, chatRoom.getUsers().size());
+        
     }
 
     @Test
@@ -87,6 +96,10 @@ public class SessionResourceTest {
                 result.contains(expResult));
         assertTrue("The session was added to the session data so the failure should only because of chatroom non-existence.",
                 result.contains(expMessage));
+        assertFalse("The chat room should not be added to the database.", 
+                chatRoomData.getChatRooms().contains(chatRoom));
+        assertFalse("The chat room should not add this user.", 
+                chatRoom.getUsers().contains(user));
     }
 
     @Test
@@ -102,6 +115,10 @@ public class SessionResourceTest {
         String result = sessionResource.joinRoom(sessionId, chatRoom);
         assertTrue("The operation should success because the chatroom was added to the data and the session id is valid.",
                 result.contains(expResult));
+        assertTrue("The chat room should be added to the database.", 
+                chatRoomData.getChatRooms().contains(chatRoom));
+        assertTrue("The user should be added to the chat room.", 
+                chatRoom.getUsers().contains(user));
     }
 
     /**
@@ -113,6 +130,8 @@ public class SessionResourceTest {
         String expResult = "<result>failure</result>";
         String expMessage = "<message>sessionTimeout</message>";
         String result = sessionResource.update(randomSessionId);
+        assertNull("The session should not appear in the database.", 
+                sessionData.getSession(randomSessionId));
         assertTrue("The operation should fail because of session id invalidity.",
                 result.contains(expResult));
         assertTrue("The sessionId should be the only thing that cause failure.",
@@ -171,14 +190,24 @@ public class SessionResourceTest {
     @Test
     public void testLogout() {
         User user = new User("test07", "test07");
+        ChatRoom chatRoom1 = new ChatRoom();
+        ChatRoom chatRoom2 = new ChatRoom();
+        chatRoomData.addChatRoom(chatRoom1);
+        chatRoomData.addChatRoom(chatRoom2);
         Session session = new Session(user);
         sessionData.addSession(session);
         String sessionId = session.getId();
+        session.joinRoom(chatRoom1);
+        session.joinRoom(chatRoom2);
         assertNotNull("The session should be added to the session data.",
                 sessionData.getSession(sessionId));
         sessionResource.logout(sessionId);       
         assertNull("The session should be removed in the data.",
                 sessionData.getSession(sessionId));
+        assertFalse("The user should be removed from the chat room 1", 
+                chatRoom1.getUsers().contains(user));
+        assertFalse("The user should be removed from the chat room 2",
+                chatRoom2.getUsers().contains(user));
     }
     
     /**
@@ -192,8 +221,7 @@ public class SessionResourceTest {
         String sessionId = session.getId();
         ChatRoom chatRoom = new ChatRoom();
         chatRoomData.addChatRoom(chatRoom);
-        int chatRoomId = chatRoom.getId();
-        session.joinRoom(chatRoomId);
+        session.joinRoom(chatRoom);
         assertTrue("The user should be in the room now.", 
                 chatRoom.getUsers().contains(user));
         sessionResource.outRoomsTemporary(sessionId);

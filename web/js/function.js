@@ -43,12 +43,14 @@ function init() {
                     
                     rejoinRooms();
                     currentUser = $(data).find("username").html();
-                    render("#chat");
+                    render(window.location.hash);
                 } else if (result === "failure") {
+                    localStorage.removeItem("sessionId");
                     render("#login");
                 }
             },
             error   : function() {
+                localStorage.removeItem("sessionId");
                 render("#login");
             }
         });
@@ -285,7 +287,7 @@ function outRoomsTemporary() {
         url     : "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
         cache   : false,
         success : function () {
-            console.log("success");
+            console.log("success from outRoomsTemporary");
         }
     });
 }
