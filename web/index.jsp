@@ -54,9 +54,9 @@
                 </div>
                 <form class="register-form">
                     <label for="username">username</label>
-                    <input type="text" name="username" autofocus><br>
+                    <input type="text" name="username" autofocus class="input-username"><br>
                     <label for="password">password</label>
-                    <input type="password" name="password"><br>
+                    <input type="password" name="password" class="input-password"><br>
                     <span class="alert register-form-error-span"></span>
                     <button type="submit" id="registerButton">submit</button>
                 </form>
@@ -73,9 +73,9 @@
                 </div>
                 <form class="login-form">
                     <label for="username">username</label>
-                    <input type="text" name="username" autofocus><br>
+                    <input type="text" name="username" autofocus class="input-username"><br>
                     <label for="password">password</label>
-                    <input type="password" name="password"><br>
+                    <input type="password" name="password" class="input-password"><br>
                     <span class="alert login-form-error-span"></span>
                     <button type="submit" id="logInButton">sign in</button><br>
                     <a href="#register" class="show-register-form-button button">
