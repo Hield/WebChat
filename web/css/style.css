@@ -252,6 +252,14 @@ label, input {
     background-color: #31353d;
 }
 
+.bubble-middle {
+  float: none;
+  width: 140px;
+  margin: 0 auto;
+  color: white;
+  background-color: #ba0;
+}
+
 .chat-message {
     width: 100%;
 }
