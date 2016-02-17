@@ -51,7 +51,7 @@ input[type='submit'] {
     white-space: nowrap;
 }
 
-a:visited {
+.button:visited, .button:active, .button:hover, .button:focus, .button {
     color: #2A333C;
 }
 
@@ -78,6 +78,7 @@ a:visited {
 
 .banner-login, .banner-register {
     width: 100%;
+    padding: 1% 0;
     height: 50px;
     margin-bottom: 60px;
     background-color: #2A333C;
@@ -249,9 +250,18 @@ label, input {
 .bubble-right {
     float: right;
     color: white;
+    background-color: #31353d;
 }
 
-.sender, .receiver {
+.bubble-middle {
+  float: none;
+  width: 140px;
+  margin: 0 auto;
+  color: white;
+  background-color: #ba0;
+}
+
+.chat-message {
     width: 100%;
 }
 

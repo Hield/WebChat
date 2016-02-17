@@ -224,12 +224,15 @@ function processResponse(data) {
                             var message = $(data).find("message").html();
                             var roomId = $(data).find("roomId").html();
                             var username = $(data).find("username").html();
+                            var date = $(data).find("date").html();
                             var time = $(data).find("time").html();
                             
+                            console.log(date);
+                            console.log(currentUser);
                             if (username !== currentUser) {
-                                updateChatDivision("received", username + ": " + message, time);
+                                updateChatDivision("received", username + ": " + message, date, time);
                             } else {
-                                updateChatDivision("sent", username + ": " + message, time);
+                                updateChatDivision("sent", username + ": " + message, date, time);
                             }
                             
                              //----- Scroll to bottom for new message -----//
