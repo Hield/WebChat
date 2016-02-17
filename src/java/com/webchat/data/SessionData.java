@@ -18,9 +18,11 @@ public class SessionData {
 
     private static SessionData instance = new SessionData();
     private Map<String, Session> sessions;
+    private Map<String, Session> sessionsByUsername;
 
     private SessionData() {
         this.sessions = new HashMap<>();
+        this.sessionsByUsername = new HashMap<>();
     }
 
     public static SessionData getInstance() {
@@ -33,10 +35,15 @@ public class SessionData {
     
     public void addSession(Session session) {
         sessions.put(session.getId(), session);
+        sessionsByUsername.put(session.getUsername(), session);
     }
 
     public Session getSession(String sessionId) {
         return sessions.get(sessionId);
+    }
+    
+    public Session getSessionByUsername(String username) {
+        return sessionsByUsername.get(username);
     }
     
     public void deleteSession(String sessionId) {

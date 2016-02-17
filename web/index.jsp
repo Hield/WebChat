@@ -113,6 +113,11 @@
                 </div>
             </div>
 
+            <div class="user-page page">
+                <h2 class="user-page-username"></h2>
+                
+            </div>
+
             <div class="error-page page">
                 <h3>Sorry, something went wrong</h3>
             </div>

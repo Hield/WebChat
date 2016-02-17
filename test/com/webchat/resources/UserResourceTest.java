@@ -5,6 +5,7 @@
  */
 package com.webchat.resources;
 
+import com.webchat.data.UserData;
 import com.webchat.models.User;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -16,9 +17,11 @@ import static org.junit.Assert.*;
 public class UserResourceTest {
 
     private UserResource userResource;
+    private UserData userData;
 
     public UserResourceTest() {
         this.userResource = new UserResource();
+        this.userData = UserData.getInstance();
     }
 
     /**
@@ -29,8 +32,10 @@ public class UserResourceTest {
         User user = new User("test01", "test01");
         String expResult = "<result>success</result>";
         String result = userResource.register(user);
-        assertTrue("Username \"test01\" was not in the user data but register failed.",
+        assertTrue("The user should be registered since there is no other user with the same username in the database.",
                 result.contains(expResult));
+        assertTrue("The user should be added to the user database.", 
+                userData.getUsers().contains(user));
     }
 
     @Test
@@ -39,8 +44,10 @@ public class UserResourceTest {
         String expResult = "<result>failure</result>";
         String expMessage = "<message>This username is not available</message>";
         userResource.register(user);
+        assertTrue("The user should be added to the database before the actual test.", 
+                userData.getUsers().contains(user));
         String result = userResource.register(user);
-        assertTrue("Username \"test02\" was created before in but still register.",
+        assertTrue("The user should not be registered because test02 is already in the database.",
                 result.contains(expResult));
         assertTrue("\"test02\" was a valid input and should only cause error because of unavalability.",
                 result.contains(expMessage));
@@ -56,6 +63,8 @@ public class UserResourceTest {
                 result.contains(expResult));
         assertTrue("The password test03  was in correct format so the error should only be username invalidity.",
                 result.contains(expMessage));
+        assertFalse("The user should not be added to the database.", 
+                userData.getUsers().contains(user));
     }
 
     @Test
@@ -68,6 +77,8 @@ public class UserResourceTest {
                 result.contains(expResult));
         assertTrue("The password test04 was in correct format so the error should only be username invalidity.",
                 result.contains(expMessage));
+        assertFalse("The user should not be added to the database.", 
+                userData.getUsers().contains(user));
     }
 
     @Test
@@ -80,6 +91,8 @@ public class UserResourceTest {
                 result.contains(expResult));
         assertTrue("The username test05 was in correct format so the error should only be password invalidity.",
                 result.contains(expMessage));
+        assertFalse("The user should not be added to the database.", 
+                userData.getUsers().contains(user));
     }
 
     @Test
@@ -95,5 +108,7 @@ public class UserResourceTest {
                 result.contains(expResult));
         assertTrue("The username test06 was in correct format so the error should only be password invalidity.",
                 result.contains(expMessage));
+        assertFalse("The user should not be added to the database.", 
+                userData.getUsers().contains(user));
     }
 }

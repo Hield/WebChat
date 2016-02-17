@@ -77,7 +77,7 @@ public class SessionResource {
         result.append("</response>");
         return result.toString();
     }
-    
+
     @Path("{sessionId}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
@@ -95,13 +95,17 @@ public class SessionResource {
         result.append("</response>");
         return result.toString();
     }
-    
+
     @Path("{sessionId}")
     @DELETE
     public void logout(@PathParam("sessionId") String sessionId) {
+        Session session = sessionData.getSession(sessionId);
+        if (session != null) {
+            session.outRoomsCompletely();
+        }
         sessionData.deleteSession(sessionId);
     }
-    
+
     @Path("{sessionId}/rooms")
     @GET
     @Produces(MediaType.APPLICATION_XML)
@@ -109,7 +113,7 @@ public class SessionResource {
         Session session = sessionData.getSession(sessionId);
         return session.getChatRooms();
     }
-    
+
     @Path("{sessionId}/rooms")
     @POST
     @Consumes(MediaType.APPLICATION_XML)
@@ -120,7 +124,9 @@ public class SessionResource {
         result.append("<response>");
         Session session = sessionData.getSession(sessionId);
         if (session != null) {
-            if (session.joinRoom(chatRoom.getId())) {
+            chatRoom = chatRoomData.getChatRoom(chatRoom.getId());
+            if (chatRoom != null) {
+                session.joinRoom(chatRoom);
                 result.append("<result>success</result>");
             } else {
                 result.append("<result>failure</result>");
@@ -133,7 +139,7 @@ public class SessionResource {
         result.append("</response>");
         return result.toString();
     }
-    
+
     @Path("{sesseionId}/rooms")
     @DELETE
     public void outRoomsTemporary(@PathParam("sessionId") String sessionId) {
@@ -142,11 +148,11 @@ public class SessionResource {
             session.outRoomsTemporary();
         }
     }
-    
+
     @Path("{sessionId}/{index}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public EventEntry getEventEntry(@PathParam("sessionId") String sessionId, 
+    public EventEntry getEventEntry(@PathParam("sessionId") String sessionId,
             @PathParam("index") int index) {
         Session session = sessionData.getSession(sessionId);
         if (session == null) {
@@ -155,7 +161,7 @@ public class SessionResource {
         User user = session.getUser();
         return user.getEventEntries().get(index);
     }
-    
+
     @Path("{sessionId}/update")
     @GET
     @Produces(MediaType.APPLICATION_XML)

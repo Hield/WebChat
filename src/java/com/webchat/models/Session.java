@@ -52,19 +52,9 @@ public class Session {
         return chatRooms.values();
     }
     
-    public boolean joinRoom(int roomId) {
-        if (chatRooms.containsKey(roomId)) {
-            chatRooms.get(roomId).addUser(user);
-            return true;
-        }
-        ChatRoom chatRoom = ChatRoomData.getInstance().getChatRoom(roomId);
-        if (chatRoom != null) {
-            chatRooms.put(roomId, chatRoom);
-            chatRoom.addUser(user);
-            return true;
-        } else {
-            return false;
-        }
+    public void joinRoom(ChatRoom chatRoom) {
+        chatRooms.put(chatRoom.getId(), chatRoom);
+        chatRoom.addUser(user);
     }
 
     public void reJoinRooms() {
@@ -80,6 +70,9 @@ public class Session {
     }
 
     public void outRoomsCompletely() {
+        for (ChatRoom room : chatRooms.values()) {
+            room.removeUser(user);
+        }
         chatRooms.clear();
     }
     
