@@ -47,8 +47,6 @@ function updateChatDivision(messageType, message, date_param, time) {
 		$chatDivision.find(".chat-message:last").text(message);
 		$chatDivision.find(".time:last").text(time);
 	}
-	//#1c1d21
-    //#445878
 }
 
 /*

@@ -42,6 +42,7 @@
 
         <div class="container">
 
+            <!---- Register Page ---->
             <div class="register-page page" >
                 <div class="show-login-page">
                     <a href="#login" class="show-login-form-button button">
@@ -62,6 +63,7 @@
                 </form>
             </div>
 
+            <!---- Login Page ---->
             <div class="login-page page">
                 <div class="banner-welcome">
                     <h2 class="banner-h2">welcome to</h2>
@@ -84,19 +86,56 @@
                 </form>
             </div>
 
+            <!---- Chat Page ---->
+
+            <!--            <div class="chat-page page">
+                            <nav class="navigation">            
+                                <div class="container">
+                                    <span class="navigation-title">Welcome to chat</span>
+                                    <ul class="navigation-list float-right">
+                                        <li class="navigation-item login-state-control">
+                                            <a class="logout-button button">
+                                                Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>-->
             <div class="chat-page page">
-                <nav class="navigation">            
-                    <div class="container">
-                        <span class="navigation-title">Welcome to chat</span>
-                        <ul class="navigation-list float-right">
-                            <li class="navigation-item login-state-control">
-                                <a class="logout-button button">
-                                    Logout
-                                </a>
-                            </li>
-                        </ul>
+                <aside class='chat-sidebar'>
+                    <div class="search-container">
+                        <span class="icon"><i class="fa fa-search"></i></span>
+                        <input type="search" id="search" placeholder="Search" />
                     </div>
-                </nav>
+
+
+                    <ul class='contacts'>
+                        <li class='contact'>
+                            <div class='contact-box'>
+                                <p>Tina Chang</p>
+                            </div>
+                            </a>
+                        </li>
+                        <li class='contact'>
+                            <div class='contact-box'>
+                                <p>Luke Mikey</p>
+                            </div>
+                            </a>
+                        </li>
+                        <li class='contact'>
+                            <div class='contact-box'>
+                                <p>Hieu Le</p>
+                            </div>
+                            </a>
+                        </li>
+                        <li class='contact'>
+                            <div class='contact-box'>
+                                <p>Henry Tran</p>
+                            </div>
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
                 <div class="chat-rooms">
                     <!--
                         ***Example chatroom***                       
@@ -111,11 +150,14 @@
                         </div>
                     -->
                 </div>
+                <a class="logout-button button">
+                    Logout
+                </a>
             </div>
 
             <div class="user-page page">
                 <h2 class="user-page-username"></h2>
-                
+
             </div>
 
             <div class="error-page page">

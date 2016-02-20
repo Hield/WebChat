@@ -220,6 +220,7 @@ function processResponse(data) {
                     dataType: "xml",
                     success: function(data) {
                         var type = $(data).find("type").html();
+                        console.log(data);
                         if (type === "chat") {
                             var message = $(data).find("message").html();
                             var roomId = $(data).find("roomId").html();
