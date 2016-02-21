@@ -102,10 +102,20 @@
                                 </div>
                             </nav>-->
             <div class="chat-page page">
+                <div class="profile">
+                    
+                </div>
+                
+                <nav class="navbar">
+                    
+                </nav>
                 <aside class='chat-sidebar'>
-                    <div class="search-container">
-                        <span class="icon"><i class="fa fa-search"></i></span>
-                        <input type="search" id="search" placeholder="Search" />
+                    <!--                    <div class="search-container">
+                                            <span class="icon"><i class="fa fa-search"></i></span>
+                                            <input type="search" id="search" placeholder="Search" />
+                                        </div>-->
+                    <div class="search">
+                        <input type="search" class="search-input" placeholder="Search">
                     </div>
 
 

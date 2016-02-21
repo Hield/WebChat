@@ -332,7 +332,7 @@ function joinRoom(roomId) {
             "<div class=\"chat-division\"></div>" +
             "<form class=\"chat-form\" onsubmit=\"sendMessage(event, this);\">" +
                 "<input type=\"text\" name=\"message\" class=\"message-input\" autocomplete=\"off\">" + 
-                "<button type=\"submit\" id=\"sendingButton\">Send</button>" + 
+                "<button type=\"submit\" id=\"sendingButton\">SEND</button>" + 
             "</form>" + 
         "</div>");
     $.ajax({
