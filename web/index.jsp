@@ -129,8 +129,10 @@
                                             <span class="icon"><i class="fa fa-search"></i></span>
                                             <input type="search" id="search" placeholder="Search" />
                                         </div>-->
+                                           
                     <div class="search">
                         <input type="search" class="search-input" placeholder="Search">
+
                     </div>
 
 

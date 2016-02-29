@@ -6,7 +6,7 @@
 $(document).ready(function () {
 
     $(window).on("hashchange", function () {
-        alert("Change");
+        //alert("Change");
         render(decodeURI(window.location.hash));
     });
 });
