@@ -19,9 +19,15 @@ var component = {
 						'<p class="date"></p>' +
 					'</div>',
 	chatElement : '<div class="bubble">' +
-								'<p class="chat-message"></p>' +
-									'<span class="time"><span>' +
-						'</div>'
+						'<p class="chat-message"></p>' +
+						'<span class="time"><span>' +
+					'</div>'
+	searchElement: ' <li class="contact">' +
+                        '<div class="contact-box">' +
+                            '<p></p>' +
+                         '</div>' + 
+                        '</a>' +
+                    '</li>' +
 }
 
 function updateChatDivision(messageType, message, date_param, time) {
@@ -52,7 +58,10 @@ function updateChatDivision(messageType, message, date_param, time) {
     //#445878
 }
 
+//--- Update Search Page ---//
+function updateSearchPage() {
 
+}
 
 //--- Search contacts action ---//
 $(".search-input").on("input", function() {
