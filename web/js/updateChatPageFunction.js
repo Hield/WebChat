@@ -47,24 +47,54 @@ function updateChatDivision(messageType, message, date_param, time) {
 		$chatDivision.find(".chat-message:last").text(message);
 		$chatDivision.find(".time:last").text(time);
 	}
+
+	//#1c1d21
+    //#445878
 }
 
-/*
-function updateChatDivision(messageType, message, time) {
-	if (messageType === "received") {
-		var $chatDivision = $(".chat-division");
-		console.log(time);
-		$chatDivision.append('<div class="bubble"><p class="chat-message">' + message + '</p><span class="time">' + time + '<span></div>');
-	}
-	else if (messageType === "sent") {
-		var $chatDivision = $(".chat-division");
-		$chatDivision.append('<div class="bubble bubble-right"><p class="chat-message">' + message + '</p><span class="time">' + time + '</span</div>');
-		//var $chatBubble = $(".bubble-right");
-		//$chatBubble.css("background", "#31353d");
+//--- Search contacts action ---//
+$(".search-input").keypress( function() {
+	var data = $(this).val();
+	searchContactsFunction(data);
+});
 
-                //#1c1d21
-                //#445878
-	}
+
+
+
+
+
+
+//--- Search contacts function ---//
+function searchContactsFunction(data) {
+    $.ajax({
+        type: "GET",
+        url: "api/users",
+        headers: {
+            "sessionId": localStorage.getItem("sessionId")
+        },
+        dataType: "xml",
+        success: function(responseXML) {
+            var $contacts = responseXML.getElementsByTagName("users")[0];
+            var contacts = [];
+            for (var i = 0; i < $contacts.childNodes.length; i++) {
+            	var contact = $contacts.childNodes[i].getElementsByTagName("username")[0].childNodes[0].nodeValue;
+            	contacts.push(contact);
+            }
+
+           	console.log(contacts);
+
+           	contacts.forEach( function(val) {
+            	//console.log(val);
+            	if (val.indexOf(data) !== -1) {
+            		console.log(val);
+            		//updateSearchPage(val);
+            	}
+            });
+
+            
+        }
+    });
+
 }
-*/
+
 
