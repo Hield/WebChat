@@ -59,13 +59,13 @@ function updateChatDivision(messageType, message, date_param, time) {
 }
 
 //--- Update Search Page ---//
-function updateSearchPage() {
+function updateSearchPage(foundUser) {
 
 }
 
 //--- Search contacts action ---//
 $(".search-input").on("input", function() {
-	var data = $(this).val();
+	var searchedData = $(this).val();
 	$.ajax({
         type: "GET",
         url: "api/users",
@@ -79,11 +79,11 @@ $(".search-input").on("input", function() {
             for (var i = 0; i < $contacts.childNodes.length; i++) {
             	var contact = $contacts.childNodes[i].getElementsByTagName("username")[0].childNodes[0].nodeValue;
             	contacts.push(contact);
-            }data
+            }
 
            	contacts.forEach( function(val) {
-           		if (val.indexOf(data) !== -1 && data != "")  {
-            		console.log(data);
+           		if (val.indexOf(searchedData) !== -1 && searchedData != "")  {
+            		console.log(searchedData);
             		console.log(val);
             		//updateSearchPage(val);
             	}
