@@ -114,8 +114,19 @@
                                             <span class="icon"><i class="fa fa-search"></i></span>
                                             <input type="search" id="search" placeholder="Search" />
                                         </div>-->
+                                           
                     <div class="search">
                         <input type="search" class="search-input" placeholder="Search">
+                        <div class="search-contacts-container">
+                             <ul class='search-contacts'>
+                                <li class='contact'>
+                                    <div class='contact-box'>
+                                        <p>Tina Chang</p>
+                                    </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
 
@@ -176,7 +187,7 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <!-- <script src="js/updateChatPageFunction.js"></script> !-->
+        <script src="js/updateChatPageFunction.js"></script>
         <script src="js/function.js"></script>
         <script src="js/renderFunction.js"></script>
     </body>

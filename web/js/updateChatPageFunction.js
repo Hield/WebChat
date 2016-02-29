@@ -52,17 +52,36 @@ function updateChatDivision(messageType, message, date_param, time) {
     //#445878
 }
 
+
+
 //--- Search contacts action ---//
-$(".search-input").keypress( function() {
+$(".search-input").on("input", function() {
 	var data = $(this).val();
-	searchContactsFunction(data);
+	$.ajax({
+        type: "GET",
+        url: "api/users",
+        headers: {
+            "sessionId": localStorage.getItem("sessionId")
+        },
+        dataType: "xml",
+        success: function(responseXML) {
+            var $contacts = responseXML.getElementsByTagName("users")[0];
+            var contacts = [];
+            for (var i = 0; i < $contacts.childNodes.length; i++) {
+            	var contact = $contacts.childNodes[i].getElementsByTagName("username")[0].childNodes[0].nodeValue;
+            	contacts.push(contact);
+            }data
+
+           	contacts.forEach( function(val) {
+           		if (val.indexOf(data) !== -1 && data != "")  {
+            		console.log(data);
+            		console.log(val);
+            		//updateSearchPage(val);
+            	}
+            });
+   		}
+    });
 });
-
-
-
-
-
-
 
 //--- Search contacts function ---//
 function searchContactsFunction(data) {
@@ -79,13 +98,11 @@ function searchContactsFunction(data) {
             for (var i = 0; i < $contacts.childNodes.length; i++) {
             	var contact = $contacts.childNodes[i].getElementsByTagName("username")[0].childNodes[0].nodeValue;
             	contacts.push(contact);
-            }
-
-           	console.log(contacts);
+            }data
 
            	contacts.forEach( function(val) {
-            	//console.log(val);
-            	if (val.indexOf(data) !== -1) {
+           		if (val.indexOf(data) !== -1 && data != "")  {
+            		console.log(data);
             		console.log(val);
             		//updateSearchPage(val);
             	}
