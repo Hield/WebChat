@@ -103,11 +103,26 @@
                             </nav>-->
             <div class="chat-page page">
                 <div class="profile">
-                    
+
                 </div>
-                
+
+
+
                 <nav class="navbar">
-                    
+
+                    <div class="dropdown">
+                        <span onclick="myFunction()" class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <div id="myDropdown" class="dropdown-content">
+                            <a href="#home">Home</a>
+                            <a href="#about">About</a>
+                            <a href="#contact">Contact</a>
+                        </div> 
+                    </div>
+
+
                 </nav>
                 <aside class='chat-sidebar'>
                     <!--                    <div class="search-container">

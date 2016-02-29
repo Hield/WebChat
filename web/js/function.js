@@ -350,3 +350,7 @@ function joinRoom(roomId) {
         cache      : false
     });
 }
+
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
