@@ -363,7 +363,13 @@ var component = {
     chatElement : '<div class="bubble">' +
                                 '<p class="chat-message"></p>' +
                                     '<span class="time"><span>' +
-                        '</div>'
+                        '</div>',
+    searchElement: '<li class="contact">' +
+            '<div class="contact-box">' +
+            '<p></p>' +
+            '</div>' +
+            '</a>' +
+            '</li>'
 }
 
 function updateChatDivision(messageType, message, date_param, time) {

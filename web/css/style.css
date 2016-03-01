@@ -253,6 +253,7 @@ label, input {
     margin: 30px auto;
 }
 
+
 .search-contacts-container {
     width: 100%;
     height: 100px;
@@ -275,8 +276,10 @@ label, input {
 }
 
 ul.search-contacts {
-    list-style-type: none;
-    padding-left: 10%;
+  list-style-type: none;
+  padding-left: 10%;
+  display: none;
+
 }
 
 ul.search-contacts > li.contact {
@@ -412,14 +415,6 @@ ul.contacts > li.contact {
     font-size: 0.8em;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-
-/*#sendingInput {
-    width: 93%;
-    float: left;
-    margin: 0;
-    height: 30px;
-}*/
-
 
 
 /* ===========================
