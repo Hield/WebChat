@@ -58,38 +58,53 @@ function updateChatDivision(messageType, message, date_param, time) {
 
 //--- Update Search Page ---//
 function updateSearchPage(foundUser) {
+      var $searchContacts = (".search-contacts");
+    //var 
 
 }
 
 //--- Search contacts action ---//
 $(".search-input").on("input", function () {
-    var searchedData = $(this).val();
-    $.ajax({
-        type: "GET",
-        url: "api/users",
-        headers: {
-            "sessionId": localStorage.getItem("sessionId")
-        },
-        dataType: "xml",
-        success: function (responseXML) {
-            var $contacts = responseXML.getElementsByTagName("users")[0];
-            var contacts = [];
-            for (var i = 0; i < $contacts.childNodes.length; i++) {
-                var contact = $contacts.childNodes[i].getElementsByTagName("username")[0].childNodes[0].nodeValue;
-                contacts.push(contact);
-            }
+    var searchedData = $(this).val().toLowerCase();
+    var currentContacts = $(".contacts");
 
-            contacts.forEach(function (val) {
-                if (val.indexOf(searchedData) !== -1 && searchedData != "") {
-                    console.log(searchedData);
-                    console.log(val);
-                    //updateSearchPage(val);
+    if (searchedData != "") {
+        currentContacts.hide();
+
+        $.ajax({
+            type: "GET",
+            url: "api/users",
+            headers: {
+                "sessionId": localStorage.getItem("sessionId")
+            },
+            dataType: "xml",
+            success: function (responseXML) {
+                var $contacts = responseXML.getElementsByTagName("users")[0];
+                var contacts = [];
+                for (var i = 0; i < $contacts.childNodes.length; i++) {
+                    var contact = $contacts.childNodes[i].getElementsByTagName("username")[0].childNodes[0].nodeValue;
+                    contacts.push(contact);
                 }
-            });
-        }
-    });
+
+                contacts.forEach(function (val) {
+                    if (val.toLowerCase().indexOf(searchedData) == 0) {
+                        console.log(searchedData);
+                        console.log(val);
+                        //updateSearchPage(val);
+                    }
+                });
+            }
+        });
+    }
+    else if (searchedData == "") {
+        currentContacts.show();
+    }
+
+
+    
 });
 
+/*****************
 //--- Search contacts function ---//
 function searchContactsFunction(data) {
     $.ajax({
@@ -118,3 +133,4 @@ function searchContactsFunction(data) {
         }
     });
 }
+*******************************/

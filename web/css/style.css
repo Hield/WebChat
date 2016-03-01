@@ -253,14 +253,6 @@ label, input {
     margin: 30px auto;
 }
 
-.search-contacts-container {
-    width: 100%;
-    height: 100px;
-    background-color: red;
-    display: red
-    ;
-}
-
 .search-input {
     width: 100%;
     padding: 6px 15px 6px 30px;
@@ -277,6 +269,8 @@ label, input {
 ul.search-contacts {
   list-style-type: none;
   padding-left: 10%;
+  display: none;
+  background-color: red;
 }
 
 ul.search-contacts > li.contact {

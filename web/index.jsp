@@ -132,8 +132,18 @@
                                            
                     <div class="search">
                         <input type="search" class="search-input" placeholder="Search">
-
                     </div>
+
+                    <ul class='search-contacts'>
+                        <!--
+                        <li class='contact'>
+                            <div class='contact-box'>
+                                <p>Lieu Vu</p>
+                            </div>
+                            </a>
+                        </li>
+                        !-->
+                    </ul>
 
 
                     <ul class='contacts'>
