@@ -26,7 +26,7 @@ function updateChatDivision(messageType, message, date_param, time) {
 function updateSearchPage(foundUser) {
     var $searchContacts = $(".search-contacts");
     $searchContacts.append(component.searchElement);
-    $searchContacts.find(".contact-box:last > p").text(foundUser);
+    $searchContacts.find(".contact-box:last > p").html(foundUser);
 }
 
 //--- Search contacts action ---//
