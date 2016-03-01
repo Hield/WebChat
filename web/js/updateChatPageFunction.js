@@ -20,7 +20,7 @@ var component = {
             '<p class="chat-message"></p>' +
             '<span class="time"><span>' +
             '</div>',
-    searchElement: ' <li class="contact">' +
+    searchElement: '<li class="contact">' +
             '<div class="contact-box">' +
             '<p></p>' +
             '</div>' +
@@ -58,18 +58,21 @@ function updateChatDivision(messageType, message, date_param, time) {
 
 //--- Update Search Page ---//
 function updateSearchPage(foundUser) {
-      var $searchContacts = (".search-contacts");
-    //var 
-
+    var $searchContacts = $(".search-contacts");
+    $searchContacts.append(component.searchElement);
+    $searchContacts.find(".contact-box:last > p").text(foundUser);
 }
 
 //--- Search contacts action ---//
 $(".search-input").on("input", function () {
     var searchedData = $(this).val().toLowerCase();
-    var currentContacts = $(".contacts");
+    var $currentContacts = $(".contacts");
+    var $searchContacts = $(".search-contacts");
 
     if (searchedData != "") {
-        currentContacts.hide();
+        $currentContacts.hide();
+        $searchContacts.find(".contact").remove();
+        $searchContacts.show();
 
         $.ajax({
             type: "GET",
@@ -90,14 +93,15 @@ $(".search-input").on("input", function () {
                     if (val.toLowerCase().indexOf(searchedData) == 0) {
                         console.log(searchedData);
                         console.log(val);
-                        //updateSearchPage(val);
+                        updateSearchPage(val);
                     }
                 });
             }
         });
     }
     else if (searchedData == "") {
-        currentContacts.show();
+        $currentContacts.show();
+        $searchContacts.hide();
     }
 
 

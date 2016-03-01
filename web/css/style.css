@@ -270,7 +270,6 @@ ul.search-contacts {
   list-style-type: none;
   padding-left: 10%;
   display: none;
-  background-color: red;
 }
 
 ul.search-contacts > li.contact {

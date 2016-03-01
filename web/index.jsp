@@ -135,14 +135,6 @@
                     </div>
 
                     <ul class='search-contacts'>
-                        <!--
-                        <li class='contact'>
-                            <div class='contact-box'>
-                                <p>Lieu Vu</p>
-                            </div>
-                            </a>
-                        </li>
-                        !-->
                     </ul>
 
 
@@ -203,8 +195,8 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script src="js/updateChatPageFunction.js"></script>
         <script src="js/function.js"></script>
+        <script src="js/updateChatPageFunction.js"></script>
         <script src="js/renderFunction.js"></script>
     </body>
 </html>
