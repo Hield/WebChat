@@ -22,6 +22,10 @@ public class UserData {
     private UserData() {
         this.users = new HashMap<>();
         addUser(new User("admin", "password"));
+        addUser(new User("lieuvu", "password"));
+        addUser(new User("hieule", "password"));
+        addUser(new User("henry", "password"));
+        addUser(new User("namgay", "password"));
     }
 
     public static UserData getInstance() {
