@@ -280,11 +280,13 @@ ul.search-contacts > li.contact {
 
 ul.contacts {
     list-style-type: none;
+    padding: 0;
 }
 
 ul.contacts > li.contact {
     background-color: #F0F0F8;
     width: 80%;
+    margin: 0 auto;
 }
 
 
