@@ -110,17 +110,30 @@
 
                 <nav class="navbar">
 
-                    <div class="dropdown">
-                        <span onclick="myFunction()" class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <div id="myDropdown" class="dropdown-content">
-                            <a href="#home">Home</a>
-                            <a href="#about">About</a>
-                            <a href="#contact">Contact</a>
-                        </div> 
+
+                    <div class='navbar-buttons'>
+                        <div class="dropdown">
+                            <span onclick="myFunction()" class="fa-stack fa-2x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
+                            </span>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="#home">Home</a>
+                                <a href="#about">About</a>
+                                <a href="#contact">Contact</a>
+                            </div> 
+                        </div>
+
+                        <div class="plus">
+                            <span class="fa-stack fa-2x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </div>
+
                     </div>
+
+
 
 
                 </nav>
@@ -129,7 +142,7 @@
                                             <span class="icon"><i class="fa fa-search"></i></span>
                                             <input type="search" id="search" placeholder="Search" />
                                         </div>-->
-                                           
+
                     <div class="search">
                         <input type="search" class="search-input" placeholder="Search">
 

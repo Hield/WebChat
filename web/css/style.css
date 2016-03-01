@@ -258,7 +258,7 @@ label, input {
     height: 100px;
     background-color: red;
     display: red
-    ;
+        ;
 }
 
 .search-input {
@@ -275,13 +275,13 @@ label, input {
 }
 
 ul.search-contacts {
-  list-style-type: none;
-  padding-left: 10%;
+    list-style-type: none;
+    padding-left: 10%;
 }
 
 ul.search-contacts > li.contact {
-   background-color: #F0F0F8;
-   width: 80%;
+    background-color: #F0F0F8;
+    width: 80%;
 }
 
 ul.contacts {
@@ -312,6 +312,24 @@ ul.contacts > li.contact {
 .contact a {
     text-decoration: none;
     color: black;
+}
+
+.navbar-buttons {
+    margin: 30px 30px 0 0;
+}
+
+.plus {
+    float: right;
+    margin-right: 10px;
+}
+
+
+.fa-stack-2x {
+    color: #36597A;
+}
+
+.fa-stack.fa-2x {
+    cursor: pointer;
 }
 
 .chat-division {
@@ -494,6 +512,7 @@ ul.contacts > li.contact {
 .dropdown {
     position: relative;
     display: inline-block;
+    float: right;
 }
 
 .dropdown-content {
