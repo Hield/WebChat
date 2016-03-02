@@ -32,8 +32,16 @@ $(document).ready(function () {
     init();
 });
 
+//----- Reset function -----//
+function reset() {
+    chatRooms = new ChatRoomData();
+    $(".chat-rooms").html("");
+    $(".contacts").html("");
+}
+
 //----- Initialize -----//
 function init() {
+    reset();
     if (localStorage.getItem("sessionId")) {
         $.ajax({
             type    : "GET",
@@ -47,6 +55,7 @@ function init() {
                     currentUser = $(data).find("username").html();
                     loadData($(data).find("username").html());
                     render(window.location.hash);
+                    sendLogEntry("in");
                 } else if (result === "failure") {
                     localStorage.removeItem("sessionId");
                     render("#login");
@@ -104,11 +113,13 @@ function login(form) {
             if (result === "failure") {
                 var message = $(xml).find("message").html();
                 $(".login-form-error-span").html(message + "<br/>");
-            } else if (result === "success") { 
+            } else if (result === "success") {
+                reset();
                 var sessionId = $(xml).find("sessionId").html();
                 currentUser = $(xml).find("username").html();
                 loadData(username);
                 localStorage.setItem("sessionId", sessionId);
+                sendLogEntry("in");
                 joinRoom(0);
                 render("#chat");
             }
@@ -168,6 +179,7 @@ function register(form) {
 
 //----- Logout function -----//
 function logout() {
+    sendLogEntry("out");
     $.ajax({
         type : "DELETE",
         url  : "api/sessions/" + localStorage.getItem("sessionId"),
@@ -230,6 +242,7 @@ function processResponse(data) {
         var newestIndex = parseInt($(data).find("newest").html());
         if (currentIndex < newestIndex) {
             for (var i = currentIndex + 1; i <= newestIndex; i++) {
+                console.log(i);
                 $.ajax({
                     type: "GET",
                     url: "api/sessions/" + localStorage.getItem("sessionId") + "/" + i,
@@ -248,6 +261,7 @@ function processResponse(data) {
                             var time = $(data).find("time").html();
                             
                             if (!chatRooms.hasChatRoom(roomId)) {
+                                console.log("joinRoom from processResponse")
                                 joinRoom(roomId);
                             }
                             var chatRoom = chatRooms.getChatRoom(roomId);
@@ -259,17 +273,19 @@ function processResponse(data) {
                             }
                             
                              //----- Scroll to bottom for new message -----//
-                            $('.chat-division').animate({scrollTop: $('.chat-division')[0].scrollHeight}, 1);
+                            $("#chat-room-" + roomId).find('.chat-division').animate({scrollTop: $("#chat-room-" + roomId).find('.chat-division')[0].scrollHeight}, 1);
                             
                             //var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
                             //chatDivision.html(chatDivision.html() + "<p>" + username + ": " + message + "</p>");
+                        } else if (type === "log") {
+                            console.log(data);
                         }
                     },
                     error: function(data) {
                         console.log(data);
                     },
                     cache: false
-                });
+                    });
             }
         }
     } else if (result === "failure") {
@@ -305,9 +321,26 @@ function sendMessage(event, form) {
     });
 }
 
+function sendLogEntry(state) {
+    $.ajax({
+        type       : "POST",
+        url        : "api/events/log",
+        headers    : {
+            "sessionId": localStorage.getItem("sessionId")
+        },
+        contentType: "application/xml",
+        data       : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
+                     "<logEntry>" + 
+                         "<username>" + user.username + "</username>" + 
+                         "<state>" + state + "</state>" + 
+                     "</logEntry>",
+        cache      : false
+    });
+}
 
 //----- Out all rooms temporary function -----//
 function outRoomsTemporary() {
+    sendLogEntry("out");
     $.ajax({
         type    : "DELETE",
         url     : "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
@@ -337,9 +370,9 @@ function rejoinRooms() {
         success : function(data) {
             console.log(data);
             $(data).find("chatRoom").each(function(index, element) {
+                console.log("joinRoom from rejoinRooms");
                 joinRoom($(element).find("id").html());
             });
-            switchRoom(0);
         },
         error   : function(data) {
             console.log(data);
@@ -379,10 +412,12 @@ function joinRoom(roomId) {
 //----- Switch room function -----//
 function switchRoom(roomId) {
     if (!chatRooms.hasChatRoom(roomId)) {
+        console.log("joinRoom from switchRoom");
         joinRoom(roomId);
     }
     $(".chat-room").hide();
     $("#chat-room-" + roomId).show();
+    $("#chat-room-" + roomId).find('.chat-division').animate({scrollTop: $("#chat-room-" + roomId).find('.chat-division')[0].scrollHeight}, 1);
 }
 
 //----- Function that find room Id for specified user -----//

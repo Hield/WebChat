@@ -11,7 +11,9 @@ import com.webchat.data.SessionData;
 import com.webchat.models.ChatEntry;
 import com.webchat.models.ChatRoom;
 import com.webchat.models.EventEntry;
+import com.webchat.models.LogEntry;
 import com.webchat.models.Session;
+import com.webchat.models.User;
 import java.util.Collection;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -56,7 +58,6 @@ public class EventEntryResource {
     @POST
     @Consumes(MediaType.APPLICATION_XML)
     public void createChatEntry(@HeaderParam("sessionId") String sessionId, ChatEntry entry) {
-        eventEntryData.addEventEntry(entry);
         Session session = sessionData.getSession(sessionId);
         if (session != null) {
             String username = session.getUsername();
@@ -64,11 +65,34 @@ public class EventEntryResource {
             int roomId = entry.getRoomId();
             ChatRoom chatRoom = chatRoomData.getChatRoom(roomId);
             if (chatRoom != null) {
-                chatRoom.addChatEntry(entry);
+                if (!entry.getMessage().equals("")){
+                    chatRoom.addChatEntry(entry);
+                    eventEntryData.addEventEntry(entry);
+                    System.out.println(entry.getMessage());
+                }
             }
         }
     }
 
+    @Path("log")
+    @POST
+    @Consumes(MediaType.APPLICATION_XML)
+    public void createLogEntry(@HeaderParam("sessionId") String sessionId, LogEntry entry) {
+        Session session = sessionData.getSession(sessionId);
+        if (session != null) {
+            User user = session.getUser();
+            if (entry.getUsername().equals(user.getUsername())) {
+                if (entry.getState().equals("in") || entry.getState().equals("out")) {
+                    user.notifyLog(entry);
+                    /*
+                    System.out.println(entry.getUsername());
+                    System.out.println(entry.getState());
+*/
+                }
+            }
+        }
+    }
+    
     @Path("{timeStamp}")
     @GET
     @Produces(MediaType.APPLICATION_XML)

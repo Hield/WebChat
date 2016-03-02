@@ -76,4 +76,10 @@ public class User {
         currentEventIndex = eventEntries.size() - 1;
         return eventEntries.size() - 1;
     }
+    
+    public void notifyLog(LogEntry entry) {
+        for (User user : contacts) {
+            user.addEventEntry(entry);
+        }
+    }
 }

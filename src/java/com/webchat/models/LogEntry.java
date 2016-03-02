@@ -9,17 +9,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author hieu
+ * @author hieu 
  */
 @XmlRootElement
-public class LoginEntry extends EventEntry {
+public class LogEntry extends EventEntry {
     
     private String username;
+    private String state;
     
-    public LoginEntry(){
+    public LogEntry(){
         super();
-        setType("login");
+        setType("log");
         this.username = "temp";
+        this.state = "temp";
     }
     
     public void setUsername(String username) {
@@ -28,5 +30,13 @@ public class LoginEntry extends EventEntry {
     
     public String getUsername() {
         return username;
+    }
+    
+    public void setState(String state) {
+        this.state = state;
+    }
+    
+    public String getState() {
+        return state;
     }
 }
