@@ -1,5 +1,7 @@
 var pollId;
 var currentUser;
+var chatRooms = new ChatRoomData();
+var user;
 
 $(document).ready(function () {
 
@@ -38,11 +40,12 @@ function init() {
             url     : "api/sessions/" + localStorage.getItem("sessionId"),
             dataType: "xml",
             success : function(data) {
+                console.log(data);
                 var result = $(data).find("result").html();
                 if (result === "success") {
-                    
                     rejoinRooms();
                     currentUser = $(data).find("username").html();
+                    loadData($(data).find("username").html());
                     render(window.location.hash);
                 } else if (result === "failure") {
                     localStorage.removeItem("sessionId");
@@ -101,9 +104,10 @@ function login(form) {
             if (result === "failure") {
                 var message = $(xml).find("message").html();
                 $(".login-form-error-span").html(message + "<br/>");
-            } else if (result === "success") {               
+            } else if (result === "success") { 
                 var sessionId = $(xml).find("sessionId").html();
                 currentUser = $(xml).find("username").html();
+                loadData(username);
                 localStorage.setItem("sessionId", sessionId);
                 joinRoom(0);
                 render("#chat");
@@ -175,6 +179,21 @@ function logout() {
     stopPolling();
 }
 
+//----- Function that load data when user login -----//
+function loadData(username) {
+    user = new User(username);
+    $.ajax({
+        type     : "GET",
+        url      : "api/users/" + username + "/contacts",
+        dataType : "xml",
+        success  : function(data) {
+            $(data).find("contact").each(function(index, element) {
+                user.addContact($(element).html());
+            });
+        }
+    });
+}
+
 //----- Polling function -----//
 function poll() {
     pollId = setInterval(function() {
@@ -228,12 +247,15 @@ function processResponse(data) {
                             var date = $(data).find("date").html();
                             var time = $(data).find("time").html();
                             
-                            console.log(date);
-                            console.log(currentUser);
+                            if (!chatRooms.hasChatRoom(roomId)) {
+                                joinRoom(roomId);
+                            }
+                            var chatRoom = chatRooms.getChatRoom(roomId);
+                            chatRoom.addChatEntry(new ChatEntry(username, message, time));
                             if (username !== currentUser) {
-                                updateChatDivision("received", username + ": " + message, date, time);
+                                updateChatDivision("received", username + ": " + message, roomId, date, time);
                             } else {
-                                updateChatDivision("sent", username + ": " + message, date, time);
+                                updateChatDivision("sent", username + ": " + message, roomId, date, time);
                             }
                             
                              //----- Scroll to bottom for new message -----//
@@ -345,8 +367,42 @@ function joinRoom(roomId) {
                          "<id>" + roomId + "</id>" +
                      "</chatRoom>",
         success    : function(data) {
-            console.log(data);
+            if ($(data).find("result").html() === "success") {
+                chatRooms.addChatRoom(new ChatRoom(roomId));
+            }
         },
         cache      : false
+    });
+}
+
+//----- Switch room function -----//
+function switchRoom(roomId) {
+    if (!chatRooms.hasChatRoom(roomId)) {
+        joinRoom(roomId);
+    }
+    $(".chat-room").hide();
+    $("#chat-room-" + roomId).show();
+}
+
+//----- Function that find room Id for specified user -----//
+function chatWithUser(event) {
+    var contact = $(event.currentTarget).find("p").html();
+    console.log(contact);
+    $.ajax({
+        type    : "GET",
+        url     : "api/rooms/" + contact,
+        headers : {
+            "sessionId": localStorage.getItem("sessionId")
+        },
+        dataType: "xml",
+        success : function(data) {
+            var result = $(data).find("result").html();
+            if (result === "success") {
+                var roomId = $(data).find("roomId").html();
+                switchRoom(roomId);
+            } else {
+                console.log(data);
+            }
+        }
     });
 }

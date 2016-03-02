@@ -15,13 +15,25 @@ User.prototype.setUsername = function (username) {
 
 User.prototype.addContact = function (user) {
     this.contacts.push(user);
+    $(".contacts").append("" + 
+        "<li class=\"contact\">" +
+            "<div class=\"contact-box\" onclick=\"chatWithUser(event);\">" + 
+                "<p>" + user + "</p>" + 
+            "</div>" +
+        "</li>" +
+    "");
+};
+
+var Contact = function(username, roomId) {
+    this.username = username;
+    this.roomId = roomId;
 };
 
 // Class that represents a chat entry
-var ChatEntry = function (username, message, timeStamp) {
+var ChatEntry = function (username, message, time) {
     this.username = username;
     this.message = message;
-    this.timeStamp = timeStamp;
+    this.timeStamp = time;
 };
 
 // Class that represents a chat room which contains list of users and chat entries
@@ -56,5 +68,6 @@ ChatRoomData.prototype.getChatRoom = function (roomId) {
     }
 };
 
-
-
+ChatRoomData.prototype.hasChatRoom = function(roomId) {
+    return this.chatRooms.hasOwnProperty(roomId);
+};

@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ChatRoom {
 
     private int id;
+    private String title;
     private Set<User> users;
     private List<ChatEntry> chatEntries;
 

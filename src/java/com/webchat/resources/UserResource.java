@@ -76,4 +76,21 @@ public class UserResource {
     public User getUserXML(@PathParam("username") String username) {
         return userData.getUser(username);
     }
+
+    @Path("{username}/contacts")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public String getUserContacts(@PathParam("username") String username) {
+        StringBuilder result = new StringBuilder();
+        result.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
+        result.append("<contacts>");
+        User user = userData.getUser(username);
+        for (User contact : user.getContacts()) {
+            result.append("<contact>");
+            result.append(contact.getUsername());
+            result.append("</contact>");
+        }
+        result.append("</contacts>");
+        return result.toString();
+    }
 }

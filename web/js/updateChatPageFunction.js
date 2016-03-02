@@ -24,8 +24,8 @@ var component = {
 						'</div>'
 }
 
-function updateChatDivision(messageType, message, date_param, time) {
-	var $chatDivision = $(".chat-division");
+function updateChatDivision(messageType, message, roomId, date_param, time) {
+	var $chatDivision = $("#chat-room-" + roomId).find(".chat-division");
 	var date = $chatDivision.find(".date:last").html();
 
 	if(!date || date !== date_param) {

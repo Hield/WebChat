@@ -120,30 +120,15 @@
 
 
                     <ul class='contacts'>
-                        <li class='contact'>
-                            <div class='contact-box'>
-                                <p>Tina Chang</p>
-                            </div>
-                            </a>
-                        </li>
-                        <li class='contact'>
-                            <div class='contact-box'>
-                                <p>Luke Mikey</p>
-                            </div>
-                            </a>
-                        </li>
-                        <li class='contact'>
-                            <div class='contact-box'>
-                                <p>Hieu Le</p>
-                            </div>
-                            </a>
-                        </li>
-                        <li class='contact'>
-                            <div class='contact-box'>
-                                <p>Henry Tran</p>
-                            </div>
-                            </a>
-                        </li>
+                        <!--
+                            ***Example contact***
+                            <li class='contact'>
+                                <div class='contact-box'>
+                                    <p>Tina Chang</p>
+                                </div>
+                                </a>
+                            </li>
+                        -->
                     </ul>
                 </aside>
                 <div class="chat-rooms">
@@ -176,6 +161,7 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="js/classes.js"></script>
         <script src="js/updateChatPageFunction.js"></script>
         <script src="js/function.js"></script>
         <script src="js/renderFunction.js"></script>

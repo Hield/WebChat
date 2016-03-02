@@ -16,13 +16,42 @@ import java.util.Map;
  */
 public class ChatRoomData {
 
+    private class DualUserKey {
+        private String username1, username2;
+        
+        public DualUserKey(String username1, String username2) {
+            this.username1 = username1;
+            this.username2 = username2;
+        }
+        
+        @Override
+        public int hashCode() {
+            return username1.hashCode() + username2.hashCode();
+        }
+        
+        @Override
+        public boolean equals(Object object) {
+            if (object == null) {
+                return false;
+            }
+            if (object.getClass() != getClass()) {
+                return false;
+            }
+            DualUserKey key = (DualUserKey)object;
+            return (username1.equals(key.username1) && username2.equals(key.username2)) ||
+                    (username1.equals(key.username2) && username2.equals(key.username1));
+        }
+    }
+    
     private static ChatRoomData instance = new ChatRoomData();
     private Map<Integer, ChatRoom> chatRooms;
+    private Map<DualUserKey, ChatRoom> dualUserChatRooms;
     private int serial;
 
     private ChatRoomData() {
-        chatRooms = new HashMap<>();
-        serial = 0;
+        this.chatRooms = new HashMap<>();
+        this.dualUserChatRooms = new HashMap<>();
+        this.serial = 0;
         addChatRoom(new ChatRoom());
     }
 
@@ -38,9 +67,20 @@ public class ChatRoomData {
         return chatRooms.get(roomId);
     }
 
+    public ChatRoom getDualChatRoom(String username1, String username2) {
+        System.out.println(username1 + username2);
+        System.out.println(dualUserChatRooms);
+        return dualUserChatRooms.get(new DualUserKey(username1, username2));
+    }
+    
     public void addChatRoom(ChatRoom chatRoom) {
         chatRoom.setId(serial);
         chatRooms.put(serial, chatRoom);
         serial++;
+    }
+    
+    public void addDualChatRoom(ChatRoom chatRoom, String username1, String username2) {
+       dualUserChatRooms.put(new DualUserKey(username1, username2), chatRoom);
+       addChatRoom(chatRoom);
     }
 }
