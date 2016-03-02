@@ -148,6 +148,15 @@
                     </div>
 
                     <ul class='search-contacts'>
+                        <!--
+                            ***Example search contact***
+                            <li class='contact'>
+                                <div class='contact-box'>
+                                    <p>Tina Chang</p>
+                                </div>
+                                </a>
+                            </li>
+                        -->
                     </ul>
 
 
