@@ -103,20 +103,52 @@
                             </nav>-->
             <div class="chat-page page">
                 <div class="profile">
-                    
+
                 </div>
-                
+
+
+
                 <nav class="navbar">
-                    
+
+
+                    <div class='navbar-buttons'>
+                        <div class="dropdown">
+                            <span onclick="myFunction()" class="fa-stack fa-2x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
+                            </span>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="#home">Home</a>
+                                <a href="#about">About</a>
+                                <a href="#contact">Contact</a>
+                            </div> 
+                        </div>
+
+                        <div class="plus">
+                            <span class="fa-stack fa-2x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </div>
+
+                    </div>
+
+
+
+
                 </nav>
                 <aside class='chat-sidebar'>
                     <!--                    <div class="search-container">
                                             <span class="icon"><i class="fa fa-search"></i></span>
                                             <input type="search" id="search" placeholder="Search" />
                                         </div>-->
+
                     <div class="search">
                         <input type="search" class="search-input" placeholder="Search">
                     </div>
+
+                    <ul class='search-contacts'>
+                    </ul>
 
 
                     <ul class='contacts'>
@@ -162,8 +194,8 @@
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="js/classes.js"></script>
-        <script src="js/updateChatPageFunction.js"></script>
         <script src="js/function.js"></script>
+        <script src="js/updateChatPageFunction.js"></script>
         <script src="js/renderFunction.js"></script>
     </body>
 </html>

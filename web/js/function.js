@@ -339,6 +339,7 @@ function rejoinRooms() {
             $(data).find("chatRoom").each(function(index, element) {
                 joinRoom($(element).find("id").html());
             });
+            switchRoom(0);
         },
         error   : function(data) {
             console.log(data);
@@ -405,4 +406,49 @@ function chatWithUser(event) {
             }
         }
     });
+}
+
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+var component = {
+    dateElement : '<div class="bubble bubble-middle">' +
+                        '<p class="date"></p>' +
+                    '</div>',
+    chatElement : '<div class="bubble">' +
+                                '<p class="chat-message"></p>' +
+                                    '<span class="time"><span>' +
+                        '</div>',
+    searchElement: '<li class="contact">' +
+            '<div class="contact-box">' +
+            '<p></p>' +
+            '</div>' +
+            '</a>' +
+            '</li>'
+};
+
+function updateChatDivision(messageType, message, roomId, date_param, time) {
+    var $chatDivision = $("#chat-room-" + roomId).find(".chat-division");
+    var date = $chatDivision.find(".date:last").html();
+
+    if(!date || date !== date_param) {
+        console.log(date_param);
+        $chatDivision.append(component.dateElement);
+        $chatDivision.find(".date:last").text(date_param);
+    }
+
+    if (messageType === "received") {
+        console.log(messageType);
+        $chatDivision.append(component.chatElement);
+        $chatDivision.find(".chat-message:last").text(message);
+        $chatDivision.find(".time:last").text(time);
+    }
+    else if (messageType === "sent") {
+        console.log("In sent");
+        $chatDivision.append(component.chatElement);
+        $chatDivision.find(".bubble:last").addClass("bubble-right");
+        $chatDivision.find(".chat-message:last").text(message);
+        $chatDivision.find(".time:last").text(time);
+    }
 }

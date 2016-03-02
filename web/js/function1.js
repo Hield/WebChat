@@ -37,6 +37,7 @@ $(document).ready(function () {
 //----- Initialize -----//
 function init() {
     $(".chat-page").show();
+    console.log("HHH");
 }
 
 //----- Check the validity of username -----//
@@ -275,6 +276,8 @@ function sendMessage(form) {
         cache: false
     });
 }
+
+
 //<<<<<<< HEAD
 //=======
 //}

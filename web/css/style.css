@@ -266,13 +266,27 @@ label, input {
     float: left;
 }
 
+ul.search-contacts {
+  list-style-type: none;
+  padding-left: 10%;
+  display: none;
+
+}
+
+ul.search-contacts > li.contact {
+    background-color: #F0F0F8;
+    width: 80%;
+}
+
 ul.contacts {
     list-style-type: none;
+    padding: 0;
 }
 
 ul.contacts > li.contact {
     background-color: #F0F0F8;
     width: 80%;
+    margin: 0 auto;
 }
 
 
@@ -292,6 +306,24 @@ ul.contacts > li.contact {
 .contact a {
     text-decoration: none;
     color: black;
+}
+
+.navbar-buttons {
+    margin: 30px 30px 0 0;
+}
+
+.plus {
+    float: right;
+    margin-right: 10px;
+}
+
+
+.fa-stack-2x {
+    color: #36597A;
+}
+
+.fa-stack.fa-2x {
+    cursor: pointer;
 }
 
 .chat-division {
@@ -375,14 +407,6 @@ ul.contacts > li.contact {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-/*#sendingInput {
-    width: 93%;
-    float: left;
-    margin: 0;
-    height: 30px;
-}*/
-
-
 
 /* ===========================
    ====== Media Queries ====== 
@@ -457,3 +481,42 @@ ul.contacts > li.contact {
         }*/
 
 }
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    float: right;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}
+
+.show {display:block;}
