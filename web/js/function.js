@@ -412,6 +412,8 @@ function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
+
+//---- Variable to hold html elements -----//
 var component = {
     dateElement : '<div class="bubble bubble-middle">' +
                         '<p class="date"></p>' +
@@ -428,14 +430,15 @@ var component = {
             '</li>'
 };
 
-function updateChatDivision(messageType, message, roomId, date_param, time) {
+
+//-------- Function that update chat division ------//
+function updateChatDivision(messageType, message, roomId, date, time) {
     var $chatDivision = $("#chat-room-" + roomId).find(".chat-division");
     var date = $chatDivision.find(".date:last").html();
 
-    if(!date || date !== date_param) {
-        console.log(date_param);
+    if(!date || date !== date) {
         $chatDivision.append(component.dateElement);
-        $chatDivision.find(".date:last").text(date_param);
+        $chatDivision.find(".date:last").text(date);
     }
 
     if (messageType === "received") {
