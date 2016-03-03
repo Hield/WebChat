@@ -261,6 +261,10 @@ label, input {
     background-color: #F0F0F8;
 }
 
+#search-input-local {
+    background-color: #36597A;
+}
+
 .chat-rooms {
     width: 75%;
     float: left;

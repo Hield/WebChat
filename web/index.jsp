@@ -144,10 +144,16 @@
                                         </div>-->
 
                     <div class="search">
-                        <input type="search" class="search-input" placeholder="Search">
+                        <input type="search" class="search-input" id="search-input-global"placeholder="Search Global">
                     </div>
-
-                    <ul class='search-contacts'>
+                    
+					<!--
+                    <div class="search">
+                        <input type="search" class="search-input" id="search-input-local"placeholder="Search Local">
+                    </div>
+					!-->
+					
+                    <ul class="search-contacts">
                         <!--
                             ***Example search contact***
                             <li class='contact'>
