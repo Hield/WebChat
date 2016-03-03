@@ -447,6 +447,10 @@ function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
+$('#tabs').on('click', '.tab', function () {
+    $('#tabs .tab').removeClass('current-tab');
+    $(this).toggleClass('current-tab');
+});
 
 
 //---- Variable to hold html elements -----//

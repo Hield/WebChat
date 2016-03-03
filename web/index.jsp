@@ -102,6 +102,7 @@
                                 </div>
                             </nav>-->
             <div class="chat-page page">
+                <!---- Profile Container ---->
                 <div class="profile-container">
 
                     <div class='profile-info'>
@@ -112,12 +113,16 @@
                             <p>Doctor</p> 
                         </div>
                     </div>
+                </div><!---- Profile Container ---->
 
-                </div>
-
-
-
+                <!---- Navigation bar ---->
                 <nav class="navbar">
+
+                    <div class="group-info">
+                        <h1 class="group-info-name">Group A</h1>
+                        <div class="arrow-down"></div>
+                        <h4 class="group-info-number">6 members</h4>
+                    </div>
 
                     <div class='navbar-buttons'>
 
@@ -145,22 +150,32 @@
 
 
 
-                </nav>
+                </nav><!---- Navigation bar ---->
+
+                <!---- Sidebar ---->
                 <aside class='chat-sidebar'>
 
-                    <!--                    <div class="search-container">
-                                            <span class="icon"><i class="fa fa-search"></i></span>
-                                            <input type="search" id="search" placeholder="Search" />
-                                        </div>-->
+                    <div id="wrapper">
+
+                        <ul id="tabs">
+                            <li id="tab1" class="tab current-tab">
+                                Contact
+                            </li>
+                            <li id="tab2" class="tab">
+                                Group
+                            </li>
+                        </ul>
+
+                    </div>
 
                     <div class="search">
                         <input type="search" class="search-input" id="search-input-global"placeholder="Search Global">
                     </div>
 
                     <!--
-<div class="search">
-    <input type="search" class="search-input" id="search-input-local"placeholder="Search Local">
-</div>
+                        <div class="search">
+                            <input type="search" class="search-input" id="search-input-local"placeholder="Search Local">
+                        </div>
                     !-->
 
                     <ul class="search-contacts">
@@ -177,13 +192,11 @@
 
 
                     <ul class='contacts'>
-
                         <li class='contact'>
                             <div class='contact-box'>
                                 <div class='contact-box-info'>
                                     <p>Tina Chang</p>
                                 </div>
-
                                 <div class="status">
                                     <div class="status-icon status-online">
                                     </div>
@@ -191,9 +204,11 @@
                             </div>
                             </a>
                         </li>
-
                     </ul>
-                </aside>
+
+                </aside><!---- Sidebar ---->
+
+                <!---- Chat rooms ---->
                 <div class="chat-rooms">
                     <!--
                         ***Example chatroom***                       
@@ -207,7 +222,8 @@
                             </form>
                         </div>
                     -->
-                </div>
+                </div><!---- Chat rooms ---->
+
             </div>
 
             <div class="user-page page">

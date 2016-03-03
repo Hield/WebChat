@@ -123,8 +123,6 @@ label, input {
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 1em;
-    /*    margin: 10px 0;
-        float: right;*/
 }
 
 .show-register-form-button {
@@ -185,18 +183,34 @@ label, input {
     background-color: #15161B;
 }
 
-/*.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+.group-info {
+    float: left;
+    margin: 30px 0 0 50px;
 }
 
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
-}*/
+h1.group-info-name, .group-info > h4 {
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+h1.group-info-name {
+    float: left;
+}
+
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    float: left;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white;
+    margin: 10px 0 0 8px;
+}
+
+.group-info-number {
+    clear: both;
+}
 
 .dropdown {
     position: relative;
@@ -255,6 +269,42 @@ label, input {
     margin: 0 auto;
     height: 516px;
     background-color: #15161B;
+}
+
+#tabs {
+    margin:0; 
+    padding:0;
+    list-style:none; 
+    overflow:hidden;
+}
+
+#tabs li { 
+    float: left; 
+    width: 50%;
+    text-align: center;
+    color: white;
+    display: block; 
+    padding: 10px 0;
+    background-color: #33333b;
+}
+
+#tabs li:hover {
+    cursor: pointer;
+}
+
+#tabs li a { 
+    text-decoration:none;
+}
+#tabs li.current-tab { 
+    background-color: #15161B; 
+}
+#tabs li.current a { 
+    color:#000; 
+    text-decoration:none;
+}
+#tabs li a.remove { 
+    color:#f00; 
+    margin-left:10px;
 }
 
 .search {
