@@ -432,23 +432,21 @@ var component = {
 
 
 //-------- Function that update chat division ------//
-function updateChatDivision(messageType, message, roomId, date, time) {
+function updateChatDivision(messageType, message, roomId, datePara, time) {
     var $chatDivision = $("#chat-room-" + roomId).find(".chat-division");
     var date = $chatDivision.find(".date:last").html();
 
-    if(!date || date !== date) {
+    if (!date || datePara !== date) {
         $chatDivision.append(component.dateElement);
-        $chatDivision.find(".date:last").text(date);
+        $chatDivision.find(".date:last").text(datePara);
     }
 
     if (messageType === "received") {
-        console.log(messageType);
         $chatDivision.append(component.chatElement);
         $chatDivision.find(".chat-message:last").text(message);
         $chatDivision.find(".time:last").text(time);
     }
     else if (messageType === "sent") {
-        console.log("In sent");
         $chatDivision.append(component.chatElement);
         $chatDivision.find(".bubble:last").addClass("bubble-right");
         $chatDivision.find(".chat-message:last").text(message);

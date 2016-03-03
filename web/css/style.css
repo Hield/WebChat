@@ -155,35 +155,6 @@ label, input {
 }
 /*---- Chat Page -----*/
 
-/*.navigation {
-    margin: 20px auto;
-    background: #f4f5f6;
-    height: 40px;
-    max-width: 1000px;
-    width: 95%;
-}
-
-.navigation-list {
-    list-style: none;
-    padding-right: 20px;
-}
-
-.navigation-title {
-    color: black;
-    font-size: 40px;
-    font-weight: 700;
-    line-height:40px;
-    padding-left: 20px;
-}
-
-.navigation-item {
-    display: list-item;
-    float: left;
-    margin-bottom: 0;
-    margin-left: 5px;
-    line-height: 40px;
-}*/
-
 .float-right {
     float: right;
 }
@@ -192,12 +163,21 @@ label, input {
     display: none;
 }
 
-.profile {
+.profile-container {
     float: left;
     width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 150px;
     background-color: #eeeeee;
 }
+
+.profile-info-name h2 {
+    padding: 0;
+    margin: 0;
+}
+
 
 .navbar {
     float: left;
@@ -267,9 +247,9 @@ label, input {
 }
 
 ul.search-contacts {
-  list-style-type: none;
-  padding-left: 10%;
-  display: none;
+    list-style-type: none;
+    padding-left: 10%;
+    display: none;
 
 }
 
@@ -289,18 +269,42 @@ ul.contacts > li.contact {
     margin: 0 auto;
 }
 
+.contact-box-info {
+    width: 80%;
+    display: inline-block;
+}
 
-.active-contact {
-    background-color: red;
+.status {
+    width: 20%;
+    height: 100%;
+    position: relative;
+    float: right;
+}
+
+.status-icon {
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.status-online {
+    background-color: green;
 }
 
 .contact-box {
     border: 4px solid #35577A;
     margin-bottom: -4px;  /*  prevent double border css   */
     width: 100%;
-    height: 35px;      /* vertical align div */
-    line-height: 35px;
+    height: 50px;      /* vertical align div */
+    line-height: 50px;
     background-color: #F0F0F8;
+}
+
+.contact-box:hover {
+    border: 4px solid #92CECF;
 }
 
 .contact a {
@@ -310,10 +314,13 @@ ul.contacts > li.contact {
 
 .navbar-buttons {
     margin: 30px 30px 0 0;
+    display: flex;
+    float: right;
+    
 }
 
 .plus {
-    float: right;
+
     margin-right: 10px;
 }
 

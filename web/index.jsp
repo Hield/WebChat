@@ -102,7 +102,16 @@
                                 </div>
                             </nav>-->
             <div class="chat-page page">
-                <div class="profile">
+                <div class="profile-container">
+
+                    <div class='profile-info'>
+                        <div class='profile-info-name'>
+                            <h2>Nam Nguyen</h2>
+                        </div>
+                        <div class='profile-info-job'>
+                            <p>Doctor</p> 
+                        </div>
+                    </div>
 
                 </div>
 
@@ -110,8 +119,15 @@
 
                 <nav class="navbar">
 
-
                     <div class='navbar-buttons'>
+
+                        <div class="plus">
+                            <span class="fa-stack fa-2x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </div>
+
                         <div class="dropdown">
                             <span onclick="myFunction()" class="fa-stack fa-2x">
                                 <i class="fa fa-circle fa-stack-2x"></i>
@@ -122,13 +138,6 @@
                                 <a href="#about">About</a>
                                 <a href="#contact">Contact</a>
                             </div> 
-                        </div>
-
-                        <div class="plus">
-                            <span class="fa-stack fa-2x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
-                            </span>
                         </div>
 
                     </div>
@@ -152,15 +161,21 @@
 
 
                     <ul class='contacts'>
-                        <!--
-                            ***Example contact***
-                            <li class='contact'>
-                                <div class='contact-box'>
+
+                        <li class='contact'>
+                            <div class='contact-box'>
+                                <div class='contact-box-info'>
                                     <p>Tina Chang</p>
                                 </div>
-                                </a>
-                            </li>
-                        -->
+
+                                <div class="status">
+                                    <div class="status-icon status-online">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </li>
+
                     </ul>
                 </aside>
                 <div class="chat-rooms">
