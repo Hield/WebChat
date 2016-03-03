@@ -43,7 +43,7 @@ function render(url) {
             renderErrorPage();
         }
         if (localStorage.getItem("sessionId")) {
-            $(".logout-button").parent().show();
+//            $(".logout-button").parent().show();
         } else {
             $(".show-login-form-button").parent().show();
             $(".show-register-form-button").parent().show();

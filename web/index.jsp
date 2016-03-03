@@ -120,7 +120,7 @@
                             <div id="myDropdown" class="dropdown-content">
                                 <a href="#home">Home</a>
                                 <a href="#about">About</a>
-                                <a href="#contact">Contact</a>
+                                <a class="logout-button">Logout</a>
                             </div> 
                         </div>
 
@@ -186,9 +186,6 @@
                         </div>
                     -->
                 </div>
-                <a class="logout-button button">
-                    Logout
-                </a>
             </div>
 
             <div class="user-page page">
