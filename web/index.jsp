@@ -118,9 +118,9 @@
                                 <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
                             </span>
                             <div id="myDropdown" class="dropdown-content">
-                                <a href="#home">Home</a>
-                                <a href="#about">About</a>
-                                <a class="logout-button">Logout</a>
+                                <a>PATIENT MANAGEMENT</a>
+                                <a>SETTING</a>
+                                <a class="logout-button">LOGOUT</a>
                             </div> 
                         </div>
 
@@ -138,6 +138,7 @@
 
                 </nav>
                 <aside class='chat-sidebar'>
+                    
                     <!--                    <div class="search-container">
                                             <span class="icon"><i class="fa fa-search"></i></span>
                                             <input type="search" id="search" placeholder="Search" />

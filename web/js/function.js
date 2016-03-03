@@ -240,6 +240,7 @@ function processResponse(data) {
     if (result === "success") {
         var currentIndex = parseInt($(data).find("current").html());
         var newestIndex = parseInt($(data).find("newest").html());
+        alert("Current index: " + currentIndex + ",  newestIndex: " + newestIndex);
         if (currentIndex < newestIndex) {
             for (var i = currentIndex + 1; i <= newestIndex; i++) {
                 console.log(i);
