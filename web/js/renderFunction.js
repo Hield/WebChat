@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
 });
 
-function render(url) {  
+function render(url) {
     if (url !== decodeURI(window.location.hash)) {
         window.location.hash = url;
     } else {
@@ -43,7 +43,7 @@ function render(url) {
             renderErrorPage();
         }
         if (localStorage.getItem("sessionId")) {
-            $(".logout-button").parent().show();
+//            $(".logout-button").parent().show();
         } else {
             $(".show-login-form-button").parent().show();
             $(".show-register-form-button").parent().show();

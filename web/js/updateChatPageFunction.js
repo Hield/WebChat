@@ -1,6 +1,13 @@
 
 //-- Action when searching for user ---//
+
 $(".search-input").on("input", function () {
+    var searchedData = $(this).val().toLowerCase();
+    var $currentContacts = $(".contacts");
+    var $searchContacts = $(".search-contacts");
+});
+
+$("#search-input-global").on("input", function () {
     var searchedData = $(this).val().toLowerCase();
     var $currentContacts = $(".contacts");
     var $searchContacts = $(".search-contacts");

@@ -134,9 +134,9 @@
                                 <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
                             </span>
                             <div id="myDropdown" class="dropdown-content">
-                                <a href="#home">Home</a>
-                                <a href="#about">About</a>
-                                <a href="#contact">Contact</a>
+                                <a>PATIENT MANAGEMENT</a>
+                                <a>SETTING</a>
+                                <a class="logout-button">LOGOUT</a>
                             </div> 
                         </div>
 
@@ -147,16 +147,32 @@
 
                 </nav>
                 <aside class='chat-sidebar'>
+
                     <!--                    <div class="search-container">
                                             <span class="icon"><i class="fa fa-search"></i></span>
                                             <input type="search" id="search" placeholder="Search" />
                                         </div>-->
 
                     <div class="search">
-                        <input type="search" class="search-input" placeholder="Search">
+                        <input type="search" class="search-input" id="search-input-global"placeholder="Search Global">
                     </div>
 
-                    <ul class='search-contacts'>
+                    <!--
+<div class="search">
+    <input type="search" class="search-input" id="search-input-local"placeholder="Search Local">
+</div>
+                    !-->
+
+                    <ul class="search-contacts">
+                        <!--
+                            ***Example search contact***
+                            <li class='contact'>
+                                <div class='contact-box'>
+                                    <p>Tina Chang</p>
+                                </div>
+                                </a>
+                            </li>
+                        -->
                     </ul>
 
 
@@ -192,9 +208,6 @@
                         </div>
                     -->
                 </div>
-                <a class="logout-button button">
-                    Logout
-                </a>
             </div>
 
             <div class="user-page page">

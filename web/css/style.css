@@ -241,6 +241,10 @@ label, input {
     background-color: #F0F0F8;
 }
 
+#search-input-local {
+    background-color: #36597A;
+}
+
 .chat-rooms {
     width: 75%;
     float: left;
@@ -316,7 +320,7 @@ ul.contacts > li.contact {
     margin: 30px 30px 0 0;
     display: flex;
     float: right;
-    
+
 }
 
 .plus {

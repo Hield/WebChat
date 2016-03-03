@@ -68,8 +68,6 @@ public class ChatRoomData {
     }
 
     public ChatRoom getDualChatRoom(String username1, String username2) {
-        System.out.println(username1 + username2);
-        System.out.println(dualUserChatRooms);
         return dualUserChatRooms.get(new DualUserKey(username1, username2));
     }
     
