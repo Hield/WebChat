@@ -80,11 +80,11 @@ function renderRegisterPage() {
 
 function renderChatPage() {
     var sessionId = localStorage.getItem("sessionId");
-    var username = localStorage.getItem("username");
+//    var username = localStorage.getItem("username");
     if (sessionId) {
         $(".chat-page").show();
+        $('.profile-info-name').find('h2').html(currentUser);
         $(".bubble").remove();
-        $("#welcomHeading").html("Welcome" + username);
         poll();
 
     } else {

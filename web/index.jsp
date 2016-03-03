@@ -106,7 +106,7 @@
 
                     <div class='profile-info'>
                         <div class='profile-info-name'>
-                            <h2>Nam Nguyen</h2>
+                            <h2></h2>
                         </div>
                         <div class='profile-info-job'>
                             <p>Doctor</p> 

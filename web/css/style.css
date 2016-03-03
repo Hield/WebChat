@@ -178,12 +178,75 @@ label, input {
     margin: 0;
 }
 
-
 .navbar {
     float: left;
     width: 75%;
     height: 150px;
     background-color: #15161B;
+}
+
+/*.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}*/
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    float: right;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #36597A;
+    margin-top: 10px;
+    font-size: 0.9em;
+    min-width: 200px;
+    overflow: auto;
+    right: 0;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    font-weight: 900;
+}
+
+.show {display:block;}
+
+
+.navbar-buttons {
+    margin: 30px 30px 0 0;
+    display: flex;
+    float: right;
+
+}
+
+.plus {
+    margin-right: 10px;
+}
+
+
+.fa-stack-2x {
+    color: #36597A;
+}
+
+.fa-stack.fa-2x {
+    cursor: pointer;
 }
 
 .chat-sidebar {
@@ -193,39 +256,6 @@ label, input {
     height: 516px;
     background-color: #15161B;
 }
-
-/*
-.search-container {
-    width: 70%;
-    margin: 0 auto;
-    vertical-align: middle;
-    white-space: nowrap;
-    position: relative;
-}
-
-.search-container input#search {
-    width: 100%;
-    height: 50px;
-    background: #F0F0F8;
-    border: none;
-    font-size: 10pt;
-    float: left;
-    color: #63717f;
-    padding-left: 45px;
-}
-
-.search-container input#search::-webkit-input-placeholder {
-    color: #65737e;
-}
-
-.search-container .icon{
-    position: absolute;
-    top: 50%;
-    margin-left: 17px;
-    margin-top: 17px;
-    z-index: 1;
-    color: #4f5b66;
-}*/
 
 .search {
     width: 70%;
@@ -316,26 +346,6 @@ ul.contacts > li.contact {
     color: black;
 }
 
-.navbar-buttons {
-    margin: 30px 30px 0 0;
-    display: flex;
-    float: right;
-
-}
-
-.plus {
-
-    margin-right: 10px;
-}
-
-
-.fa-stack-2x {
-    color: #36597A;
-}
-
-.fa-stack.fa-2x {
-    cursor: pointer;
-}
 
 .chat-division {
     box-sizing: border-box;
@@ -379,9 +389,6 @@ ul.contacts > li.contact {
     max-width: 80%;
     position: relative;
     clear: both;
-    /*    -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;*/
-    border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 6px 20px;
@@ -467,67 +474,4 @@ ul.contacts > li.contact {
         margin-top: 10px;
         padding: 2px 43px;
     }
-    /*    .body {
-            clear: both; 
-            margin: 0 auto; 
-            width: 90%;
-            font-size: 70%;
-        }
-    
-        #sendingInput {
-            width: 85%;
-        }
-        #sendingButton {  
-            width: 13%;
-            float: right;
-        }
-    
-        .chat-division {
-            height: 300px;
-        }
-    
-        .bubble {
-            font-size: 1em;
-            max-width: 50%;
-        }*/
-
 }
-
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-    float: right;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown a:hover {background-color: #f1f1f1}
-
-.show {display:block;}

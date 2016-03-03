@@ -448,6 +448,7 @@ function myFunction() {
 }
 
 
+
 //---- Variable to hold html elements -----//
 var component = {
     dateElement: '<div class="bubble bubble-middle">' +
