@@ -1,18 +1,12 @@
 
 //-- Action when searching for user ---//
 
-$(".search-input").on("input", function () {
-    var searchedData = $(this).val().toLowerCase();
-    var $currentContacts = $(".contacts");
-    var $searchContacts = $(".search-contacts");
-});
-
 $("#search-input-global").on("input", function () {
     var searchedData = $(this).val().toLowerCase();
     var $currentContacts = $(".contacts");
     var $searchContacts = $(".search-contacts");
-
-    if (searchedData != "") {
+	
+	if (searchedData !== "") {
         $currentContacts.hide();
         $searchContacts.find(".contact").remove();
         $searchContacts.show();
@@ -36,10 +30,10 @@ function searchContactsFunction(searchedData) {
         success: function (data) {
             var contacts = [];
 
-            $(data).find("username").each(function (element) {
+            $(data).find("username").each(function (index, element) {
                 contacts.push($(element).html());
             });
-
+			
             contacts.forEach(function (val) {
                 if (val.toLowerCase().indexOf(searchedData) === 0) {
                     console.log(searchedData);
