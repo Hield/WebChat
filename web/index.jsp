@@ -102,27 +102,29 @@
                                 </div>
                             </nav>-->
             <div class="chat-page page">
-                <div class="profile">
+                <!---- Profile Container ---->
+                <div class="profile-container">
 
-                </div>
+                    <div class='profile-info'>
+                        <div class='profile-info-name'>
+                            <h2></h2>
+                        </div>
+                        <div class='profile-info-job'>
+                            <p>Doctor</p> 
+                        </div>
+                    </div>
+                </div><!---- Profile Container ---->
 
-
-
+                <!---- Navigation bar ---->
                 <nav class="navbar">
 
+                    <div class="group-info">
+                        <h1 class="group-info-name">Group A</h1>
+                        <div class="arrow-down"></div>
+                        <h4 class="group-info-number">6 members</h4>
+                    </div>
 
                     <div class='navbar-buttons'>
-                        <div class="dropdown">
-                            <span onclick="myFunction()" class="fa-stack fa-2x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <div id="myDropdown" class="dropdown-content">
-                                <a href="#home">Home</a>
-                                <a href="#about">About</a>
-                                <a href="#contact">Contact</a>
-                            </div> 
-                        </div>
 
                         <div class="plus">
                             <span class="fa-stack fa-2x">
@@ -131,23 +133,52 @@
                             </span>
                         </div>
 
+                        <div class="dropdown">
+                            <span onclick="myFunction()" class="fa-stack fa-2x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
+                            </span>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a>PATIENT MANAGEMENT</a>
+                                <a>SETTING</a>
+                                <a class="logout-button">LOGOUT</a>
+                            </div> 
+                        </div>
+
                     </div>
 
 
 
 
-                </nav>
+                </nav><!---- Navigation bar ---->
+
+                <!---- Sidebar ---->
                 <aside class='chat-sidebar'>
-                    <!--                    <div class="search-container">
-                                            <span class="icon"><i class="fa fa-search"></i></span>
-                                            <input type="search" id="search" placeholder="Search" />
-                                        </div>-->
+
+                    <div id="wrapper">
+
+                        <ul id="tabs">
+                            <li id="tab1" class="tab current-tab">
+                                Contact
+                            </li>
+                            <li id="tab2" class="tab">
+                                Group
+                            </li>
+                        </ul>
+
+                    </div>
 
                     <div class="search">
-                        <input type="search" class="search-input" placeholder="Search">
+                        <input type="search" class="search-input" id="search-input-global"placeholder="Search Global">
                     </div>
 
-                    <ul class='search-contacts'>
+                    <!--
+                        <div class="search">
+                            <input type="search" class="search-input" id="search-input-local"placeholder="Search Local">
+                        </div>
+                    !-->
+
+                    <ul class="search-contacts">
                         <!--
                             ***Example search contact***
                             <li class='contact'>
@@ -161,17 +192,23 @@
 
 
                     <ul class='contacts'>
-                        <!--
-                            ***Example contact***
-                            <li class='contact'>
-                                <div class='contact-box'>
+                        <li class='contact'>
+                            <div class='contact-box'>
+                                <div class='contact-box-info'>
                                     <p>Tina Chang</p>
                                 </div>
-                                </a>
-                            </li>
-                        -->
+                                <div class="status">
+                                    <div class="status-icon status-online">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </li>
                     </ul>
-                </aside>
+
+                </aside><!---- Sidebar ---->
+
+                <!---- Chat rooms ---->
                 <div class="chat-rooms">
                     <!--
                         ***Example chatroom***                       
@@ -185,10 +222,8 @@
                             </form>
                         </div>
                     -->
-                </div>
-                <a class="logout-button button">
-                    Logout
-                </a>
+                </div><!---- Chat rooms ---->
+
             </div>
 
             <div class="user-page page">

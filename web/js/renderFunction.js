@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
 });
 
-function render(url) {  
+function render(url) {
     if (url !== decodeURI(window.location.hash)) {
         window.location.hash = url;
     } else {
@@ -43,7 +43,7 @@ function render(url) {
             renderErrorPage();
         }
         if (localStorage.getItem("sessionId")) {
-            $(".logout-button").parent().show();
+//            $(".logout-button").parent().show();
         } else {
             $(".show-login-form-button").parent().show();
             $(".show-register-form-button").parent().show();
@@ -80,11 +80,11 @@ function renderRegisterPage() {
 
 function renderChatPage() {
     var sessionId = localStorage.getItem("sessionId");
-    var username = localStorage.getItem("username");
+//    var username = localStorage.getItem("username");
     if (sessionId) {
         $(".chat-page").show();
+        $('.profile-info-name').find('h2').html(currentUser);
         $(".bubble").remove();
-        $("#welcomHeading").html("Welcome" + username);
         poll();
 
     } else {

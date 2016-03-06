@@ -123,8 +123,6 @@ label, input {
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 1em;
-    /*    margin: 10px 0;
-        float: right;*/
 }
 
 .show-register-form-button {
@@ -155,35 +153,6 @@ label, input {
 }
 /*---- Chat Page -----*/
 
-/*.navigation {
-    margin: 20px auto;
-    background: #f4f5f6;
-    height: 40px;
-    max-width: 1000px;
-    width: 95%;
-}
-
-.navigation-list {
-    list-style: none;
-    padding-right: 20px;
-}
-
-.navigation-title {
-    color: black;
-    font-size: 40px;
-    font-weight: 700;
-    line-height:40px;
-    padding-left: 20px;
-}
-
-.navigation-item {
-    display: list-item;
-    float: left;
-    margin-bottom: 0;
-    margin-left: 5px;
-    line-height: 40px;
-}*/
-
 .float-right {
     float: right;
 }
@@ -192,11 +161,19 @@ label, input {
     display: none;
 }
 
-.profile {
+.profile-container {
     float: left;
     width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 150px;
     background-color: #eeeeee;
+}
+
+.profile-info-name h2 {
+    padding: 0;
+    margin: 0;
 }
 
 .navbar {
@@ -204,6 +181,86 @@ label, input {
     width: 75%;
     height: 150px;
     background-color: #15161B;
+}
+
+.group-info {
+    float: left;
+    margin: 30px 0 0 50px;
+}
+
+h1.group-info-name, .group-info > h4 {
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+h1.group-info-name {
+    float: left;
+}
+
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    float: left;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white;
+    margin: 10px 0 0 8px;
+}
+
+.group-info-number {
+    clear: both;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    float: right;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #36597A;
+    margin-top: 10px;
+    font-size: 0.9em;
+    min-width: 200px;
+    overflow: auto;
+    right: 0;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    font-weight: 900;
+}
+
+.show {display:block;}
+
+
+.navbar-buttons {
+    margin: 30px 30px 0 0;
+    display: flex;
+    float: right;
+
+}
+
+.plus {
+    margin-right: 10px;
+}
+
+
+.fa-stack-2x {
+    color: #36597A;
+}
+
+.fa-stack.fa-2x {
+    cursor: pointer;
 }
 
 .chat-sidebar {
@@ -214,38 +271,41 @@ label, input {
     background-color: #15161B;
 }
 
-/*
-.search-container {
-    width: 70%;
-    margin: 0 auto;
-    vertical-align: middle;
-    white-space: nowrap;
-    position: relative;
+#tabs {
+    margin:0; 
+    padding:0;
+    list-style:none; 
+    overflow:hidden;
 }
 
-.search-container input#search {
-    width: 100%;
-    height: 50px;
-    background: #F0F0F8;
-    border: none;
-    font-size: 10pt;
-    float: left;
-    color: #63717f;
-    padding-left: 45px;
+#tabs li { 
+    float: left; 
+    width: 50%;
+    text-align: center;
+    color: white;
+    display: block; 
+    padding: 10px 0;
+    background-color: #33333b;
 }
 
-.search-container input#search::-webkit-input-placeholder {
-    color: #65737e;
+#tabs li:hover {
+    cursor: pointer;
 }
 
-.search-container .icon{
-    position: absolute;
-    top: 50%;
-    margin-left: 17px;
-    margin-top: 17px;
-    z-index: 1;
-    color: #4f5b66;
-}*/
+#tabs li a { 
+    text-decoration:none;
+}
+#tabs li.current-tab { 
+    background-color: #15161B; 
+}
+#tabs li.current a { 
+    color:#000; 
+    text-decoration:none;
+}
+#tabs li a.remove { 
+    color:#f00; 
+    margin-left:10px;
+}
 
 .search {
     width: 70%;
@@ -261,15 +321,19 @@ label, input {
     background-color: #F0F0F8;
 }
 
+#search-input-local {
+    background-color: #36597A;
+}
+
 .chat-rooms {
     width: 75%;
     float: left;
 }
 
 ul.search-contacts {
-  list-style-type: none;
-  padding-left: 10%;
-  display: none;
+    list-style-type: none;
+    padding-left: 10%;
+    display: none;
 
 }
 
@@ -289,18 +353,42 @@ ul.contacts > li.contact {
     margin: 0 auto;
 }
 
+.contact-box-info {
+    width: 80%;
+    display: inline-block;
+}
 
-.active-contact {
-    background-color: red;
+.status {
+    width: 20%;
+    height: 100%;
+    position: relative;
+    float: right;
+}
+
+.status-icon {
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.status-online {
+    background-color: green;
 }
 
 .contact-box {
     border: 4px solid #35577A;
     margin-bottom: -4px;  /*  prevent double border css   */
     width: 100%;
-    height: 35px;      /* vertical align div */
-    line-height: 35px;
+    height: 50px;      /* vertical align div */
+    line-height: 50px;
     background-color: #F0F0F8;
+}
+
+.contact-box:hover {
+    border: 4px solid #92CECF;
 }
 
 .contact a {
@@ -308,23 +396,6 @@ ul.contacts > li.contact {
     color: black;
 }
 
-.navbar-buttons {
-    margin: 30px 30px 0 0;
-}
-
-.plus {
-    float: right;
-    margin-right: 10px;
-}
-
-
-.fa-stack-2x {
-    color: #36597A;
-}
-
-.fa-stack.fa-2x {
-    cursor: pointer;
-}
 
 .chat-division {
     box-sizing: border-box;
@@ -368,9 +439,6 @@ ul.contacts > li.contact {
     max-width: 80%;
     position: relative;
     clear: both;
-    /*    -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;*/
-    border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 6px 20px;
@@ -456,67 +524,4 @@ ul.contacts > li.contact {
         margin-top: 10px;
         padding: 2px 43px;
     }
-    /*    .body {
-            clear: both; 
-            margin: 0 auto; 
-            width: 90%;
-            font-size: 70%;
-        }
-    
-        #sendingInput {
-            width: 85%;
-        }
-        #sendingButton {  
-            width: 13%;
-            float: right;
-        }
-    
-        .chat-division {
-            height: 300px;
-        }
-    
-        .bubble {
-            font-size: 1em;
-            max-width: 50%;
-        }*/
-
 }
-
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-    float: right;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown a:hover {background-color: #f1f1f1}
-
-.show {display:block;}

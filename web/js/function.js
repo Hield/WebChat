@@ -26,7 +26,7 @@ $(document).ready(function () {
     });
 
     //----- Close tab action -----//
-    $(window).on("beforeunload", function(){
+    $(window).on("beforeunload", function () {
         outRoomsTemporary();
     });
 
@@ -46,10 +46,10 @@ function init() {
     reset();
     if (localStorage.getItem("sessionId")) {
         $.ajax({
-            type    : "GET",
-            url     : "api/sessions/" + localStorage.getItem("sessionId"),
+            type: "GET",
+            url: "api/sessions/" + localStorage.getItem("sessionId"),
             dataType: "xml",
-            success : function(data) {
+            success: function (data) {
                 console.log(data);
                 var result = $(data).find("result").html();
                 if (result === "success") {
@@ -63,7 +63,7 @@ function init() {
                     render("#login");
                 }
             },
-            error   : function() {
+            error: function () {
                 localStorage.removeItem("sessionId");
                 render("#login");
             }
@@ -100,16 +100,16 @@ function login(form) {
     var username = $(form).find("[name='username']").val();
     var password = $(form).find("[name='password']").val();
     $.ajax({
-        type       : "POST",
-        url        : "api/sessions",
+        type: "POST",
+        url: "api/sessions",
         contentType: "application/xml",
-        dataType   : "xml",
-        data       : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
-                     "<user>" + 
-                         "<username>" + username + "</username>" + 
-                         "<password>" + password + "</password>" + 
-                     "</user>",
-        complete    : function(data) {
+        dataType: "xml",
+        data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<user>" +
+                "<username>" + username + "</username>" +
+                "<password>" + password + "</password>" +
+                "</user>",
+        complete: function (data) {
             var xml = data.responseXML;
             var result = $(xml).find("result").html();
             if (result === "failure") {
@@ -126,7 +126,7 @@ function login(form) {
                 render("#chat");
             }
         },
-        cache       : false
+        cache: false
     });
     $(form).find("[name='username']").val("");
     $(form).find("[name='password']").val("");
@@ -147,26 +147,26 @@ function register(form) {
         $(".register-form-error-span").html(errorMessage + "<br/>");
     } else {
         $.ajax({
-            type       : "POST",
-            url        : "api/users",
+            type: "POST",
+            url: "api/users",
             contentType: "application/xml",
-            dataType   : "xml",
-            data       : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
-                         "<user>" + 
-                             "<username>" + username + "</username>" + 
-                             "<password>" + password + "</password>" + 
-                         "</user>",
-            success    : function() {
+            dataType: "xml",
+            data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                    "<user>" +
+                    "<username>" + username + "</username>" +
+                    "<password>" + password + "</password>" +
+                    "</user>",
+            success: function () {
                 console.log("Success");
             },
-            complete   : function(data) {
+            complete: function (data) {
                 var xml = data.responseXML;
-            console.log(xml);
+                console.log(xml);
                 var result = $(xml).find("result").html();
                 if (result === "failure") {
                     var message = $(xml).find("message").html();
                     $(".register-form-error-span").html(message + "<br/>");
-                } else if (result === "success") {                   
+                } else if (result === "success") {
                     var sessionId = $(xml).find("sessionId").html();
                     currentUser = $(xml).find("username").html();
                     localStorage.setItem("sessionId", sessionId);
@@ -174,7 +174,7 @@ function register(form) {
                     render("#chat");
                 }
             },
-            cache      : false
+            cache: false
         });
     }
 }
@@ -183,8 +183,8 @@ function register(form) {
 function logout() {
     sendLogEntry("out");
     $.ajax({
-        type : "DELETE",
-        url  : "api/sessions/" + localStorage.getItem("sessionId"),
+        type: "DELETE",
+        url: "api/sessions/" + localStorage.getItem("sessionId"),
         cache: false
     });
     localStorage.removeItem("sessionId");
@@ -197,11 +197,11 @@ function logout() {
 function loadData(username) {
     user = new User(username);
     $.ajax({
-        type     : "GET",
-        url      : "api/users/" + username + "/contacts",
-        dataType : "xml",
-        success  : function(data) {
-            $(data).find("contact").each(function(index, element) {
+        type: "GET",
+        url: "api/users/" + username + "/contacts",
+        dataType: "xml",
+        success: function (data) {
+            $(data).find("contact").each(function (index, element) {
                 user.addContact($(element).html());
             });
         }
@@ -210,26 +210,26 @@ function loadData(username) {
 
 //----- Polling function -----//
 function poll() {
-    pollId = setInterval(function() {
+    pollId = setInterval(function () {
         if (localStorage.getItem("sessionId")) {
             var sessionId = localStorage.getItem("sessionId");
             $.ajax({
-                type    : "GET",
-                url     : "api/sessions/" + sessionId + "/update",
-                headers : {
+                type: "GET",
+                url: "api/sessions/" + sessionId + "/update",
+                headers: {
                     "sessionId": sessionId
                 },
                 dataType: "xml",
-                success : function(data) {
+                success: function (data) {
                     processResponse(data);
                 },
-                error   : function(data) {
+                error: function (data) {
                     console.log(data);
                 },
-                cache   : false
+                cache: false
             });
         }
-    }, 500);    
+    }, 500);
 }
 
 function stopPolling() {
@@ -252,7 +252,7 @@ function processResponse(data) {
                         "sessionId": localStorage.getItem("sessionId")
                     },
                     dataType: "xml",
-                    success: function(data) {
+                    success: function (data) {
                         var type = $(data).find("type").html();
                         console.log(data);
                         if (type === "chat") {
@@ -261,7 +261,7 @@ function processResponse(data) {
                             var username = $(data).find("username").html();
                             var date = $(data).find("date").html();
                             var time = $(data).find("time").html();
-                            
+
                             if (!chatRooms.hasChatRoom(roomId)) {
                                 console.log("joinRoom from processResponse")
                                 joinRoom(roomId);
@@ -273,21 +273,21 @@ function processResponse(data) {
                             } else {
                                 updateChatDivision("sent", username + ": " + message, roomId, date, time);
                             }
-                            
-                             //----- Scroll to bottom for new message -----//
+
+                            //----- Scroll to bottom for new message -----//
                             $("#chat-room-" + roomId).find('.chat-division').animate({scrollTop: $("#chat-room-" + roomId).find('.chat-division')[0].scrollHeight}, 1);
-                            
+
                             //var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
                             //chatDivision.html(chatDivision.html() + "<p>" + username + ": " + message + "</p>");
                         } else if (type === "log") {
                             console.log(data);
                         }
                     },
-                    error: function(data) {
+                    error: function (data) {
                         console.log(data);
                     },
                     cache: false
-                    });
+                });
             }
         }
     } else if (result === "failure") {
@@ -296,7 +296,7 @@ function processResponse(data) {
             localStorage.removeItem("sessionId");
             render("login");
             stopPolling();
-	}
+        }
     }
 }
 
@@ -305,38 +305,38 @@ function sendMessage(event, form) {
     event.preventDefault();
     var message = $(form).find("[name='message']").val();
     var roomId = $(form).parent().attr("id").split("-room-")[1];
-    
+
     $(".message-input").val("");
     $.ajax({
-        type       : "POST",
-        url        : "api/events/chat",
-        headers    : {
+        type: "POST",
+        url: "api/events/chat",
+        headers: {
             "sessionId": localStorage.getItem("sessionId")
         },
         contentType: "application/xml",
-        data       : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
-                     "<chatEntry>" +
-                         "<roomId>" + roomId + "</roomId>" +
-                         "<message>" + message + "</message>" +
-                     "</chatEntry>",
-        cache      : false
+        data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<chatEntry>" +
+                "<roomId>" + roomId + "</roomId>" +
+                "<message>" + message + "</message>" +
+                "</chatEntry>",
+        cache: false
     });
 }
 
 function sendLogEntry(state) {
     $.ajax({
-        type       : "POST",
-        url        : "api/events/log",
-        headers    : {
+        type: "POST",
+        url: "api/events/log",
+        headers: {
             "sessionId": localStorage.getItem("sessionId")
         },
         contentType: "application/xml",
-        data       : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
-                     "<logEntry>" + 
-                         "<username>" + user.username + "</username>" + 
-                         "<state>" + state + "</state>" + 
-                     "</logEntry>",
-        cache      : false
+        data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<logEntry>" +
+                "<username>" + user.username + "</username>" +
+                "<state>" + state + "</state>" +
+                "</logEntry>",
+        cache: false
     });
 }
 
@@ -344,10 +344,10 @@ function sendLogEntry(state) {
 function outRoomsTemporary() {
     sendLogEntry("out");
     $.ajax({
-        type    : "DELETE",
-        url     : "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
-        cache   : false,
-        success : function () {
+        type: "DELETE",
+        url: "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
+        cache: false,
+        success: function () {
             console.log("success from outRoomsTemporary");
         }
     });
@@ -355,7 +355,7 @@ function outRoomsTemporary() {
 
 //----- Out room function -----//
 function outRoom(roomId) {
-    
+
 }
 
 //----- Out all rooms completely function -----//
@@ -366,48 +366,48 @@ function outRoomsCompletely() {
 //----- Rejoin rooms function -----//
 function rejoinRooms() {
     $.ajax({
-        type    : "GET",
-        url     : "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
+        type: "GET",
+        url: "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
         dataType: "xml",
-        success : function(data) {
+        success: function (data) {
             console.log(data);
-            $(data).find("chatRoom").each(function(index, element) {
+            $(data).find("chatRoom").each(function (index, element) {
                 console.log("joinRoom from rejoinRooms");
                 joinRoom($(element).find("id").html());
             });
         },
-        error   : function(data) {
+        error: function (data) {
             console.log(data);
         },
-        cache   : false
+        cache: false
     });
 }
 
 //----- Join room function -----//
 function joinRoom(roomId) {
-    $(".chat-rooms").html($(".chat-rooms").html() + 
-        "<div id=\"chat-room-" + roomId + "\" class=\"chat-room\">" + 
+    $(".chat-rooms").html($(".chat-rooms").html() +
+            "<div id=\"chat-room-" + roomId + "\" class=\"chat-room\">" +
             "<div class=\"chat-division\"></div>" +
             "<form class=\"chat-form\" onsubmit=\"sendMessage(event, this);\">" +
-                "<input type=\"text\" name=\"message\" class=\"message-input\" autocomplete=\"off\">" + 
-                "<button type=\"submit\" id=\"sendingButton\">SEND</button>" + 
-            "</form>" + 
-        "</div>");
+            "<input type=\"text\" name=\"message\" class=\"message-input\" autocomplete=\"off\">" +
+            "<button type=\"submit\" id=\"sendingButton\">SEND</button>" +
+            "</form>" +
+            "</div>");
     $.ajax({
-        type       : "POST",
-        url        : "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
+        type: "POST",
+        url: "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
         contentType: "application/xml",
-        dataType   : "xml",
-        data       : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
-                     "<chatRoom>" +
-                         "<id>" + roomId + "</id>" +
-                     "</chatRoom>",
-        success    : function(data) {
+        dataType: "xml",
+        data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<chatRoom>" +
+                "<id>" + roomId + "</id>" +
+                "</chatRoom>",
+        success: function (data) {
             if ($(data).find("result").html() === "success") {
                 chatRooms.addChatRoom(new ChatRoom(roomId));
             }
         },
-        cache      : false
+        cache: false
     });
 }
 
@@ -427,13 +427,13 @@ function chatWithUser(event) {
     var contact = $(event.currentTarget).find("p").html();
     console.log(contact);
     $.ajax({
-        type    : "GET",
-        url     : "api/rooms/" + contact,
-        headers : {
+        type: "GET",
+        url: "api/rooms/" + contact,
+        headers: {
             "sessionId": localStorage.getItem("sessionId")
         },
         dataType: "xml",
-        success : function(data) {
+        success: function (data) {
             var result = $(data).find("result").html();
             if (result === "success") {
                 var roomId = $(data).find("roomId").html();
@@ -449,16 +449,21 @@ function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
+$('#tabs').on('click', '.tab', function () {
+    $('#tabs .tab').removeClass('current-tab');
+    $(this).toggleClass('current-tab');
+});
+
 
 //---- Variable to hold html elements -----//
 var component = {
-    dateElement : '<div class="bubble bubble-middle">' +
-                        '<p class="date"></p>' +
-                    '</div>',
-    chatElement : '<div class="bubble">' +
-                                '<p class="chat-message"></p>' +
-                                    '<span class="time"><span>' +
-                        '</div>',
+    dateElement: '<div class="bubble bubble-middle">' +
+            '<p class="date"></p>' +
+            '</div>',
+    chatElement: '<div class="bubble">' +
+            '<p class="chat-message"></p>' +
+            '<span class="time"><span>' +
+            '</div>',
     searchElement: '<li class="contact">' +
             '<div class="contact-box">' +
             '<p></p>' +
@@ -469,23 +474,20 @@ var component = {
 
 
 //-------- Function that update chat division ------//
-function updateChatDivision(messageType, message, roomId, date, time) {
+function updateChatDivision(messageType, message, roomId, datePara, time) {
     var $chatDivision = $("#chat-room-" + roomId).find(".chat-division");
     var date = $chatDivision.find(".date:last").html();
 
-    if(!date || date !== date) {
+    if (!date || datePara !== date) {
         $chatDivision.append(component.dateElement);
-        $chatDivision.find(".date:last").text(date);
+        $chatDivision.find(".date:last").text(datePara);
     }
 
     if (messageType === "received") {
-        console.log(messageType);
         $chatDivision.append(component.chatElement);
         $chatDivision.find(".chat-message:last").text(message);
         $chatDivision.find(".time:last").text(time);
-    }
-    else if (messageType === "sent") {
-        console.log("In sent");
+    } else if (messageType === "sent") {
         $chatDivision.append(component.chatElement);
         $chatDivision.find(".bubble:last").addClass("bubble-right");
         $chatDivision.find(".chat-message:last").text(message);
