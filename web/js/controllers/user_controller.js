@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var UserController = function() {
+var UserController = function () {
 };
 
-UserController.prototype.register = function(username, password) {
+//----- Register controller -----//
+UserController.prototype.register = function (username, password) {
     $.ajax({
         type       : "POST",
         url        : "api/users",
@@ -17,8 +18,8 @@ UserController.prototype.register = function(username, password) {
                          "<username>" + username + "</username>" +
                          "<password>" + password + "</password>" +
                      "</user>",
-        success    : user.register, // Model function in user.js
-        error   : function(data) {
+        success: user.register, // Model function in user.js
+        error: function (data) {
             console.log("error from UserController.register");
             console.log(data);
         },
@@ -26,3 +27,34 @@ UserController.prototype.register = function(username, password) {
     });
 };
 
+//----- Login controller -----//
+UserController.prototype.login = function (username, password) {
+    $.ajax({
+        type       : "POST",
+        url        : "api/sessions",
+        contentType: "application/xml",
+        dataType   : "xml",
+        data       : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                     "<user>" +
+                         "<username>" + username + "</username>" +
+                         "<password>" + password + "</password>" +
+                     "</user>",
+        success    : user.login,
+        error      : function (data) {
+            console.log("error from UserController.login");
+            console.log(data);
+        },
+        cache      : false
+    });
+};
+
+//----- Logout controller -----//
+UserController.prototype.logout = function () {
+    sendLogEntry("out");
+    $.ajax({
+        type : "DELETE",
+        url  : "api/sessions/" + localStorage.getItem("sessionId"),
+        cache: false
+    });
+    user.logout();
+};

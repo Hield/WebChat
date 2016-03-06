@@ -23,10 +23,12 @@ User.prototype.addContact = function (user) {
     "");
 };
 
+//----- Register model function -----//
 User.prototype.register = function (response) {
     var result = $(response).find("result").html();
     if (result === "success") {
         localStorage.setItem("sessionId", $(response).find("sessionId").html());
+        currentUser = $(response).find("username").html();
         user.setUsername($(response).find("username").html());
         joinRoom(0);
         render("#chat");
@@ -35,12 +37,30 @@ User.prototype.register = function (response) {
     }
 };
 
+// Login model function -----//
 User.prototype.login = function (response) {
-    
+    var result = $(response).find("result").html();
+    if (result === "success") {
+        reset();
+        localStorage.setItem("sessionId", $(response).find("sessionId").html());
+        currentUser = $(response).find("username").html();
+        user.setUsername($(response).find("username").html());
+        loadData(user.username);        
+        sendLogEntry("in");
+        joinRoom(0);
+        render("#chat");
+    } else {
+        $(".login-form-error-span").html($(response).find("message").html() + "<br/>");
+    }
 };
 
-User.prototype.logout = function (response) {
-    
+User.prototype.logout = function () {
+    localStorage.removeItem("sessionId");
+    currentUser = "";
+    this.username = "guest";
+    outRoomsCompletely();
+    stopPolling();
+    render("");
 };
 
 User.prototype.joinRoom = function (response) {
