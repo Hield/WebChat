@@ -1,16 +1,18 @@
 var pollId;
 var currentUser;
 var chatRooms = new ChatRoomData();
-var user;
+user = new User("guest");
 
 $(document).ready(function () {
 
     //----- Register action -----//
+    $(".register-form").submit(registerHandler);
+    /*
     $(".register-form").submit(function (event) {
         event.preventDefault();
         register(this);
     });
-
+    */
     //----- Login action -----//
     $(".login-form").submit(function (event) {
         event.preventDefault();
