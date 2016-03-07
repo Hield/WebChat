@@ -1,27 +1,18 @@
 var pollId;
 var currentUser;
 var chatRooms = new ChatRoomData();
-var user;
+var user = new User("guest");
 
 $(document).ready(function () {
 
     //----- Register action -----//
-    $(".register-form").submit(function (event) {
-        event.preventDefault();
-        register(this);
-    });
+    $(".register-form").submit(registerHandler);
 
     //----- Login action -----//
-    $(".login-form").submit(function (event) {
-        event.preventDefault();
-        login(this);
-    });
+    $(".login-form").submit(loginHandler);
 
     //----- Logout action -----//
-    $(".logout-button").click(function () {
-        logout();
-        render("");
-    });
+    $(".logout-button").click(logoutHandler);
 
     //----- Close tab action -----//
     $(window).on("beforeunload", function () {
@@ -91,104 +82,6 @@ function checkPassword(password) {
         return "Password must have between 6 characters and 128 characters.";
     }
     return "passed";
-}
-
-//----- Login function -----//
-function login(form) {
-    var username = $(form).find("[name='username']").val();
-    var password = $(form).find("[name='password']").val();
-    $.ajax({
-        type: "POST",
-        url: "api/sessions",
-        contentType: "application/xml",
-        dataType: "xml",
-        data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<user>" +
-                "<username>" + username + "</username>" +
-                "<password>" + password + "</password>" +
-                "</user>",
-        complete: function (data) {
-            var xml = data.responseXML;
-            var result = $(xml).find("result").html();
-            if (result === "failure") {
-                var message = $(xml).find("message").html();
-                $(".login-form-error-span").html(message + "<br/>");
-            } else if (result === "success") {
-                reset(); // create 
-                var sessionId = $(xml).find("sessionId").html();
-                currentUser = $(xml).find("username").html();
-                loadData(username);
-                localStorage.setItem("sessionId", sessionId);
-                sendLogEntry("in");
-                joinRoom(0);
-                render("#chat");
-            }
-        },
-        cache: false
-    });
-    $(form).find("[name='username']").val("");
-    $(form).find("[name='password']").val("");
-}
-
-//----- Register function -----//
-function register(form) {
-    var username = $(form).find("[name='username']").val();
-    var password = $(form).find("[name='password']").val();
-    var errorMessage = "";
-    if (checkUsername(username) !== "passed") {
-        errorMessage = checkUsername(username);
-    }
-    if (checkPassword(password) !== "passed") {
-        errorMessage = checkPassword(password);
-    }
-    if (errorMessage !== "") {
-        $(".register-form-error-span").html(errorMessage + "<br/>");
-    } else {
-        $.ajax({
-            type: "POST",
-            url: "api/users",
-            contentType: "application/xml",
-            dataType: "xml",
-            data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                    "<user>" +
-                    "<username>" + username + "</username>" +
-                    "<password>" + password + "</password>" +
-                    "</user>",
-            success: function () {
-                console.log("Success");
-            },
-            complete: function (data) {
-                var xml = data.responseXML;
-                console.log(xml);
-                var result = $(xml).find("result").html();
-                if (result === "failure") {
-                    var message = $(xml).find("message").html();
-                    $(".register-form-error-span").html(message + "<br/>");
-                } else if (result === "success") {
-                    var sessionId = $(xml).find("sessionId").html();
-                    currentUser = $(xml).find("username").html();
-                    localStorage.setItem("sessionId", sessionId);
-                    joinRoom(0);
-                    render("#chat");
-                }
-            },
-            cache: false
-        });
-    }
-}
-
-//----- Logout function -----//
-function logout() {
-    sendLogEntry("out");
-    $.ajax({
-        type: "DELETE",
-        url: "api/sessions/" + localStorage.getItem("sessionId"),
-        cache: false
-    });
-    localStorage.removeItem("sessionId");
-    currentUser = "";
-    outRoomsCompletely();
-    stopPolling();
 }
 
 //----- Function that load data when user login -----//

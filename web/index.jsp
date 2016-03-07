@@ -237,8 +237,13 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script src="js/classes.js"></script>
+        <script src="js/classes.js"></script>    
+        <script src="js/models/user.js"></script>
         <script src="js/function.js"></script>
+        <script src="js/handlers/login_handler.js"></script>
+        <script src="js/handlers/logout_handler.js"></script>
+        <script src="js/handlers/register_handler.js"></script>
+        <script src="js/controllers/user_controller.js"></script>
         <script src="js/updateChatPageFunction.js"></script>
         <script src="js/renderFunction.js"></script>
     </body>

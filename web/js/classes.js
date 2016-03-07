@@ -4,16 +4,16 @@
  * and open the template in the editor.
  */
 // Class that represents an user
-var User = function (username) {
+var OldUser = function (username) {
     this.username = username;
     this.contacts = [];
 };
 
-User.prototype.setUsername = function (username) {
+OldUser.prototype.setUsername = function (username) {
     this.username = username;
 };
 
-User.prototype.addContact = function (user) {
+OldUser.prototype.addContact = function (user) {
     this.contacts.push(user);
     $(".contacts").append("" + 
         "<li class=\"contact\">" +
