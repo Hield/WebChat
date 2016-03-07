@@ -18,6 +18,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.PUT;
 
 /**
  *
@@ -92,5 +93,13 @@ public class UserResource {
         }
         result.append("</contacts>");
         return result.toString();
+    }
+	
+	@Path("{username}/contacts/update")
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    public void updateUserContacts(@PathParam("username") String username, User contact) {
+        User user = userData.getUser(username);
+        user.addContact(userData.getUser(contact.getUsername()));
     }
 }
