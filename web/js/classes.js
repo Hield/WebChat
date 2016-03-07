@@ -14,14 +14,10 @@ OldUser.prototype.setUsername = function (username) {
 };
 
 OldUser.prototype.addContact = function (user) {
+    var $currentContacts = $(".contacts");
     this.contacts.push(user);
-    $(".contacts").append("" + 
-        "<li class=\"contact\">" +
-            "<div class=\"contact-box\" onclick=\"chatWithUser(event);\">" + 
-                "<p>" + user + "</p>" + 
-            "</div>" +
-        "</li>" +
-    "");
+    $currentContacts.append(components.contactElement); //components is a global variable in components.js
+    $currentContacts.find(".contact-box:last > p").html(user);
 };
 
 var Contact = function(username, roomId) {

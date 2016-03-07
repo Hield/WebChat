@@ -39,12 +39,13 @@ function init() {
             url: "api/sessions/" + localStorage.getItem("sessionId"),
             dataType: "xml",
             success: function (data) {
-                console.log(data);
                 var result = $(data).find("result").html();
                 if (result === "success") {
                     rejoinRooms();
-                    currentUser = $(data).find("username").html();
-                    loadData($(data).find("username").html());
+                    //currentUser = $(data).find("username").html();
+                    var username = $(data).find("username").html();
+                    user.setUsername(username);
+                    loadData(username);
                     render(window.location.hash);
                     sendLogEntry("in");
                 } else if (result === "failure") {
@@ -137,7 +138,6 @@ function processResponse(data) {
         var newestIndex = parseInt($(data).find("newest").html());
         if (currentIndex < newestIndex) {
             for (var i = currentIndex + 1; i <= newestIndex; i++) {
-                console.log(i);
                 $.ajax({
                     type: "GET",
                     url: "api/sessions/" + localStorage.getItem("sessionId") + "/" + i,
@@ -147,7 +147,6 @@ function processResponse(data) {
                     dataType: "xml",
                     success: function (data) {
                         var type = $(data).find("type").html();
-                        console.log(data);
                         if (type === "chat") {
                             var message = $(data).find("message").html();
                             var roomId = $(data).find("roomId").html();
@@ -161,7 +160,8 @@ function processResponse(data) {
                             }
                             var chatRoom = chatRooms.getChatRoom(roomId);
                             chatRoom.addChatEntry(new ChatEntry(username, message, time));
-                            if (username !== currentUser) {
+                            //if (username !== currentUser) {
+                            if (username !== user.username) {
                                 updateChatDivision("received", username + ": " + message, roomId, date, time);
                             } else {
                                 updateChatDivision("sent", username + ": " + message, roomId, date, time);
@@ -263,9 +263,7 @@ function rejoinRooms() {
         url: "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
         dataType: "xml",
         success: function (data) {
-            console.log(data);
             $(data).find("chatRoom").each(function (index, element) {
-                console.log("joinRoom from rejoinRooms");
                 joinRoom($(element).find("id").html());
             });
         },
@@ -278,6 +276,7 @@ function rejoinRooms() {
 
 //----- Join room function -----//
 function joinRoom(roomId) {
+    $(".chat-rooms").append("")
     $(".chat-rooms").html($(".chat-rooms").html() +
             "<div id=\"chat-room-" + roomId + "\" class=\"chat-room\">" +
             "<div class=\"chat-division\"></div>" +
@@ -318,7 +317,6 @@ function switchRoom(roomId) {
 //----- Function that find room Id for specified user -----//
 function chatWithUser(event) {
     var contact = $(event.currentTarget).find("p").html();
-    console.log(contact);
     $.ajax({
         type: "GET",
         url: "api/rooms/" + contact,
@@ -327,7 +325,8 @@ function chatWithUser(event) {
         },
         dataType: "xml",
         success: function (data) {
-            var result = $(data).find("result").html();
+            console.log(data);
+			var result = $(data).find("result").html();
             if (result === "success") {
                 var roomId = $(data).find("roomId").html();
                 switchRoom(roomId);
@@ -336,6 +335,8 @@ function chatWithUser(event) {
             }
         }
     });
+	
+	
 }
 
 function myFunction() {
@@ -345,29 +346,16 @@ function myFunction() {
 $('#tabs').on('click', '.tab', function () {
     $('#tabs .tab').removeClass('current-tab');
     $(this).toggleClass('current-tab');
-    $('.tab-content div').hide();
-    var dataId = '#' + $(this).data('id');
-    $(dataId).show();
+    var dataId = $(this).data('id');
+    $('.tabs-content .tab-content').each( function (index, element){
+	   if (dataId !== $(element).attr('id'))
+		   $(element).hide();
+	   else
+		   $(element).show();
+	});
+	//var dataId = '#' + $(this).data('id');
+   	//$(dataId).show();
 });
-
-
-//---- Variable to hold html elements -----//
-var component = {
-    dateElement: '<div class="bubble bubble-middle">' +
-            '<p class="date"></p>' +
-            '</div>',
-    chatElement: '<div class="bubble">' +
-            '<p class="chat-message"></p>' +
-            '<span class="time"><span>' +
-            '</div>',
-    searchElement: '<li class="contact">' +
-            '<div class="contact-box">' +
-            '<p></p>' +
-            '</div>' +
-            '</a>' +
-            '</li>'
-};
-
 
 //-------- Function that update chat division ------//
 function updateChatDivision(messageType, message, roomId, datePara, time) {
@@ -375,18 +363,36 @@ function updateChatDivision(messageType, message, roomId, datePara, time) {
     var date = $chatDivision.find(".date:last").html();
 
     if (!date || datePara !== date) {
-        $chatDivision.append(component.dateElement);
+        $chatDivision.append(components.dateElement);   //components is a global variable in compoments.js
         $chatDivision.find(".date:last").text(datePara);
     }
 
     if (messageType === "received") {
-        $chatDivision.append(component.chatElement);
+        $chatDivision.append(components.chatElement);
         $chatDivision.find(".chat-message:last").text(message);
         $chatDivision.find(".time:last").text(time);
     } else if (messageType === "sent") {
-        $chatDivision.append(component.chatElement);
+        $chatDivision.append(components.chatElement);
         $chatDivision.find(".bubble:last").addClass("bubble-right");
         $chatDivision.find(".chat-message:last").text(message);
         $chatDivision.find(".time:last").text(time);
     }
+}
+
+//------ Function that trigger event to add a user' contact on server -----//
+function addToContact(event) {
+	var contact = $(event.currentTarget).find("p").html();
+    $.ajax({
+        type: "PUT",
+        url: "api/users/" + user.username + "/contacts/update",
+        contentType: "application/xml",
+        data: '<?xml version="1.0" encoding="UTF-8" ?>' +
+              '<user>'+
+              '<username>' + contact + '</username>' +
+              '</user>'
+        
+    });
+    $(event.currentTarget).parent().remove();
+    user.addContact(contact);
+	
 }

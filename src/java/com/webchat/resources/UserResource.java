@@ -101,5 +101,5 @@ public class UserResource {
     public void updateUserContacts(@PathParam("username") String username, User contact) {
         User user = userData.getUser(username);
         user.addContact(userData.getUser(contact.getUsername()));
-    }
-}
+	}
+ }
