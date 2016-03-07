@@ -114,7 +114,7 @@ function login(form) {
                 var message = $(xml).find("message").html();
                 $(".login-form-error-span").html(message + "<br/>");
             } else if (result === "success") {
-                reset();
+                reset(); // create 
                 var sessionId = $(xml).find("sessionId").html();
                 currentUser = $(xml).find("username").html();
                 loadData(username);

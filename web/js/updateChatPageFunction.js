@@ -36,7 +36,7 @@ function searchContactsFunction(searchedData) {
         success: function (data) {
             var contacts = [];
 
-            $(data).find("username").each(function (element) {
+            $(data).find("username").each(function(index, element) {
                 contacts.push($(element).html());
             });
 

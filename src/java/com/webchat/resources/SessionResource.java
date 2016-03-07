@@ -124,7 +124,9 @@ public class SessionResource {
         result.append("<response>");
         Session session = sessionData.getSession(sessionId);
         if (session != null) {
+            
             chatRoom = chatRoomData.getChatRoom(chatRoom.getId());
+            System.out.println("2: " + chatRoomData.getChatRooms().size());
             if (chatRoom != null) {
                 session.joinRoom(chatRoom);
                 result.append("<result>success</result>");
