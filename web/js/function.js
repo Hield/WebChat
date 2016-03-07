@@ -86,7 +86,9 @@ function checkPassword(password) {
 
 //----- Function that load data when user login -----//
 function loadData(username) {
+    console.log("loadData " + username);
     user = new User(username);
+    console.log("User " + username);
     $.ajax({
         type: "GET",
         url: "api/users/" + username + "/contacts",

@@ -36,6 +36,9 @@ $("#search-input-local").on("input", function () {
     }
 });
 
+$('.search-contacts').on('click', '.contact-box', function () {
+    alert("Hello");
+});
 //--- Function that search global contacts ---//
 function searchContactsGlobal(searchedData) {
     $.ajax({
@@ -48,7 +51,7 @@ function searchContactsGlobal(searchedData) {
         success: function (data) {
             var contacts = [];
 
-            $(data).find("username").each( function (index, element) {
+            $(data).find("username").each(function (index, element) {
                 contacts.push($(element).html());
             });
 
@@ -65,20 +68,20 @@ function searchContactsGlobal(searchedData) {
 
 //--- Function that search local contacts ---//
 function searchContactsLocal(searchedData) {
-	var $currentContacts = $(".contacts");
+    var $currentContacts = $(".contacts");
     var $searchContacts = $(".search-contacts");
     var localContacts = [];
-	
-	console.log("In search contacts local");
-	
-    $currentContacts.find("p").each( function(index, element) {
-    	localContacts.push($(element).html());
+
+    console.log("In search contacts local");
+
+    $currentContacts.find("p").each(function (index, element) {
+        localContacts.push($(element).html());
     });
-	
-	localContacts.forEach( function(val) {
-		if (val.toLowerCase().indexOf(searchedData) === 0)
-			updateSearchPage(val);
-	});
+
+    localContacts.forEach(function (val) {
+        if (val.toLowerCase().indexOf(searchedData) === 0)
+            updateSearchPage(val);
+    });
 }
 
 
@@ -88,4 +91,8 @@ function updateSearchPage(foundUser) {
     var $searchContacts = $(".search-contacts");
     $searchContacts.append(component.searchElement);	//component is a global variable in function.js
     $searchContacts.find(".contact-box:last > p").html(foundUser);
+}
+
+function addContacts(contact) {
+    alert("Hello");
 }

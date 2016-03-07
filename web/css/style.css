@@ -392,6 +392,7 @@ ul.contacts > li.contact {
 
 .contact-box:hover {
     border: 4px solid #92CECF;
+    cursor: pointer;
 }
 
 .contact a {

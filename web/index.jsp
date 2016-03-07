@@ -172,23 +172,24 @@
 
                         <div id="tab3" class="search" style="display: none">
                             <input type="search" class="search-input" id="search-input-global" placeholder="Search Global">
+                            <ul class="search-contacts">
+                                <!--
+                                    ***Example search contact***
+                                    <li class='contact'>
+                                        <div class='contact-box'>
+                                            <p>Tina Chang</p>
+                                        </div>
+                                        </a>
+                                    </li>
+                                -->
+                            </ul>
                         </div>
                     </div>
 
 
 
 
-                    <ul class="search-contacts">
-                        <!--
-                            ***Example search contact***
-                            <li class='contact'>
-                                <div class='contact-box'>
-                                    <p>Tina Chang</p>
-                                </div>
-                                </a>
-                            </li>
-                        -->
-                    </ul>
+
 
 
                     <ul class='contacts'>
