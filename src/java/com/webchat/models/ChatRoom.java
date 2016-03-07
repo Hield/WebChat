@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -29,7 +30,8 @@ public class ChatRoom {
         this.chatEntries = new ArrayList<>();
     }
 
-    public int getId() {
+    @XmlElement
+	public int getId() {
         return id;
     }
 
@@ -37,6 +39,7 @@ public class ChatRoom {
         this.id = id;
     }
     
+	@XmlElement
     public Set<User> getUsers() {
         return users;
     }

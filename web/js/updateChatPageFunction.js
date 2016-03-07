@@ -3,41 +3,41 @@
 
 $("#search-input-global").on("input", function () {
     var searchedData = $(this).val().toLowerCase();
-    var $currentContacts = $(".contacts");
-    var $searchContacts = $(".search-contacts");
-
+    var $searchContacts = $(this).parent().find(".search-contacts");
+	
+    //console.log($searchContacts);
+		
     if (searchedData !== "") {
-        $currentContacts.hide();
         $searchContacts.find(".contact").remove();
-        $searchContacts.show();
-        searchContactsGlobal(searchedData);
+		$searchContacts.show();
+        searchContactsGlobal(searchedData, $searchContacts);
     } else {
-        $currentContacts.show();
         $searchContacts.find(".contact").remove();
-        $searchContacts.hide();
     }
 });
 
 
 $("#search-input-local").on("input", function () {
     var searchedData = $(this).val().toLowerCase();
-    var $currentContacts = $(".contacts");
-    var $searchContacts = $(".search-contacts");
-
+    var $currentContacs= $(this).parent().find(".contacts");
+    var $searchContacts = $(this).parent().find(".search-contacts");
+	
+    //console.log($searchContacts);
+		
     if (searchedData !== "") {
-        $currentContacts.hide();
+		$currentContacs.hide();
         $searchContacts.find(".contact").remove();
-        $searchContacts.show();
-        searchContactsLocal(searchedData);
+		$searchContacts.show();
+        searchContactsLocal(searchedData, $searchContacts);
     } else {
-        $currentContacts.show();
         $searchContacts.find(".contact").remove();
         $searchContacts.hide();
+        $currentContacs.show();
     }
 });
 
 //--- Function that search global contacts ---//
-function searchContactsGlobal(searchedData) {
+function searchContactsGlobal(searchedData, $searchElement) {
     $.ajax({
         type: "GET",
         url: "api/users",
@@ -46,17 +46,20 @@ function searchContactsGlobal(searchedData) {
         },
         dataType: "xml",
         success: function (data) {
-            var contacts = [];
-
+            var contactsAll = [];
+            var contactsCurr = user.contacts;
+            
             $(data).find("username").each( function (index, element) {
-                contacts.push($(element).html());
+                contactsAll.push($(element).html());
             });
-
-            contacts.forEach(function (val) {
-                if (val.toLowerCase().indexOf(searchedData) === 0) {
-                    console.log(searchedData);
-                    console.log(val);
-                    updateSearchPage(val);
+						
+            contactsAll.forEach(function (val) {
+                val = val.toLowerCase();
+				var inCurrentContactsIndex = $.inArray(val, contactsCurr);
+				var isCurrentUser = (val === user.username);
+				if (val.indexOf(searchedData) === 0 && inCurrentContactsIndex === -1
+						&& !isCurrentUser) {
+                    updateSearchPage(val, $searchElement);
                 }
             });
         }
@@ -64,28 +67,21 @@ function searchContactsGlobal(searchedData) {
 }
 
 //--- Function that search local contacts ---//
-function searchContactsLocal(searchedData) {
-	var $currentContacts = $(".contacts");
-    var $searchContacts = $(".search-contacts");
-    var localContacts = [];
+function searchContactsLocal(searchedData, $searchElement) {
+	var localContacts = user.contacts;
 	
 	console.log("In search contacts local");
 	
-    $currentContacts.find("p").each( function(index, element) {
-    	localContacts.push($(element).html());
-    });
-	
 	localContacts.forEach( function(val) {
 		if (val.toLowerCase().indexOf(searchedData) === 0)
-			updateSearchPage(val);
+			updateSearchPage(val, $searchElement);
 	});
 }
 
 
 
 //--- Function that update search page ---//
-function updateSearchPage(foundUser) {
-    var $searchContacts = $(".search-contacts");
-    $searchContacts.append(component.searchElement);	//component is a global variable in function.js
-    $searchContacts.find(".contact-box:last > p").html(foundUser);
+function updateSearchPage(foundUser, $searchElement) {
+    $searchElement.append(components.searchElement);	//components is a global variable in component.js
+    $searchElement.find(".contact-box:last > p").html(foundUser);
 }

@@ -165,19 +165,48 @@
 
                     </div>
 
-                    <div class="tab-content">
-                        <div id="tab1" class="search search-local">
+                    <div class="tabs-content">
+                        <div id="tab1" class="tab-content">
                             <input type="search" class="search-input" id="search-input-local" placeholder="Search Local">
+                            <ul class="search-contacts">
+                                <!-- ***Example search contact***
+                                <li class='contact'>
+                                    <div class='contact-box'>
+                                        <p>Tina Chang</p>
+                                    </div>
+                                    </a>
+                                 </li>
+                                -->
+                            </ul>
+                             <ul class="contacts">
+                                <!-- ***Example search contact***
+                                <li class='contact'>
+                                    <div class='contact-box'>
+                                        <p>Tina Chang</p>
+                                    </div>
+                                    </a>
+                                 </li>
+                                -->
+                            </ul>
+
                         </div>
 
-                        <div id="tab3" class="search" style="display: none">
+                        <div id="tab3" class="tab-content" style="display: none">
                             <input type="search" class="search-input" id="search-input-global" placeholder="Search Global">
+                            <ul class="search-contacts">
+                                <!-- ***Example search contact***
+                                <li class='contact'>
+                                    <div class='contact-box'>
+                                        <p>Tina Chang</p>
+                                    </div>
+                                    </a>
+                                 </li>
+                                -->
+                            </ul>
                         </div>
                     </div>
 
-
-
-
+                    <!--                    
                     <ul class="search-contacts">
                         <!--
                             ***Example search contact***
@@ -187,7 +216,7 @@
                                 </div>
                                 </a>
                             </li>
-                        -->
+                        
                     </ul>
 
 
@@ -205,6 +234,7 @@
                             </a>
                         </li>
                     </ul>
+                    !-->
 
                 </aside><!---- Sidebar ---->
 
@@ -237,8 +267,9 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script src="js/classes.js"></script>    
-        <script src="js/models/user.js"></script>
+        <script src="js/components/components.js"></script>
+		<script src="js/classes.js"></script>
+		<script src="js/models/user.js"></script>
         <script src="js/function.js"></script>
         <script src="js/handlers/login_handler.js"></script>
         <script src="js/handlers/logout_handler.js"></script>

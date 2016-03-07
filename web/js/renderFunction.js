@@ -83,7 +83,7 @@ function renderChatPage() {
 //    var username = localStorage.getItem("username");
     if (sessionId) {
         $(".chat-page").show();
-        $('.profile-info-name').find('h2').html(currentUser);
+        $('.profile-info-name').find('h2').html(user.username);
         $(".bubble").remove();
         poll();
 

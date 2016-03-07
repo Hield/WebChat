@@ -25,8 +25,8 @@ public class UserData {
         addUser(new User("test01", "password"));
         addUser(new User("test02", "password"));
         addUser(new User("test03", "password"));
-        getUser("test01").addContact(getUser("test02"));
-        getUser("test01").addContact(getUser("test03"));
+        //getUser("test01").addContact(getUser("test02"));
+        //getUser("test01").addContact(getUser("test03"));
         addUser(new User("lieuvu", "password"));
         addUser(new User("hieule", "password"));
         addUser(new User("henry", "password"));

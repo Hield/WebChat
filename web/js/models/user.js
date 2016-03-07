@@ -13,14 +13,10 @@ User.prototype.setUsername = function (username) {
 };
 
 User.prototype.addContact = function (user) {
+    var $currentContacts = $(".contacts");
     this.contacts.push(user);
-    $(".contacts").append("" + 
-        "<li class=\"contact\">" +
-            "<div class=\"contact-box\" onclick=\"chatWithUser(event);\">" + 
-                "<p>" + user + "</p>" + 
-            "</div>" +
-        "</li>" +
-    "");
+	$currentContacts.append(components.contactElement); //components is a global variable in components.js
+    $currentContacts.find(".contact-box:last > p").html(user);
 };
 
 //----- Register model function -----//
@@ -30,7 +26,7 @@ User.prototype.register = function (response) {
         localStorage.setItem("sessionId", $(response).find("sessionId").html());
         currentUser = $(response).find("username").html();
         user.setUsername($(response).find("username").html());
-        joinRoom(0);
+        //joinRoom(0);
         render("#chat");
     } else {
         $(".register-form-error-span").html($(response).find("message").html() + "<br/>");
@@ -47,7 +43,7 @@ User.prototype.login = function (response) {
         user.setUsername($(response).find("username").html());
         loadData(user.username);        
         sendLogEntry("in");
-        joinRoom(0);
+        //joinRoom(0);
         render("#chat");
     } else {
         $(".login-form-error-span").html($(response).find("message").html() + "<br/>");
