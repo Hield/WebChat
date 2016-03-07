@@ -63,7 +63,7 @@
                 </form>
             </div>
 
-            <!---- Login Page ---->
+            <!---- Login Page/Register Page ---->
             <div class="login-page page">
                 <div class="banner-welcome">
                     <h2 class="banner-h2">welcome to</h2>
@@ -84,7 +84,7 @@
                         register
                     </a>
                 </form>
-            </div>
+            </div><!---- Login Page/Register Page ---->
 
             <!---- Chat Page ---->
 
@@ -102,9 +102,9 @@
                                 </div>
                             </nav>-->
             <div class="chat-page page">
+                
                 <!---- Profile Container ---->
                 <div class="profile-container">
-
                     <div class='profile-info'>
                         <div class='profile-info-name'>
                             <h2></h2>
@@ -117,7 +117,6 @@
 
                 <!---- Navigation bar ---->
                 <nav class="navbar">
-
                     <div class="group-info">
                         <h1 class="group-info-name">Group A</h1>
                         <div class="arrow-down"></div>
@@ -144,12 +143,7 @@
                                 <a class="logout-button">LOGOUT</a>
                             </div> 
                         </div>
-
                     </div>
-
-
-
-
                 </nav><!---- Navigation bar ---->
 
                 <!---- Sidebar ---->
@@ -175,9 +169,10 @@
                         <input type="search" class="search-input" id="search-input-global" placeholder="Search Global">
                     </div>
 
-                    <div class="search search-global">
-                        <input type="search" class="search-input" id="search-input-global" placeholder="Search Global">
+                    <div class="search">
+                            <input type="search" class="search-input" id="search-input-local" placeholder="Search Local">
                     </div>
+                    
 
                     <ul class="search-contacts">
                         <!--

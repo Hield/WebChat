@@ -10,16 +10,34 @@ $("#search-input-global").on("input", function () {
         $currentContacts.hide();
         $searchContacts.find(".contact").remove();
         $searchContacts.show();
-        searchContactsFunction(searchedData);
+        searchContactsGlobal(searchedData);
     } else {
         $currentContacts.show();
+        $searchContacts.find(".contact").remove();
         $searchContacts.hide();
     }
 });
 
 
-//--- Function that search for contacts ---//
-function searchContactsFunction(searchedData) {
+$("#search-input-local").on("input", function () {
+    var searchedData = $(this).val().toLowerCase();
+    var $currentContacts = $(".contacts");
+    var $searchContacts = $(".search-contacts");
+
+    if (searchedData !== "") {
+        $currentContacts.hide();
+        $searchContacts.find(".contact").remove();
+        $searchContacts.show();
+        searchContactsLocal(searchedData);
+    } else {
+        $currentContacts.show();
+        $searchContacts.find(".contact").remove();
+        $searchContacts.hide();
+    }
+});
+
+//--- Function that search global contacts ---//
+function searchContactsGlobal(searchedData) {
     $.ajax({
         type: "GET",
         url: "api/users",
@@ -30,9 +48,7 @@ function searchContactsFunction(searchedData) {
         success: function (data) {
             var contacts = [];
 
-
-
-            $(data).find("username").each(function (index, element) {
+            $(data).find("username").each( function (index, element) {
                 contacts.push($(element).html());
             });
 
@@ -46,6 +62,26 @@ function searchContactsFunction(searchedData) {
         }
     });
 }
+
+//--- Function that search local contacts ---//
+function searchContactsLocal(searchedData) {
+	var $currentContacts = $(".contacts");
+    var $searchContacts = $(".search-contacts");
+    var localContacts = [];
+	
+	console.log("In search contacts local");
+	
+    $currentContacts.find("p").each( function(index, element) {
+    	localContacts.push($(element).html());
+    });
+	
+	localContacts.forEach( function(val) {
+		if (val.toLowerCase().indexOf(searchedData) === 0)
+			updateSearchPage(val);
+	});
+}
+
+
 
 //--- Function that update search page ---//
 function updateSearchPage(foundUser) {
