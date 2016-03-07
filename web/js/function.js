@@ -343,6 +343,9 @@ function myFunction() {
 $('#tabs').on('click', '.tab', function () {
     $('#tabs .tab').removeClass('current-tab');
     $(this).toggleClass('current-tab');
+    $('.tab-content div').hide();
+    var dataId = '#' + $(this).data('id');
+    $(dataId).show();
 });
 
 

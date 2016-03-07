@@ -241,7 +241,9 @@ h1.group-info-name {
     cursor: pointer;
 }
 
-.show {display:block;}
+.show {
+    display:block;
+}
 
 .navbar-buttons {
     margin: 30px 30px 0 0;
@@ -304,7 +306,7 @@ h1.group-info-name {
 }
 
 .search-tab {
-   width: 34%;
+    width: 34%;
 }
 
 #tabs li a.remove { 
@@ -324,10 +326,6 @@ h1.group-info-name {
     border: 0;
     background: url('../img/search-btn.png') no-repeat 8px 6px;
     background-color: #F0F0F8;
-}
-
-#search-input-local {
-    background-color: #36597A;
 }
 
 .chat-rooms {

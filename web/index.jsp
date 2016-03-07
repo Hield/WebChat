@@ -102,7 +102,7 @@
                                 </div>
                             </nav>-->
             <div class="chat-page page">
-                
+
                 <!---- Profile Container ---->
                 <div class="profile-container">
                     <div class='profile-info'>
@@ -152,27 +152,31 @@
                     <div id="wrapper">
 
                         <ul id="tabs">
-                            <li id="tab1" class="tab current-tab">
+                            <li class="tab current-tab" data-id="tab1">
                                 Contact
                             </li>
-                            <li id="tab2" class="tab">
+                            <li class="tab" data-id="tab2">
                                 Group
                             </li>
-                            <li id="tab3" class="tab search-tab">
+                            <li class="tab search-tab" data-id="tab3">
                                 Search
                             </li>
                         </ul>
 
                     </div>
 
-                    <div class="search search-global">
-                        <input type="search" class="search-input" id="search-input-global" placeholder="Search Global">
+                    <div class="tab-content">
+                        <div id="tab1" class="search search-local">
+                            <input type="search" class="search-input" id="search-input-local" placeholder="Search Local">
+                        </div>
+
+                        <div id="tab3" class="search" style="display: none">
+                            <input type="search" class="search-input" id="search-input-global" placeholder="Search Global">
+                        </div>
                     </div>
 
-                    <div class="search">
-                            <input type="search" class="search-input" id="search-input-local" placeholder="Search Local">
-                    </div>
-                    
+
+
 
                     <ul class="search-contacts">
                         <!--
