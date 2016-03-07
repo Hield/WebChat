@@ -164,19 +164,20 @@
                             <li id="tab2" class="tab">
                                 Group
                             </li>
+                            <li id="tab3" class="tab search-tab">
+                                Search
+                            </li>
                         </ul>
 
                     </div>
 
-                    <div class="search">
-                        <input type="search" class="search-input" id="search-input-global"placeholder="Search Global">
+                    <div class="search search-global">
+                        <input type="search" class="search-input" id="search-input-global" placeholder="Search Global">
                     </div>
 
-                    <!--
-                        <div class="search">
-                            <input type="search" class="search-input" id="search-input-local"placeholder="Search Local">
-                        </div>
-                    !-->
+                    <div class="search search-global">
+                        <input type="search" class="search-input" id="search-input-global" placeholder="Search Global">
+                    </div>
 
                     <ul class="search-contacts">
                         <!--

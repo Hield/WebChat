@@ -238,10 +238,10 @@ h1.group-info-name {
 
 .dropdown a:hover {
     font-weight: 900;
+    cursor: pointer;
 }
 
 .show {display:block;}
-
 
 .navbar-buttons {
     margin: 30px 30px 0 0;
@@ -280,7 +280,7 @@ h1.group-info-name {
 
 #tabs li { 
     float: left; 
-    width: 50%;
+    width: 33%;
     text-align: center;
     color: white;
     display: block; 
@@ -302,6 +302,11 @@ h1.group-info-name {
     color:#000; 
     text-decoration:none;
 }
+
+.search-tab {
+   width: 34%;
+}
+
 #tabs li a.remove { 
     color:#f00; 
     margin-left:10px;
