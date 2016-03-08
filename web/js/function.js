@@ -275,7 +275,7 @@ function rejoinRooms() {
 //----- Join room function -----//
 function joinRoom(roomId) {
     var component = {
-        chatRoomElement: '<div id="chat-room-" class="chat-room">' +
+        chatRoomElement: '<div id="chat-room-" class="chat-room" style="display:none">' +
             '<div class="chat-division"></div>' +
             '<form class="chat-form" onsubmit="sendMessage(event, this);">' +
             '<input type="text" name="message" class="message-input" autocomplete="off">' +
@@ -283,6 +283,7 @@ function joinRoom(roomId) {
             '</form>' +
             '</div>'
     }
+    console.log("rejoin room " + roomId);
     $(".chat-rooms").append(component.chatRoomElement);
     $(".chat-room:last").attr("id", "chat-room-" + roomId);
     $.ajax({
@@ -329,6 +330,7 @@ function chatWithUser(event) {
 			var result = $(data).find("result").html();
             if (result === "success") {
                 var roomId = $(data).find("roomId").html();
+                $('.group-info-name').html("Chat Room " + roomId);
                 switchRoom(roomId);
             } else {
                 console.log(data);
@@ -339,22 +341,35 @@ function chatWithUser(event) {
 	
 }
 
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
+//----- Event when clicking on contact-box -----//
+$('#tab1').on('click', '.contact-box',function(event) {
+   $('#tab1 .contact-box').removeClass('current-contact-box');
+   $(this).addClass('current-contact-box');
+   chatWithUser(event);
+   
+});
 
+//------ Toggle when clicking the wrench ------//
+$('.dropdown').on('click', 'span', function () {
+    $('.dropdown-content').toggle();
+});
+//------ Toggle when clicking the dropdown content ----//
+$('.dropdown-content').on('click', 'a', function (event) {
+    if (!(event.target == document.getElementById("wrench"))) {
+        $('.dropdown-content').toggle();
+    }
+});
+
+//------ Toggle when clicking tab on sidebar ------//
 $('#tabs').on('click', '.tab', function () {
     $('#tabs .tab').removeClass('current-tab');
     $(this).toggleClass('current-tab');
-    var dataId = $(this).data('id');
-    $('.tabs-content .tab-content').each( function (index, element){
-	   if (dataId !== $(element).attr('id'))
-		   $(element).hide();
-	   else
-		   $(element).show();
-	});
-	//var dataId = '#' + $(this).data('id');
-   	//$(dataId).show();
+    $('.tabs-content > div').hide();
+    var dataId = '#' + $(this).data('id');
+    if (dataId == "#tab2") {
+        $(".search-input").val("");
+    }
+    $(dataId).show();
 });
 
 //-------- Function that update chat division ------//
