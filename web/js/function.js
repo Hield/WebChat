@@ -2,6 +2,7 @@ var pollId;
 var currentUser;
 var chatRooms = new ChatRoomData();
 var user = new User("guest");
+var data = new Data();
 
 $(document).ready(function () {
 
@@ -18,6 +19,9 @@ $(document).ready(function () {
     $(window).on("beforeunload", function () {
         outRoomsTemporary();
     });
+
+    //----- Load page action -----//
+    $(window).on("load", initHandler);
 
     //----- Call to initialize -----//
     init();

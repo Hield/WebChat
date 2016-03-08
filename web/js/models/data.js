@@ -22,5 +22,18 @@ Data.prototype.hasChatRoom = function (roomId) {
     return this.chatRooms.hasOwnProperty(roomId);
 };
 
+Data.prototype.init = function (response) {
+    var result = $(response).find("result").html();
+    console.log(response);
+    if (result === "success") {
+        console.log("success from data.init");
+    } else {
+        console.log("error from data.init");
+    }
+};
 
-
+Data.prototype.reset = function () {
+    this.chatRooms = {};
+    $(".chat-rooms").html("");
+    $(".contacts").html("");
+};

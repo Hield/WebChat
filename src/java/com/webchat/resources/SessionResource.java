@@ -10,6 +10,7 @@ import com.webchat.data.SessionData;
 import com.webchat.data.UserData;
 import com.webchat.models.ChatRoom;
 import com.webchat.models.EventEntry;
+import com.webchat.models.Response;
 import com.webchat.models.Session;
 import com.webchat.models.User;
 import java.util.Collection;
@@ -82,18 +83,13 @@ public class SessionResource {
     @GET
     @Produces(MediaType.APPLICATION_XML)
     public String getSession(@PathParam("sessionId") String sessionId) {
-        StringBuilder result = new StringBuilder();
-        result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-        result.append("<response>");
+        Response response = new Response();
         Session session = sessionData.getSession(sessionId);
         if (session != null) {
-            result.append("<result>success</result>");
-            result.append("<username>").append(session.getUsername()).append("</username>");
+            return response.success().tag("username", session.getUsername()).toString();
         } else {
-            result.append("<result>failure</result>");
+            return response.failure().toString();
         }
-        result.append("</response>");
-        return result.toString();
     }
 
     @Path("{sessionId}")

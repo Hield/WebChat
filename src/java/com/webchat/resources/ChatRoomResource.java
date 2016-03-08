@@ -9,11 +9,13 @@ import com.webchat.models.ChatRoom;
 import com.webchat.data.ChatRoomData;
 import com.webchat.data.SessionData;
 import com.webchat.data.UserData;
+import com.webchat.models.Response;
 import com.webchat.models.Session;
 import com.webchat.models.User;
 import java.util.Collection;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -42,6 +44,20 @@ public class ChatRoomResource {
         return chatRoomData.getChatRooms();
     }
 
+    @POST
+    @Produces(MediaType.APPLICATION_XML)
+    public String createChatRoom(@HeaderParam("sessionId") String sessionId) {
+        Response response = new Response();
+        Session session = sessionData.getSession(sessionId);
+        if (session != null) {
+            ChatRoom chatRoom = new ChatRoom();
+            chatRoomData.addChatRoom(chatRoom);
+            return response.success().tag("roomId", chatRoom.getId()).toString();
+        } else {
+            return response.failure().message("sessionTimeout").toString();
+        }
+    }
+    
     @Path("{username2}")
     @GET
     @Produces(MediaType.APPLICATION_XML)

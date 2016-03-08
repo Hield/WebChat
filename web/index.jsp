@@ -245,12 +245,15 @@
         <script src="js/components/components.js"></script>
         <script src="js/classes.js"></script>
         <script src="js/models/user.js"></script>
-        <script src="js/function.js"></script>
+        <script src="js/models/data.js"></script>
+        <script src="js/controllers/user_controller.js"></script>
+        <script src="js/controllers/data_controller.js"></script>
+        <script src="js/handlers/init_handler.js"></script>
         <script src="js/handlers/login_handler.js"></script>
         <script src="js/handlers/logout_handler.js"></script>
         <script src="js/handlers/register_handler.js"></script>
-        <script src="js/controllers/user_controller.js"></script>
         <script src="js/updateChatPageFunction.js"></script>
         <script src="js/renderFunction.js"></script>
+        <script src="js/function.js"></script>
     </body>
 </html>

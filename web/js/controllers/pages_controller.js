@@ -3,5 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var PagesController = new function () {
+};
 
+PagesController.prototype.render = function (url) {
 
+};
