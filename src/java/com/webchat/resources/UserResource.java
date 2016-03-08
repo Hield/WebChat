@@ -98,8 +98,9 @@ public class UserResource {
 	@Path("{username}/contacts/update")
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public void updateUserContacts(@PathParam("username") String username, User contact) {
-        User user = userData.getUser(username);
-        user.addContact(userData.getUser(contact.getUsername()));
+    public void updateUserContacts(@PathParam("username") String username, User user2) {
+        User user1 = userData.getUser(username);
+        user1.addContact(userData.getUser(user2.getUsername()));
+        userData.getUser(user2.getUsername()).addContact(user1);
 	}
  }

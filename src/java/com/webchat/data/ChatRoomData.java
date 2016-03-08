@@ -52,7 +52,7 @@ public class ChatRoomData {
         this.chatRooms = new HashMap<>();
         this.dualUserChatRooms = new HashMap<>();
         this.serial = 0;
-        addChatRoom(new ChatRoom());
+//        addChatRoom(new ChatRoom());
     }
 
     public static ChatRoomData getInstance() {

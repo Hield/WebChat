@@ -74,6 +74,14 @@ function searchContactsLocal(searchedData, $searchElement) {
 
 //--- Function that update search page ---//
 function updateSearchPage(foundUser, $searchElement) {
-    $searchElement.append(components.searchElement); //components is a global variable in component.js
+    var component = {
+    	searchElement: '<li class="contact">' +
+            '<div class="contact-box" onclick="addToContact(event);">' +
+            '<p></p>' +
+            '</div>' +
+            '</a>' +
+            '</li>'
+    }
+    $searchElement.append(component.searchElement);
     $searchElement.find(".contact-box:last > p").html(foundUser);
 }
