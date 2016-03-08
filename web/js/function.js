@@ -386,7 +386,6 @@ function updateChatDivision(messageType, message, roomId, datePara, time) {
 
 //------ Function that trigger event to add a user' contact on server -----//
 function addToContact(event) {
-    console.log($(this));
     var contact = $(event.currentTarget).find("p").html();
     $.ajax({
         type: "PUT",
@@ -395,6 +394,16 @@ function addToContact(event) {
         data: '<?xml version="1.0" encoding="UTF-8" ?>' +
                 '<user>' +
                 '<username>' + contact + '</username>' +
+                '</user>'
+
+    });
+    $.ajax({
+        type: "PUT",
+        url: "api/users/" + contact + "/contacts/update",
+        contentType: "application/xml",
+        data: '<?xml version="1.0" encoding="UTF-8" ?>' +
+                '<user>' +
+                '<username>' + user.username + '</username>' +
                 '</user>'
 
     });
