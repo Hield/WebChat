@@ -83,9 +83,9 @@
                 <!---- Navigation bar ---->
                 <nav class="navbar">
                     <div class="group-info">
-                        <h1 class="group-info-name">Group A</h1>
-                        <div class="arrow-down"></div>
-                        <h4 class="group-info-number">6 members</h4>
+                        <h1 class="group-info-name"></h1>
+<!--                        <div class="arrow-down"></div>
+                        <h4 class="group-info-number">6 members</h4>-->
                     </div>
 
                     <div class='navbar-buttons'>
