@@ -87,9 +87,7 @@ function checkPassword(password) {
 
 //----- Function that load data when user login -----//
 function loadData(username) {
-    console.log("loadData " + username);
     user = new User(username);
-    console.log("User " + username);
     $.ajax({
         type: "GET",
         url: "api/users/" + username + "/contacts",
@@ -276,15 +274,17 @@ function rejoinRooms() {
 
 //----- Join room function -----//
 function joinRoom(roomId) {
-    $(".chat-rooms").append("")
-    $(".chat-rooms").html($(".chat-rooms").html() +
-            "<div id=\"chat-room-" + roomId + "\" class=\"chat-room\">" +
-            "<div class=\"chat-division\"></div>" +
-            "<form class=\"chat-form\" onsubmit=\"sendMessage(event, this);\">" +
-            "<input type=\"text\" name=\"message\" class=\"message-input\" autocomplete=\"off\">" +
-            "<button type=\"submit\" id=\"sendingButton\">SEND</button>" +
-            "</form>" +
-            "</div>");
+    var component = {
+        chatRoomElement: '<div id="chat-room-" class="chat-room">' +
+            '<div class="chat-division"></div>' +
+            '<form class="chat-form" onsubmit="sendMessage(event, this);">' +
+            '<input type="text" name="message" class="message-input" autocomplete="off">' +
+            '<button type="submit" id="sendingButton">SEND</button>' +
+            '</form>' +
+            '</div>'
+    }
+    $(".chat-rooms").append(component.chatRoomElement);
+    $(".chat-room:last").attr("id", "chat-room-" + roomId);
     $.ajax({
         type: "POST",
         url: "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
@@ -326,7 +326,7 @@ function chatWithUser(event) {
         dataType: "xml",
         success: function (data) {
             console.log(data);
-            var result = $(data).find("result").html();
+			var result = $(data).find("result").html();
             if (result === "success") {
                 var roomId = $(data).find("roomId").html();
                 switchRoom(roomId);
@@ -335,37 +335,42 @@ function chatWithUser(event) {
             }
         }
     });
-
-
+	
+	
 }
 
-//------ Toggle when clicking the wrench ------//
-$('.dropdown').on('click', 'span', function () {
-    $('.dropdown-content').toggle();
-});
-//------ Toggle when clicking the dropdown content ----//
-$('.dropdown-content').on('click', 'a', function (event) {
-    if (!(event.target == document.getElementById("wrench"))) {
-        $('.dropdown-content').toggle();
-    }
-});
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
 
-//------ Toggle when clicking tab on sidebar ------//
 $('#tabs').on('click', '.tab', function () {
     $('#tabs .tab').removeClass('current-tab');
     $(this).toggleClass('current-tab');
-    $('.tabs-content > div').hide();
-    var dataId = '#' + $(this).data('id');
-    if (dataId == "#tab2") {
-        $(".search-input").val("");
-    }
-    $(dataId).show();
+    var dataId = $(this).data('id');
+    $('.tabs-content .tab-content').each( function (index, element){
+	   if (dataId !== $(element).attr('id'))
+		   $(element).hide();
+	   else
+		   $(element).show();
+	});
+	//var dataId = '#' + $(this).data('id');
+   	//$(dataId).show();
 });
 
 //-------- Function that update chat division ------//
 function updateChatDivision(messageType, message, roomId, datePara, time) {
     var $chatDivision = $("#chat-room-" + roomId).find(".chat-division");
     var date = $chatDivision.find(".date:last").html();
+    var components = {
+        dateElement: '<div class="bubble bubble-middle">' +
+            '<p class="date"></p>' +
+            '</div>',
+        chatElement: '<div class="bubble">' +
+            '<p class="chat-message"></p>' +
+            '<span class="time"><span>' +
+            '</div>'
+    }
+
 
     if (!date || datePara !== date) {
         $chatDivision.append(components.dateElement);   //components is a global variable in compoments.js
@@ -386,28 +391,18 @@ function updateChatDivision(messageType, message, roomId, datePara, time) {
 
 //------ Function that trigger event to add a user' contact on server -----//
 function addToContact(event) {
-    var contact = $(event.currentTarget).find("p").html();
+	var contact = $(event.currentTarget).find("p").html();
     $.ajax({
         type: "PUT",
         url: "api/users/" + user.username + "/contacts/update",
         contentType: "application/xml",
         data: '<?xml version="1.0" encoding="UTF-8" ?>' +
-                '<user>' +
-                '<username>' + contact + '</username>' +
-                '</user>'
-
-    });
-    $.ajax({
-        type: "PUT",
-        url: "api/users/" + contact + "/contacts/update",
-        contentType: "application/xml",
-        data: '<?xml version="1.0" encoding="UTF-8" ?>' +
-                '<user>' +
-                '<username>' + user.username + '</username>' +
-                '</user>'
-
+              '<user>'+
+              '<username>' + contact + '</username>' +
+              '</user>'
+        
     });
     $(event.currentTarget).parent().remove();
     user.addContact(contact);
-
+	
 }
