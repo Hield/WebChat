@@ -227,6 +227,7 @@ h1.group-info-name {
     min-width: 200px;
     overflow: auto;
     right: 0;
+    z-index: 1;
 }
 
 .dropdown-content a {
@@ -269,7 +270,7 @@ h1.group-info-name {
     float: left;
     width: 25%;
     margin: 0 auto;
-    height: 516px;
+    height: 616px;
     background-color: #15161B;
 }
 
@@ -388,11 +389,21 @@ ul.contacts > li.contact {
     height: 50px;      /* vertical align div */
     line-height: 50px;
     background-color: #F0F0F8;
+    transition: height 0.7mes;
+}
+
+.current-contact-box {
+    border: 4px solid #92CECF;
 }
 
 .contact-box:hover {
-    border: 4px solid #92CECF;
-    cursor: pointer;
+     cursor: pointer;
+     height: 70px;
+     line-height: 70px;  
+}
+
+.contact-box p {
+    margin-left: 20px;
 }
 
 .contact a {
@@ -405,9 +416,9 @@ ul.contacts > li.contact {
     box-sizing: border-box;
     background-color: #eeeeee;
     display: block;
-    height: 400px;
+    height: 500px;
+    padding-top: 50px;
     width: 100%;
-    padding: 1%;
     overflow-y: scroll;
 }
 
@@ -421,6 +432,7 @@ ul.contacts > li.contact {
     height: 50px;
     width: 85%;
     margin-right: 5%;
+    font-size: 1.5em;
 }
 
 

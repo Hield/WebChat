@@ -15,7 +15,7 @@ User.prototype.setUsername = function (username) {
 User.prototype.addContact = function (user) {
     var $currentContacts = $(".contacts");
     this.contacts.push(user);
-	$currentContacts.append(components.contactElement); //components is a global variable in components.js
+    $currentContacts.append(components.contactElement); //components is a global variable in components.js
     $currentContacts.find(".contact-box:last > p").html(user);
 };
 

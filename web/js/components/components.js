@@ -19,7 +19,7 @@ var components = {
             '</a>' +
             '</li>',
     contactElement: '<li class="contact">' +
-            '<div class="contact-box" onclick="chatWithUser(event);">' + 
+            '<div class="contact-box">' + 
             '<p></p>' + 
             '</div>' +
             '</li>',

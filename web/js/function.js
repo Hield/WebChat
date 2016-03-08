@@ -278,13 +278,14 @@ function rejoinRooms() {
 function joinRoom(roomId) {
     $(".chat-rooms").append("")
     $(".chat-rooms").html($(".chat-rooms").html() +
-            "<div id=\"chat-room-" + roomId + "\" class=\"chat-room\">" +
+            "<div id=\"chat-room-" + roomId + "\" class=\"chat-room\" style=\"display:none\">" +
             "<div class=\"chat-division\"></div>" +
             "<form class=\"chat-form\" onsubmit=\"sendMessage(event, this);\">" +
             "<input type=\"text\" name=\"message\" class=\"message-input\" autocomplete=\"off\">" +
             "<button type=\"submit\" id=\"sendingButton\">SEND</button>" +
             "</form>" +
             "</div>");
+    console.log("rejoin room " + roomId);
     $.ajax({
         type: "POST",
         url: "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
@@ -314,6 +315,8 @@ function switchRoom(roomId) {
     $("#chat-room-" + roomId).find('.chat-division').animate({scrollTop: $("#chat-room-" + roomId).find('.chat-division')[0].scrollHeight}, 1);
 }
 
+
+
 //----- Function that find room Id for specified user -----//
 function chatWithUser(event) {
     var contact = $(event.currentTarget).find("p").html();
@@ -329,15 +332,22 @@ function chatWithUser(event) {
             var result = $(data).find("result").html();
             if (result === "success") {
                 var roomId = $(data).find("roomId").html();
+                $('.group-info-name').html("Chat Room " + roomId);
                 switchRoom(roomId);
             } else {
                 console.log(data);
             }
         }
     });
-
-
 }
+
+//----- Event when clicking on contact-box -----//
+$('#tab1').on('click', '.contact-box',function(event) {
+   $('#tab1 .contact-box').removeClass('current-contact-box');
+   $(this).addClass('current-contact-box');
+   chatWithUser(event);
+   
+});
 
 //------ Toggle when clicking the wrench ------//
 $('.dropdown').on('click', 'span', function () {
