@@ -87,9 +87,7 @@ function checkPassword(password) {
 
 //----- Function that load data when user login -----//
 function loadData(username) {
-    console.log("loadData " + username);
     user = new User(username);
-    console.log("User " + username);
     $.ajax({
         type: "GET",
         url: "api/users/" + username + "/contacts",
@@ -276,16 +274,18 @@ function rejoinRooms() {
 
 //----- Join room function -----//
 function joinRoom(roomId) {
-    $(".chat-rooms").append("")
-    $(".chat-rooms").html($(".chat-rooms").html() +
-            "<div id=\"chat-room-" + roomId + "\" class=\"chat-room\" style=\"display:none\">" +
-            "<div class=\"chat-division\"></div>" +
-            "<form class=\"chat-form\" onsubmit=\"sendMessage(event, this);\">" +
-            "<input type=\"text\" name=\"message\" class=\"message-input\" autocomplete=\"off\">" +
-            "<button type=\"submit\" id=\"sendingButton\">SEND</button>" +
-            "</form>" +
-            "</div>");
+    var component = {
+        chatRoomElement: '<div id="chat-room-" class="chat-room" style="display:none">' +
+            '<div class="chat-division"></div>' +
+            '<form class="chat-form" onsubmit="sendMessage(event, this);">' +
+            '<input type="text" name="message" class="message-input" autocomplete="off">' +
+            '<button type="submit" id="sendingButton">SEND</button>' +
+            '</form>' +
+            '</div>'
+    }
     console.log("rejoin room " + roomId);
+    $(".chat-rooms").append(component.chatRoomElement);
+    $(".chat-room:last").attr("id", "chat-room-" + roomId);
     $.ajax({
         type: "POST",
         url: "api/sessions/" + localStorage.getItem("sessionId") + "/rooms",
@@ -315,8 +315,6 @@ function switchRoom(roomId) {
     $("#chat-room-" + roomId).find('.chat-division').animate({scrollTop: $("#chat-room-" + roomId).find('.chat-division')[0].scrollHeight}, 1);
 }
 
-
-
 //----- Function that find room Id for specified user -----//
 function chatWithUser(event) {
     var contact = $(event.currentTarget).find("p").html();
@@ -329,7 +327,7 @@ function chatWithUser(event) {
         dataType: "xml",
         success: function (data) {
             console.log(data);
-            var result = $(data).find("result").html();
+			var result = $(data).find("result").html();
             if (result === "success") {
                 var roomId = $(data).find("roomId").html();
                 $('.group-info-name').html("Chat Room " + roomId);
@@ -339,6 +337,8 @@ function chatWithUser(event) {
             }
         }
     });
+	
+	
 }
 
 //----- Event when clicking on contact-box -----//
@@ -376,6 +376,16 @@ $('#tabs').on('click', '.tab', function () {
 function updateChatDivision(messageType, message, roomId, datePara, time) {
     var $chatDivision = $("#chat-room-" + roomId).find(".chat-division");
     var date = $chatDivision.find(".date:last").html();
+    var components = {
+        dateElement: '<div class="bubble bubble-middle">' +
+            '<p class="date"></p>' +
+            '</div>',
+        chatElement: '<div class="bubble">' +
+            '<p class="chat-message"></p>' +
+            '<span class="time"><span>' +
+            '</div>'
+    }
+
 
     if (!date || datePara !== date) {
         $chatDivision.append(components.dateElement);   //components is a global variable in compoments.js
@@ -396,28 +406,18 @@ function updateChatDivision(messageType, message, roomId, datePara, time) {
 
 //------ Function that trigger event to add a user' contact on server -----//
 function addToContact(event) {
-    var contact = $(event.currentTarget).find("p").html();
+	var contact = $(event.currentTarget).find("p").html();
     $.ajax({
         type: "PUT",
         url: "api/users/" + user.username + "/contacts/update",
         contentType: "application/xml",
         data: '<?xml version="1.0" encoding="UTF-8" ?>' +
-                '<user>' +
-                '<username>' + contact + '</username>' +
-                '</user>'
-
-    });
-    $.ajax({
-        type: "PUT",
-        url: "api/users/" + contact + "/contacts/update",
-        contentType: "application/xml",
-        data: '<?xml version="1.0" encoding="UTF-8" ?>' +
-                '<user>' +
-                '<username>' + user.username + '</username>' +
-                '</user>'
-
+              '<user>'+
+              '<username>' + contact + '</username>' +
+              '</user>'
+        
     });
     $(event.currentTarget).parent().remove();
     user.addContact(contact);
-
+	
 }
