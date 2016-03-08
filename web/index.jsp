@@ -17,28 +17,6 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <!--        <nav class="navigation">            
-                    <div class="container">
-                        <a class="navigation-title" href="#">HOME</a>
-                        <ul class="navigation-list float-right">
-                            <li class="navigation-item login-state-control">
-                                <a class="logout-button button">
-                                    Logout
-                                </a>
-                            </li>
-                            <li class="navigation-item login-state-control">
-                                <a href="#login" class="show-login-form-button button">
-                                    Login
-                                </a>
-                            </li>
-                            <li class="navigation-item login-state-control">
-                                <a href="#register" class="show-register-form-button button">
-                                    Register
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>-->
 
         <div class="container">
 
@@ -88,19 +66,6 @@
 
             <!---- Chat Page ---->
 
-            <!--            <div class="chat-page page">
-                            <nav class="navigation">            
-                                <div class="container">
-                                    <span class="navigation-title">Welcome to chat</span>
-                                    <ul class="navigation-list float-right">
-                                        <li class="navigation-item login-state-control">
-                                            <a class="logout-button button">
-                                                Logout
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>-->
             <div class="chat-page page">
 
                 <!---- Profile Container ---->
@@ -113,7 +78,7 @@
                             <p>Doctor</p> 
                         </div>
                     </div>
-                </div><!---- Profile Container ---->
+                </div><!---- /Profile Container ---->
 
                 <!---- Navigation bar ---->
                 <nav class="navbar">
@@ -133,18 +98,18 @@
                         </div>
 
                         <div class="dropdown">
-                            <span onclick="myFunction()" class="fa-stack fa-2x">
+                            <span class="fa-stack fa-2x">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-wrench fa-stack-1x fa-inverse"></i>
+                                <i class="fa fa-wrench fa-stack-1x fa-inverse" id="wrench"></i>
                             </span>
-                            <div id="myDropdown" class="dropdown-content">
-                                <a>PATIENT MANAGEMENT</a>
-                                <a>SETTING</a>
-                                <a class="logout-button">LOGOUT</a>
+                            <div id="myDropdown" class="dropdown-content" style="display: none">
+                                <a href="#">PATIENT MANAGEMENT</a>
+                                <a href="#">SETTING</a>
+                                <a href="#" class="logout-button">LOGOUT</a>
                             </div> 
                         </div>
                     </div>
-                </nav><!---- Navigation bar ---->
+                </nav><!---- /Navigation bar ---->
 
                 <!---- Sidebar ---->
                 <aside class='chat-sidebar'>
@@ -167,7 +132,11 @@
 
                     <div class="tabs-content">
                         <div id="tab1" class="tab-content">
-                            <input type="search" class="search-input" id="search-input-local" placeholder="Search Local">
+                            <div class="search">
+                                <input type="search" class="search-input" 
+                                       id="search-input-local" placeholder="Search Local">
+                            </div>
+
                             <ul class="search-contacts">
                                 <!-- ***Example search contact***
                                 <li class='contact'>
@@ -192,7 +161,11 @@
                         </div>
 
                         <div id="tab3" class="tab-content" style="display: none">
-                            <input type="search" class="search-input" id="search-input-global" placeholder="Search Global">
+                            <div class="search">
+                                <input type="search" class="search-input" 
+                                       id="search-input-global" placeholder="Search Global"> 
+                            </div>
+
                             <ul class="search-contacts">
 
                                 <!-- ***Example search contact***
@@ -238,7 +211,7 @@
             </ul>
             !-->
 
-                </aside><!---- Sidebar ---->
+                </aside><!---- /Sidebar ---->
 
                 <!---- Chat rooms ---->
                 <div class="chat-rooms">
@@ -254,7 +227,7 @@
                             </form>
                         </div>
                     -->
-                </div><!---- Chat rooms ---->
+                </div><!---- /Chat rooms ---->
 
             </div>
 

@@ -3,8 +3,7 @@
 
 $("#search-input-global").on("input", function() {
     var searchedData = $(this).val().toLowerCase();
-    var $searchContacts = $(this).parent().find(".search-contacts");
-    //console.log($searchContacts);
+    var $searchContacts = $('#tab3 .search-contacts');
     if (searchedData !== "") {
         $searchContacts.find(".contact").remove();
         $searchContacts.show();
@@ -14,14 +13,10 @@ $("#search-input-global").on("input", function() {
     }
 });
 
-
 $("#search-input-local").on("input", function () {
     var searchedData = $(this).val().toLowerCase();
-    var $currentContacs = $(this).parent().find(".contacts");
-    var $searchContacts = $(this).parent().find(".search-contacts");
-
-    //console.log($searchContacts);
-
+    var $currentContacs = $('#tab1 .contacts');
+    var $searchContacts = $("#tab1 .search-contacts");
     if (searchedData !== "") {
         $currentContacs.hide();
         $searchContacts.find(".contact").remove();
@@ -34,10 +29,6 @@ $("#search-input-local").on("input", function () {
     }
 });
 
-$('.search-contacts').on('click', '.contact-box', function () {
-    alert("Hello");
-});
-
 //--- Function that search global contacts ---//
 function searchContactsGlobal(searchedData, $searchElement) {
     $.ajax({
@@ -48,16 +39,16 @@ function searchContactsGlobal(searchedData, $searchElement) {
         },
         dataType: "xml",
         success: function (data) {
-            var contactsAll = [];
-            var contactsCurr = user.contacts;
+            var allContacts = [];
+            var currentContact = user.contacts;
 
             $(data).find("username").each(function (index, element) {
-                contactsAll.push($(element).html());
+                allContacts.push($(element).html());
             });
 
-            contactsAll.forEach(function (val) {
+            allContacts.forEach(function (val) {
                 val = val.toLowerCase();
-                var inCurrentContactsIndex = $.inArray(val, contactsCurr);
+                var inCurrentContactsIndex = $.inArray(val, currentContact);
                 var isCurrentUser = (val === user.username);
                 if (val.indexOf(searchedData) === 0 && inCurrentContactsIndex === -1
                         && !isCurrentUser) {

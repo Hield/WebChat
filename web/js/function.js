@@ -326,7 +326,7 @@ function chatWithUser(event) {
         dataType: "xml",
         success: function (data) {
             console.log(data);
-			var result = $(data).find("result").html();
+            var result = $(data).find("result").html();
             if (result === "success") {
                 var roomId = $(data).find("roomId").html();
                 switchRoom(roomId);
@@ -335,26 +335,31 @@ function chatWithUser(event) {
             }
         }
     });
-	
-	
+
+
 }
 
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
+//------ Toggle when clicking the wrench ------//
+$('.dropdown').on('click', 'span', function () {
+    $('.dropdown-content').toggle();
+});
+//------ Toggle when clicking the dropdown content ----//
+$('.dropdown-content').on('click', 'a', function (event) {
+    if (!(event.target == document.getElementById("wrench"))) {
+        $('.dropdown-content').toggle();
+    }
+});
 
+//------ Toggle when clicking tab on sidebar ------//
 $('#tabs').on('click', '.tab', function () {
     $('#tabs .tab').removeClass('current-tab');
     $(this).toggleClass('current-tab');
-    var dataId = $(this).data('id');
-    $('.tabs-content .tab-content').each( function (index, element){
-	   if (dataId !== $(element).attr('id'))
-		   $(element).hide();
-	   else
-		   $(element).show();
-	});
-	//var dataId = '#' + $(this).data('id');
-   	//$(dataId).show();
+    $('.tabs-content > div').hide();
+    var dataId = '#' + $(this).data('id');
+    if (dataId == "#tab2") {
+        $(".search-input").val("");
+    }
+    $(dataId).show();
 });
 
 //-------- Function that update chat division ------//
@@ -381,18 +386,19 @@ function updateChatDivision(messageType, message, roomId, datePara, time) {
 
 //------ Function that trigger event to add a user' contact on server -----//
 function addToContact(event) {
-	var contact = $(event.currentTarget).find("p").html();
+    console.log($(this));
+    var contact = $(event.currentTarget).find("p").html();
     $.ajax({
         type: "PUT",
         url: "api/users/" + user.username + "/contacts/update",
         contentType: "application/xml",
         data: '<?xml version="1.0" encoding="UTF-8" ?>' +
-              '<user>'+
-              '<username>' + contact + '</username>' +
-              '</user>'
-        
+                '<user>' +
+                '<username>' + contact + '</username>' +
+                '</user>'
+
     });
     $(event.currentTarget).parent().remove();
     user.addContact(contact);
-	
+
 }
