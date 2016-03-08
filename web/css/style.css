@@ -106,7 +106,7 @@ label, input {
 
 .input-username, .input-password {
     border: white;
-    font-size: 1em;
+    font-size: 0.9em;
     width: 200px;
     height: 33px;
 } 
@@ -122,11 +122,13 @@ label, input {
     margin-left: 260px;
     margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 1em;
+    font-size: 0.8em;
 }
 
 .show-register-form-button {
     margin-left: 260px;
+    font-size: 0.8em;
+    padding: 3px 54px;
 }
 
 #registerButton {
@@ -138,7 +140,7 @@ label, input {
     display: inline-block;
     text-align: center;
     margin: 20px 0;
-    font-size: 1em;
+    font-size: 0.8em;
 }
 
 .show-login-page {
@@ -411,7 +413,6 @@ ul.contacts > li.contact {
     color: black;
 }
 
-
 .chat-division {
     box-sizing: border-box;
     background-color: #eeeeee;
@@ -434,7 +435,6 @@ ul.contacts > li.contact {
     margin-right: 5%;
     font-size: 1.5em;
 }
-
 
 #sendingButton {
     height: 50px;
@@ -463,6 +463,11 @@ ul.contacts > li.contact {
     word-wrap: break-word;
 }
 
+.bubble p {
+    font-size: 0.8em;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 .bubble-right {
     float: right;
     color: white;
@@ -471,10 +476,15 @@ ul.contacts > li.contact {
 
 .bubble-middle {
     float: none;
-    width: 140px;
+    width: 120px;
     margin: 0 auto;
     color: white;
     background-color: #ba0;
+    text-align: center;
+}
+
+.bubble-middle p {
+    font-size: 0.65em;
 }
 
 .chat-message {
@@ -486,10 +496,7 @@ ul.contacts > li.contact {
     float: right;
 }
 
-.bubble p {
-    font-size: 0.8em;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
+
 
 
 /* ===========================
@@ -533,11 +540,63 @@ ul.contacts > li.contact {
 
     .show-register-form-button {
         margin-left: 100px;
-        padding: 2px 43px;
+        padding: 3px 52px;
     } 
 
     .show-login-form-button {
         margin-top: 10px;
         padding: 2px 43px;
+    }
+    
+    .profile-container, .navbar {
+        height: 70px;
+    }
+    .profile-info-name {
+        font-size: 0.8em;
+    }
+    
+    .group-info {
+        font-size: 0.7em;
+        margin: 20px 0px 0px 10px;
+    }
+    
+    .chat-sidebar {
+        height: 516px;
+    }
+    
+    .navbar-buttons {
+        font-size: 0.65em;
+        margin: 10px 15px 0 0;
+    }
+    
+    .plus {
+        margin-right: 2px;
+    }
+    
+    #tabs li {
+        width: 100%;
+    }
+    
+    .chat-division {
+        height: 400px;
+    }
+    
+    .bubble {
+        font-size: 1.1em;
+    }
+    .chat-form {
+        padding: 10px 0 10px 10px;
+    }
+    
+    .message-input {
+        font-size: 1.1em;
+        height: 30px;
+        margin-right: 0px;
+        width: 80%;
+    }
+    #sendingButton {
+        font-size: 0.8em;
+        height: 31px;
+        width: 18%;
     }
 }

@@ -74,9 +74,9 @@
                         <div class='profile-info-name'>
                             <h2></h2>
                         </div>
-                        <div class='profile-info-job'>
+<!--                        <div class='profile-info-job'>
                             <p>Doctor</p> 
-                        </div>
+                        </div>-->
                     </div>
                 </div><!---- /Profile Container ---->
 
