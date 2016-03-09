@@ -242,7 +242,7 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script src="js/components/components.js"></script>
+<!--        <script src="js/components/components.js"></script>-->
         <script src="js/classes.js"></script>
         <script src="js/models/user.js"></script>
         <script src="js/models/data.js"></script>
@@ -255,5 +255,8 @@
         <script src="js/updateChatPageFunction.js"></script>
         <script src="js/renderFunction.js"></script>
         <script src="js/function.js"></script>
+        <script src="js/displayFunction.js"></script>
+        <script src="js/searchFunction.js"></script>
+        <script src="js/chatFunction.js"></script>
     </body>
 </html>

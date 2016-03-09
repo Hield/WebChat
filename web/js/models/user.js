@@ -22,7 +22,7 @@ User.prototype.addContact = function (user) {
             '</li>'
     }
     this.contacts.push(user);
-	$currentContacts.append(component.contactElement);
+    $currentContacts.append(component.contactElement);
     $currentContacts.find(".contact-box:last > p").html(user);
 };
 

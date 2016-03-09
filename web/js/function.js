@@ -21,7 +21,7 @@ $(document).ready(function () {
     });
 
     //----- Load page action -----//
-    $(window).on("load", initHandler);
+//    $(window).on("load", initHandler);
 
     //----- Call to initialize -----//
     init();
@@ -162,7 +162,6 @@ function processResponse(data) {
                             }
                             var chatRoom = chatRooms.getChatRoom(roomId);
                             chatRoom.addChatEntry(new ChatEntry(username, message, time));
-                            //if (username !== currentUser) {
                             if (username !== user.username) {
                                 updateChatDivision("received", username + ": " + message, roomId, date, time);
                             } else {
@@ -172,8 +171,6 @@ function processResponse(data) {
                             //----- Scroll to bottom for new message -----//
                             $("#chat-room-" + roomId).find('.chat-division').animate({scrollTop: $("#chat-room-" + roomId).find('.chat-division')[0].scrollHeight}, 1);
 
-                            //var chatDivision = $("#chat-room-" + roomId).find(".chat-division");
-                            //chatDivision.html(chatDivision.html() + "<p>" + username + ": " + message + "</p>");
                         } else if (type === "log") {
                             console.log(data);
                         }
@@ -195,27 +192,34 @@ function processResponse(data) {
     }
 }
 
-//----- Send message function -----//
-function sendMessage(event, form) {
-    event.preventDefault();
-    var message = $(form).find("[name='message']").val();
-    var roomId = $(form).parent().attr("id").split("-room-")[1];
+//-------- Function that update chat division ------//
+function updateChatDivision(messageType, message, roomId, datePara, time) {
+    var $chatDivision = $("#chat-room-" + roomId).find(".chat-division");
+    var date = $chatDivision.find(".date:last").html();
+    var components = {
+        dateElement: '<div class="bubble bubble-middle">' +
+                '<p class="date"></p>' +
+                '</div>',
+        chatElement: '<div class="bubble">' +
+                '<p class="chat-message"></p>' +
+                '<span class="time"><span>' +
+                '</div>'
+    }
 
-    $(".message-input").val("");
-    $.ajax({
-        type: "POST",
-        url: "api/events/chat",
-        headers: {
-            "sessionId": localStorage.getItem("sessionId")
-        },
-        contentType: "application/xml",
-        data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<chatEntry>" +
-                "<roomId>" + roomId + "</roomId>" +
-                "<message>" + message + "</message>" +
-                "</chatEntry>",
-        cache: false
-    });
+    if (!date || datePara !== date) {
+        $chatDivision.append(components.dateElement);   //components is a global variable in compoments.js
+        $chatDivision.find(".date:last").text(datePara);
+    }
+    if (messageType === "received") {
+        $chatDivision.append(components.chatElement);
+        $chatDivision.find(".chat-message:last").text(message);
+        $chatDivision.find(".time:last").text(time);
+    } else if (messageType === "sent") {
+        $chatDivision.append(components.chatElement);
+        $chatDivision.find(".bubble:last").addClass("bubble-right");
+        $chatDivision.find(".chat-message:last").text(message);
+        $chatDivision.find(".time:last").text(time);
+    }
 }
 
 function sendLogEntry(state) {
@@ -280,12 +284,12 @@ function rejoinRooms() {
 function joinRoom(roomId) {
     var component = {
         chatRoomElement: '<div id="chat-room-" class="chat-room" style="display:none">' +
-            '<div class="chat-division"></div>' +
-            '<form class="chat-form" onsubmit="sendMessage(event, this);">' +
-            '<input type="text" name="message" class="message-input" autocomplete="off">' +
-            '<button type="submit" id="sendingButton">SEND</button>' +
-            '</form>' +
-            '</div>'
+                '<div class="chat-division"></div>' +
+                '<form class="chat-form" onsubmit="sendMessage(event, this);">' +
+                '<input type="text" name="message" class="message-input" autocomplete="off">' +
+                '<button type="submit" id="sendingButton">SEND</button>' +
+                '</form>' +
+                '</div>'
     }
     console.log("rejoin room " + roomId);
     $(".chat-rooms").append(component.chatRoomElement);
@@ -317,111 +321,4 @@ function switchRoom(roomId) {
     $(".chat-room").hide();
     $("#chat-room-" + roomId).show();
     $("#chat-room-" + roomId).find('.chat-division').animate({scrollTop: $("#chat-room-" + roomId).find('.chat-division')[0].scrollHeight}, 1);
-}
-
-//----- Function that find room Id for specified user -----//
-function chatWithUser(event) {
-    var contact = $(event.currentTarget).find("p").html();
-    $.ajax({
-        type: "GET",
-        url: "api/rooms/" + contact,
-        headers: {
-            "sessionId": localStorage.getItem("sessionId")
-        },
-        dataType: "xml",
-        success: function (data) {
-            console.log(data);
-			var result = $(data).find("result").html();
-            if (result === "success") {
-                var roomId = $(data).find("roomId").html();
-                $('.group-info-name').html("Chat Room " + roomId);
-                switchRoom(roomId);
-            } else {
-                console.log(data);
-            }
-        }
-    });
-	
-	
-}
-
-//----- Event when clicking on contact-box -----//
-$('#tab1').on('click', '.contact-box',function(event) {
-   $('#tab1 .contact-box').removeClass('current-contact-box');
-   $(this).addClass('current-contact-box');
-   chatWithUser(event);
-   
-});
-
-//------ Toggle when clicking the wrench ------//
-$('.dropdown').on('click', 'span', function () {
-    $('.dropdown-content').toggle();
-});
-//------ Toggle when clicking the dropdown content ----//
-$('.dropdown-content').on('click', 'a', function (event) {
-    if (!(event.target == document.getElementById("wrench"))) {
-        $('.dropdown-content').toggle();
-    }
-});
-
-//------ Toggle when clicking tab on sidebar ------//
-$('#tabs').on('click', '.tab', function () {
-    $('#tabs .tab').removeClass('current-tab');
-    $(this).toggleClass('current-tab');
-    $('.tabs-content > div').hide();
-    var dataId = '#' + $(this).data('id');
-    if (dataId == "#tab2") {
-        $(".search-input").val("");
-    }
-    $(dataId).show();
-});
-
-//-------- Function that update chat division ------//
-function updateChatDivision(messageType, message, roomId, datePara, time) {
-    var $chatDivision = $("#chat-room-" + roomId).find(".chat-division");
-    var date = $chatDivision.find(".date:last").html();
-    var components = {
-        dateElement: '<div class="bubble bubble-middle">' +
-            '<p class="date"></p>' +
-            '</div>',
-        chatElement: '<div class="bubble">' +
-            '<p class="chat-message"></p>' +
-            '<span class="time"><span>' +
-            '</div>'
-    }
-
-
-    if (!date || datePara !== date) {
-        $chatDivision.append(components.dateElement);   //components is a global variable in compoments.js
-        $chatDivision.find(".date:last").text(datePara);
-    }
-
-    if (messageType === "received") {
-        $chatDivision.append(components.chatElement);
-        $chatDivision.find(".chat-message:last").text(message);
-        $chatDivision.find(".time:last").text(time);
-    } else if (messageType === "sent") {
-        $chatDivision.append(components.chatElement);
-        $chatDivision.find(".bubble:last").addClass("bubble-right");
-        $chatDivision.find(".chat-message:last").text(message);
-        $chatDivision.find(".time:last").text(time);
-    }
-}
-
-//------ Function that trigger event to add a user' contact on server -----//
-function addToContact(event) {
-	var contact = $(event.currentTarget).find("p").html();
-    $.ajax({
-        type: "PUT",
-        url: "api/users/" + user.username + "/contacts/update",
-        contentType: "application/xml",
-        data: '<?xml version="1.0" encoding="UTF-8" ?>' +
-              '<user>'+
-              '<username>' + contact + '</username>' +
-              '</user>'
-        
-    });
-    $(event.currentTarget).parent().remove();
-    user.addContact(contact);
-	
 }

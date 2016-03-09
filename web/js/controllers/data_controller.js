@@ -12,7 +12,7 @@ DataController.prototype.init = function() {
         type: "GET",
         url: "api/sessions/" + localStorage.getItem("sessionId"),
         dataType: "xml",
-        success: data.init,
+        success: data.init
     });
 };
 
