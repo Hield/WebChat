@@ -42,19 +42,22 @@ function sendMessage(event, form) {
     var message = $(form).find("[name='message']").val();
     var roomId = $(form).parent().attr("id").split("-room-")[1];
     $(".message-input").val("");
-    $.ajax({
-        type: "POST",
-        url: "api/events/chat",
-        headers: {
-            "sessionId": localStorage.getItem("sessionId")
-        },
-        contentType: "application/xml",
-        data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<chatEntry>" +
-                "<roomId>" + roomId + "</roomId>" +
-                "<message>" + message + "</message>" +
-                "</chatEntry>",
-        cache: false
-    });
+    if (message) {
+        $.ajax({
+            type: "POST",
+            url: "api/events/chat",
+            headers: {
+                "sessionId": localStorage.getItem("sessionId")
+            },
+            contentType: "application/xml",
+            data: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                    "<chatEntry>" +
+                    "<roomId>" + roomId + "</roomId>" +
+                    "<message>" + message + "</message>" +
+                    "</chatEntry>",
+            cache: false
+        });
+    }
+
 }
 

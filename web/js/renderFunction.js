@@ -56,7 +56,8 @@ function renderHomePage() {
     if (sessionId) {
         renderChatPage();
     } else {
-        renderLoginPage();
+        window.location.hash = "login";
+//        renderLoginPage();
     }
 }
 
@@ -65,7 +66,8 @@ function renderLoginPage() {
     if (!sessionId) {
         $(".login-page").show();
     } else {
-        renderChatPage();
+        window.location.hash = "chat";
+//        renderChatPage();
     }
 }
 
@@ -74,7 +76,7 @@ function renderRegisterPage() {
     if (!sessionId) {
         $(".register-page").show();
     } else {
-        renderChatPage();
+        window.location.hash = "chat";
     }
 }
 

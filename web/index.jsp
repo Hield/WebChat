@@ -252,7 +252,6 @@
         <script src="js/handlers/login_handler.js"></script>
         <script src="js/handlers/logout_handler.js"></script>
         <script src="js/handlers/register_handler.js"></script>
-        <script src="js/updateChatPageFunction.js"></script>
         <script src="js/renderFunction.js"></script>
         <script src="js/function.js"></script>
         <script src="js/displayFunction.js"></script>

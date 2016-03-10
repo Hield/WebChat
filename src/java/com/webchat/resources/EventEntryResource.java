@@ -65,11 +65,11 @@ public class EventEntryResource {
             int roomId = entry.getRoomId();
             ChatRoom chatRoom = chatRoomData.getChatRoom(roomId);
             if (chatRoom != null) {
-                if (!entry.getMessage().equals("")){
-                    chatRoom.addChatEntry(entry);
-                    eventEntryData.addEventEntry(entry);
-                    System.out.println(entry.getMessage());
-                }
+//                if (!entry.getMessage().equals("")){
+                chatRoom.addChatEntry(entry);
+                eventEntryData.addEventEntry(entry);
+                System.out.println(entry.getMessage());
+//                }
             }
         }
     }
@@ -87,12 +87,12 @@ public class EventEntryResource {
                     /*
                     System.out.println(entry.getUsername());
                     System.out.println(entry.getState());
-*/
+                     */
                 }
             }
         }
     }
-    
+
     @Path("{timeStamp}")
     @GET
     @Produces(MediaType.APPLICATION_XML)

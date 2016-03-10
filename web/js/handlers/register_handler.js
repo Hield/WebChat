@@ -23,3 +23,24 @@ var registerHandler = function(event) {
     }
 };
 
+//----- Check the validity of username -----//
+function checkUsername(username) {
+    if (username.length === 0) {
+        return "Please input all the fields!";
+    }
+    if (username.length < 5 || username.length > 12) {
+        return "Username must have between 5 characters and 12 characters.";
+    }
+    return "passed";
+}
+
+//----- Check validity of password -----//
+function checkPassword(password) {
+    if (password.length === 0) {
+        return "Please input all the fields!";
+    }
+    if (password.length < 5 || password.length > 12) {
+        return "Password must have between 6 characters and 128 characters.";
+    }
+    return "passed";
+}
